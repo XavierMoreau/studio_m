@@ -61,7 +61,7 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
+    transport: git
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
@@ -72,3 +72,15 @@ fos_user:
     firewall_name: main
     use_listener: false
     user_class:   UserBundle\Entity\User
+    registration:
+        form:
+            type: UserBundle\Form\RegistrationType
+        confirmation:
+            from_email:
+               address:        xavier@diaphonics.fr
+               sender_name:    Demo Registration
+    resetting:
+        email:
+            from_email:
+                address:        xavier@diaphonics.fr
+                sender_name:    Demo Resetting
