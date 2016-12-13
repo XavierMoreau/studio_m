@@ -1,0 +1,37 @@
+body {
+    font-family: 'Nunito', sans-serif;
+
+}
+
+header {
+    background-color: #6897BB;
+    color : white;
+}
+
+
+.login_form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.login_label {
+    display : inline-block;
+    width: 40%;
+    margin: auto;
+}
+
+.login_input {
+    display : inline-block;
+    width: 50%;
+    margin: auto;
+}
+
+.login_remember {
+    text-align: center;
+}
+
+
+.login_submit {
+    text-align: center;
+}
+

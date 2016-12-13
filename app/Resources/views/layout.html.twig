@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %} - Studio Bump {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito" />
+    <link rel="stylesheet" href="{{ asset('bundles/Appli/css/main.css') }}" type="text/css" media="all" />
+
+</head>
+<body>
+
+<header>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        Connecté en tant que {{ app.user.username }}
+        -
+        <a href="{{ path('fos_user_profile_show') }}">Profil</a>
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
+    {% endif %}
+    <hr>
+</header>
+{% block content %}
+{% endblock %}
+</body>
+</html>
