@@ -2,6 +2,7 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 
@@ -10,19 +11,56 @@ class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-                ->add('roles', 'collection', array(
-                        'type' => 'choice',
-                        'options' => array(
-                            'label' => false, /* Ajoutez cette ligne */
-                            'choices' => array(
-                                    'ROLE_USER' => 'Utilisateur',
-                                    'ROLE_EXPERT' => 'Expert',
-                                    'ROLE_CONTRIBUTEUR' => 'Contributeur'
-                        )
-                    )
-                )
+        $builder->add('civilite', ChoiceType::class, array(
+            'expanded' => true,
+            'multiple' => false,
+            'choices' => array(
+                'Monsieur' => 'Monsieur',
+                'Madame' => 'Madame',
             )
+        ))
+                ->add('nom')
+                ->add('prenom')
+                ->add('societe')
+                ->add('poste')
+                ->add('telephone')
+            ->add('userExpert', ChoiceType::class, array(
+                'label' => 'Expert métier : ',
+                'expanded' => true,
+                'multiple' => false,
+                'choices' => array(
+                    '0' => 'Non',
+                    '1' => 'Oui',
+                )))
+            ->add('userVoix', ChoiceType::class, array(
+                'label' => 'Comédien Audio : ',
+                'expanded' => true,
+                'multiple' => false,
+                'choices' => array(
+                    '0' => 'Non',
+                    '1' => 'Oui',
+                )))
+            ->add('userContributeur', ChoiceType::class, array(
+                'label' => 'Dessinateur : ',
+                'expanded' => true,
+                'multiple' => false,
+                'choices' => array(
+                    '0' => 'Non',
+                    '1' => 'Oui',
+                )))
+
+//                ->add('roles', 'collection', array(
+//                        'type' => 'choice',
+//                        'options' => array(
+//                            'label' => false, /* Ajoutez cette ligne */
+//                            'choices' => array(
+//                                    'ROLE_USER' => 'Utilisateur',
+//                                    'ROLE_EXPERT' => 'Expert',
+//                                    'ROLE_CONTRIBUTEUR' => 'Contributeur'
+//                        )
+//                    )
+//                )
+//            )
         ;
     }
 

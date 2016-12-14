@@ -37,9 +37,7 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     role_hierarchy:
-           ROLE_EXPERT:       ROLE_USER
-           ROLE_CONTRIBUTEUR:      ROLE_EXPERT
-           ROLE_ADMIN:      ROLE_CONTRIBUTEUR
+           ROLE_ADMIN:      ROLE_USER
 
     access_control:
         # Liste des pages accessibles à tous les utilisateurs (ne pas toucher)
@@ -51,9 +49,11 @@ security:
         - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # PAGES ACCESSIBLES AUX ADMINISTRATEURS
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        # PAGES ACCESSIBLES AUX UTILISATEURS CONNECTES
+
+        # PAGES ACCESSIBLES AUX UTILISATEURS
         - { path: ^/change-password, role: ROLE_USER }
+        # PAGES ACCESSIBLES AUX ADMINISTRATEURS
+        - { path: ^/admin$, role: ROLE_ADMIN }
+
         # PAGES ACCESSIBLES À TOUS
 #         - { path: ^/myapp.*, role: IS_AUTHENTICATED_ANONYMOUSLY

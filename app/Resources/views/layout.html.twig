@@ -13,15 +13,24 @@
 
 <header>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        Connecté en tant que {{ app.user.username }}
+
+    Connecté en tant que <b>{{ app.user.username }}</b>
         -
-        <a href="{{ path('fos_user_profile_show') }}">Profil</a>
-        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        <a href="{{ path('fos_user_profile_show') }}">Profil</a><span> |</span>
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><span> |</span>
+        <a href="{{ path('expert_control') }}">Expert</a><span> |</span>
+        <a href="{{ path('contributeur_control') }}">Contributeur</a><span> |</span>
+        <a href="{{ path('admin_control') }}">Administrateur</a>
+
     {% else %}
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a><span> |</span>
         <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
     {% endif %}
+
+
+
     <hr>
+
 </header>
 {% for type, messages in app.session.flashBag.all %}
     {% for message in messages %}
