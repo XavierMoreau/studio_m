@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      */
     public function indexAction()
     {
@@ -31,7 +31,12 @@ class DefaultController extends Controller
      */
     public function expertAction()
     {
+
+        if ($this->get('security.context')->isGranted('ROLE_USER') AND $this->getUser()->getUserExpert() == true){
+
         return $this->render('AppliBundle:Default:expert.html.twig');
+        }
+        return $this->redirectToRoute('index');
     }
 
     /**
