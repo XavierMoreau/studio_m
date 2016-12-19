@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Diffusions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Diffusiontype</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for diffusion in diffusions %}
+            <tr>
+                <td><a href="{{ path('diffusion_show', { 'id': diffusion.id }) }}">{{ diffusion.id }}</a></td>
+                <td>{{ diffusion.diffusionType }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('diffusion_show', { 'id': diffusion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('diffusion_edit', { 'id': diffusion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('diffusion_new') }}">Create a new diffusion</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Utilisation</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ utilisation.id }}</td>
+            </tr>
+            <tr>
+                <th>Utilisationtype</th>
+                <td>{{ utilisation.utilisationType }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('utilisation_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('utilisation_edit', { 'id': utilisation.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

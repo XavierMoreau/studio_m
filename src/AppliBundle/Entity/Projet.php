@@ -45,23 +45,20 @@ class Projet
     private $dateModification;
 
     /**
-     * @var string
+     * @ORM\ManyToMany(targetEntity="AppliBundle\Entity\Support", cascade={"persist"})
      *
-     * @ORM\Column(name="support", type="string", length=255)
      */
     private $support;
 
     /**
-     * @var string
+     * @ORM\ManyToMany(targetEntity="AppliBundle\Entity\Diffusion", cascade={"persist"})
      *
-     * @ORM\Column(name="diffusion", type="string", length=255)
      */
     private $diffusion;
 
     /**
-     * @var string
+     * @ORM\ManyToMany(targetEntity="AppliBundle\Entity\Utilisation", cascade={"persist"})
      *
-     * @ORM\Column(name="utilisation", type="string", length=255)
      */
     private $utilisation;
 
