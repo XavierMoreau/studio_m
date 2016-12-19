@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('projet_index') }}">Back to the list</a>
+            <a href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour aux Projets</a>
         </li>
     </ul>
 {% endblock %}

@@ -18,7 +18,7 @@
         - Vous êtes un ....
         <a href="{{ path('fos_user_profile_show') }}">Profil</a><span> |</span>
         <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><span> |</span>
-        <a href="{{ path('projet_index') }}">Projets</a><span> |</span>
+        <a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a><span> |</span>
         {#<a href="{{ path('expert_control') }}">Expert</a><span> |</span>#}
         {#<a href="{{ path('contributeur_control') }}">Contributeur</a><span> |</span>#}
         {#<a href="{{ path('admin_control') }}">Administrateur</a>#}

@@ -1,6 +1,8 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
+
+
     <h1>Vos Projets</h1>
 
     <table>
@@ -13,14 +15,17 @@
                 <th>Diffusion</th>
                 <th>Utilisation</th>
                 <th>Temps de diffusion</th>
+                <th>Montant HT</th>
                 <th>Datediffusion</th>
-                <th>Actions</th>
+                <th>Script</th>
+                <th>Storyboard</th>
+
             </tr>
         </thead>
         <tbody>
         {% for projet in projets %}
             <tr>
-                <td><a href="{{ path('projet_show', { 'id': projet.id }) }}">{{ projet.nomProjet }}</a></td>
+                <td><a href="{{ path('projet_show', {'id':app.user.id, 'projet': projet.id }) }}">{{ projet.nomProjet }}</a></td>
                 <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if projet.dateModification %}{{ projet.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ projet.support }}</td>
@@ -29,16 +34,9 @@
                 <td>{{ projet.tempsDiffusion }}</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('projet_show', { 'id': projet.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('projet_edit', { 'id': projet.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td>{% if projet.script %}Accéder au script{% else %}Ecrire le script{% endif %}</td>
+                <td>{% if projet.storyboard %}Accéder au storyboard{% else %}Créer le storyboard{% endif %}</td>
+
             </tr>
         {% endfor %}
         </tbody>
@@ -49,4 +47,7 @@
             <a href="{{ path('projet_new', {'id': app.user.id }) }}">Créer un nouveau projet</a>
         </li>
     </ul>
+
+
+
 {% endblock %}

@@ -24,6 +24,18 @@ class DefaultController extends Controller
     }
 
 
+    /**
+     * @Route("/unauth", name="unauthorized")
+     */
+    public function unauthAction()
+    {
+
+            return $this->render('AppliBundle:Default:unauthorized.html.twig');
+
+    }
+
+
+
 
 
     /**
