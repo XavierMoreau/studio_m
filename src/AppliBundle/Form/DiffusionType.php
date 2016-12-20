@@ -13,7 +13,7 @@ class DiffusionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('diffusionType')        ;
+        $builder->add('diffusionType','text',array('label'=>'Saisissez le type :'))        ;
     }
     
     /**

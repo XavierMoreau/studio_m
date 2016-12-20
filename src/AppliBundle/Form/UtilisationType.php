@@ -13,7 +13,7 @@ class UtilisationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('utilisationType')        ;
+        $builder->add('utilisationType','text',array('label'=>'Saisissez le type :'))        ;
     }
     
     /**

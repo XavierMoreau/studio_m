@@ -43,3 +43,4 @@ diffusion:
     resource: "@AppliBundle/Controller/DiffusionController.php"
     type:     annotation
     prefix:   /admin/
+

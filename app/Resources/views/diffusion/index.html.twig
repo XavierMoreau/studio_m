@@ -1,39 +1,31 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Diffusions list</h1>
+{% block content %}
+    <h1>Types de diffusion</h1>
 
-    <table>
+    <table  class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Diffusiontype</th>
-                <th>Actions</th>
+                <th>Types proposés :</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for diffusion in diffusions %}
             <tr>
-                <td><a href="{{ path('diffusion_show', { 'id': diffusion.id }) }}">{{ diffusion.id }}</a></td>
                 <td>{{ diffusion.diffusionType }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('diffusion_show', { 'id': diffusion.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('diffusion_edit', { 'id': diffusion.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a class="btn-modifier" href="{{ path('diffusion_edit', { 'id': diffusion.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td><a class="btn-delete"  href="{{ path('diffusion_delete', { 'id': diffusion.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('diffusion_new') }}">Create a new diffusion</a>
-        </li>
-    </ul>
+
+            <a class="btn btn-primary" href="{{ path('diffusion_new') }}">Nouveau</a>
+
+
+    <a class="btn btn-default" href="{{ path('admin_index') }}">Retour</a>
+
 {% endblock %}

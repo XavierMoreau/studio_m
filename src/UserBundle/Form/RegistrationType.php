@@ -49,18 +49,6 @@ class RegistrationType extends AbstractType
                     '1' => 'Oui',
                 )))
 
-//                ->add('roles', 'collection', array(
-//                        'type' => 'choice',
-//                        'options' => array(
-//                            'label' => false, /* Ajoutez cette ligne */
-//                            'choices' => array(
-//                                    'ROLE_USER' => 'Utilisateur',
-//                                    'ROLE_EXPERT' => 'Expert',
-//                                    'ROLE_CONTRIBUTEUR' => 'Contributeur'
-//                        )
-//                    )
-//                )
-//            )
         ;
     }
 

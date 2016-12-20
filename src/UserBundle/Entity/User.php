@@ -20,7 +20,7 @@ class User extends BaseUser
 
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=8)
      *
      */
     private $civilite;

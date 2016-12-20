@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+
+
+
+{% block content %}
+
+    <table width="300" style="text-align: center">
+        <td width="150"><a class="btn btn-primary" href="{{ path('users_index') }}">Utilisateurs</a></td>
+        <td width="150"><a class="btn btn-danger" style="width: 100px" href="{{ path('projets_index') }}">Projets</a></td>
+    </table>
+<br>
+
+    <table width="300" style="text-align: center">
+        <thead>
+        <th colspan="3" style="text-align: center">
+            <b>Questionnaire de création de projet</b>
+        </th>
+        </thead>
+        <tbody>
+        <tr>
+            <td height="10"></td>
+        </tr>
+        <tr>
+            <td width="100"><a class="btn btn-success" href="{{ path('utilisation_index') }}">Utilisations</a></td>
+            <td width="100"><a class="btn btn-info" href="{{ path('support_index') }}">Supports</a></td>
+            <td width="100"><a class="btn btn-warning" href="{{ path('diffusion_index') }}">Diffusions</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+{% endblock content %}

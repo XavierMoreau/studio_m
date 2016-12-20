@@ -1,39 +1,30 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Utilisations list</h1>
+{% block content %}
+    <h1>Types d'utilisation</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Utilisationtype</th>
-                <th>Actions</th>
+                <th> Type proposés :</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for utilisation in utilisations %}
             <tr>
-                <td><a href="{{ path('utilisation_show', { 'id': utilisation.id }) }}">{{ utilisation.id }}</a></td>
                 <td>{{ utilisation.utilisationType }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('utilisation_show', { 'id': utilisation.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('utilisation_edit', { 'id': utilisation.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td><a class="btn-modifier" href="{{ path('utilisation_edit', { 'id': utilisation.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td><a class="btn-delete"  href="{{ path('utilisation_delete', { 'id': utilisation.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('utilisation_new') }}">Create a new utilisation</a>
-        </li>
-    </ul>
+
+            <a class="btn btn-primary" href="{{ path('utilisation_new') }}">Nouveau</a>
+
+            <a class="btn btn-default" href="{{ path('admin_index') }}">Retour</a>
+
 {% endblock %}

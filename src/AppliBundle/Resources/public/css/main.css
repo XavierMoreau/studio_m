@@ -1,11 +1,22 @@
 body {
     font-family: 'Nunito', sans-serif;
+}
 
+.nolarge{
+    max-width : 500px;
+    margin: auto;
+
+}
+
+.large{
+
+    margin: auto;
 }
 
 header {
     background-color: #6897BB;
     color : white;
+    text-align: center;
 }
 
 
@@ -35,3 +46,12 @@ header {
     text-align: center;
 }
 
+
+.btn-delete{
+    color: darkred;
+   }
+
+
+.btn-modifier{
+    color: #337AB7;
+}

@@ -1,21 +1,13 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Support edit</h1>
+{% block content %}
+    <h1>Type de support</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-primary" type="submit" value="Enregistrer" />
+    <a class="btn btn-default" href="{{ path('support_index') }}">Retour</a>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('support_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
 {% endblock %}

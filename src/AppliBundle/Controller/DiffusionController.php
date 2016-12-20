@@ -48,7 +48,7 @@ class DiffusionController extends Controller
             $em->persist($diffusion);
             $em->flush($diffusion);
 
-            return $this->redirectToRoute('diffusion_show', array('id' => $diffusion->getId()));
+            return $this->redirectToRoute('diffusion_index');
         }
 
         return $this->render('diffusion/new.html.twig', array(
@@ -88,7 +88,7 @@ class DiffusionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('diffusion_edit', array('id' => $diffusion->getId()));
+            return $this->redirectToRoute('diffusion_index');
         }
 
         return $this->render('diffusion/edit.html.twig', array(
@@ -101,19 +101,16 @@ class DiffusionController extends Controller
     /**
      * Deletes a diffusion entity.
      *
-     * @Route("/{id}", name="diffusion_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="diffusion_delete")
+     * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, Diffusion $diffusion)
+    public function deleteAction(Diffusion $diffusion)
     {
-        $form = $this->createDeleteForm($diffusion);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($diffusion);
             $em->flush($diffusion);
-        }
+
 
         return $this->redirectToRoute('diffusion_index');
     }

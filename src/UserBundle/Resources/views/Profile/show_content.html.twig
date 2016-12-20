@@ -1,17 +1,43 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>Nom : {{ user.nom }}</p>
-    <p>Prénom : {{ user.prenom }}</p>
-    <p>Société : {{ user.societe }}</p>
-    <p>Poste au sein de la société : {{ user.poste }}</p>
-    <p>Téléphone : {{ user.telephone }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-    <p>Expert métier : {% if user.userExpert == 1 %} Oui {% else %} Non {% endif %}</p>
-    <p>Comédien Audio : {% if user.userVoix == 1 %} Oui {% else %} Non {% endif %}</p>
-    <p>Dessinateur : {% if user.userContributeur == 1 %} Oui {% else %} Non {% endif %}</p>
-    <p>Membre depuis le {{ user.dateCreation|date('d-m-Y') }}</p>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Nom d'utilisateur</dt>
+        <dd>{{ user.username }}</dd>
+    </dl>
 
-    <a href="{{ path('fos_user_profile_edit') }}">Modifier</a>
+
+    <dl class="dl-horizontal">
+        <dt>Nom</dt>
+        <dd>{{ user.nom }}</dd>
+        <dt>Prénom</dt>
+        <dd>{{ user.prenom }}</dd>
+        <dt>Société</dt>
+        <dd>{{ user.societe }}</dd>
+        <dt>Poste</dt>
+        <dd>{{ user.poste }}</dd>
+        <dt>Téléphone</dt>
+        <dd>{{ user.telephone }}</dd>
+        <dt>E-mail</dt>
+        <dd>{{ user.email }}</dd>
+    </dl>
+
+
+    <dl class="dl-horizontal">
+        <dt>Expert métier</dt>
+        <dd>{% if user.userExpert == 1 %} Oui {% else %} Non {% endif %}</dd>
+        <dt>Comédien audio</dt>
+        <dd>{% if user.userVoix == 1 %} Oui {% else %} Non {% endif %}</dd>
+        <dt>Dessinateur</dt>
+        <dd>{% if user.userContributeur == 1 %} Oui {% else %} Non {% endif %}</dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>Membre depuis le</dt>
+        <dd>{{ user.dateCreation|date('d-m-Y') }}</dd>
+    </dl>
+</div>
+
+<div style="text-align: right; width : 210px">
+    <a class="btn btn-default" href="{{ path('fos_user_profile_edit') }}">Modifier</a>
 </div>

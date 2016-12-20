@@ -1,16 +1,13 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Utilisation creation</h1>
+{% block content %}
+    <h1>Nouveau type d'utilisation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input class="btn btn-primary" type="submit" value="Créer" />
+    <a class="btn btn-default" href="{{ path('utilisation_index') }}">Retour</a>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('utilisation_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
 {% endblock %}

@@ -48,7 +48,7 @@ class UtilisationController extends Controller
             $em->persist($utilisation);
             $em->flush($utilisation);
 
-            return $this->redirectToRoute('utilisation_show', array('id' => $utilisation->getId()));
+            return $this->redirectToRoute('utilisation_index');
         }
 
         return $this->render('utilisation/new.html.twig', array(
@@ -88,7 +88,7 @@ class UtilisationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('utilisation_edit', array('id' => $utilisation->getId()));
+            return $this->redirectToRoute('utilisation_index');
         }
 
         return $this->render('utilisation/edit.html.twig', array(
@@ -101,19 +101,16 @@ class UtilisationController extends Controller
     /**
      * Deletes a utilisation entity.
      *
-     * @Route("/{id}", name="utilisation_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="utilisation_delete")
+     * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, Utilisation $utilisation)
+    public function deleteAction(Utilisation $utilisation)
     {
-        $form = $this->createDeleteForm($utilisation);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($utilisation);
             $em->flush($utilisation);
-        }
+
 
         return $this->redirectToRoute('utilisation_index');
     }

@@ -1,8 +1,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<h1>Votre profil</h1>
 
 {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+
+{{ form_widget(form) }}
+    <div style="text-align: center">
+        <input class="btn btn-default" type="submit" value="Mettre à jour" />
     </div>
 {{ form_end(form) }}

@@ -48,7 +48,7 @@ class SupportController extends Controller
             $em->persist($support);
             $em->flush($support);
 
-            return $this->redirectToRoute('support_show', array('id' => $support->getId()));
+            return $this->redirectToRoute('support_index');
         }
 
         return $this->render('support/new.html.twig', array(
@@ -88,7 +88,7 @@ class SupportController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('support_edit', array('id' => $support->getId()));
+            return $this->redirectToRoute('support_index');
         }
 
         return $this->render('support/edit.html.twig', array(
@@ -101,19 +101,15 @@ class SupportController extends Controller
     /**
      * Deletes a support entity.
      *
-     * @Route("/{id}", name="support_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="support_delete")
+     * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, Support $support)
+    public function deleteAction(Support $support)
     {
-        $form = $this->createDeleteForm($support);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($support);
             $em->flush($support);
-        }
 
         return $this->redirectToRoute('support_index');
     }

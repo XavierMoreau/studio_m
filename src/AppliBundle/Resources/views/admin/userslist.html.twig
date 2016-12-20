@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+    <a class="btn btn-default" href="{{ path('admin_index') }}">Administration</a>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <h1>Utilisateurs</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>N°</th>
+            <th>Nom d'utilisateur</th>
+            <th>Civilité</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Societé</th>
+            <th>Poste</th>
+            <th>Téléphone</th>
+            <th>E-mail</th>
+            <th>Inscrit depuis le</th>
+            <th>Dernière connexion</th>
+            <th>Expert métier</th>
+            <th>Comédien Audio</th>
+            <th>Dessinateur</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.civilite }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.societe }}</td>
+                <td>{{ user.poste }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.dateCreation | date('d/m/Y') }}</td>
+                <td>{{ user.lastLogin | date('d/m/Y \\à\\ H:i') }}</td>
+                <td>{% if user.userExpert == true %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if user.userVoix == true %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if user.userContributeur == true %}Oui{% else %}Non{% endif %}</td>
+
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
