@@ -1,13 +1,22 @@
-{% extends "layout.html.twig" %}
+{% extends 'layout.html.twig' %}
 
 
 
 
+{% block body %}
 
-{% block title %}{% endblock %}
+    <ul>
+        <li>
+            <a href="{{ path('utilisation_index') }}">Gestion des types d'utilisations</a>
+        </li>
+        <li>
+            <a href="{{ path('support_index') }}">Gestion des types de supports</a>
+        </li>
+        <li>
+            <a href="{{ path('diffusion_index') }}">Gestion des types de diffusions</a>
+        </li>
+    </ul>
 
-{% block content %}
 
-   Admin Page
 
-{% endblock %}
+{% endblock body %}

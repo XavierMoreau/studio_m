@@ -53,7 +53,7 @@ security:
         # PAGES ACCESSIBLES AUX UTILISATEURS
         - { path: ^/change-password, role: ROLE_USER }
         # PAGES ACCESSIBLES AUX ADMINISTRATEURS
-        - { path: ^/admin$, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_ADMIN }
 
         # PAGES ACCESSIBLES À TOUS
 #         - { path: ^/myapp.*, role: IS_AUTHENTICATED_ANONYMOUSLY

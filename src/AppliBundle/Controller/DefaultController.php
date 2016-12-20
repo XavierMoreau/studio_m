@@ -59,13 +59,5 @@ class DefaultController extends Controller
         return $this->render('AppliBundle:Default:contributeur.html.twig');
     }
 
-    /**
-     * @Route("/admin", name="admin_control")
-     */
-    public function adminAction()
-    {
-        return $this->render('AppliBundle:Default:admin.html.twig');
-    }
-
 
 }

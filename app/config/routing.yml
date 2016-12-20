@@ -27,3 +27,19 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /change-password
+
+
+utilisation:
+    resource: "@AppliBundle/Controller/UtilisationController.php"
+    type:     annotation
+    prefix:   /admin/
+
+support:
+    resource: "@AppliBundle/Controller/SupportController.php"
+    type:     annotation
+    prefix:   /admin/
+
+diffusion:
+    resource: "@AppliBundle/Controller/DiffusionController.php"
+    type:     annotation
+    prefix:   /admin/

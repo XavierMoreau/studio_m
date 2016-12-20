@@ -29,8 +29,9 @@
         <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
     {% endif %}
 
-
-
+    {% if is_granted("ROLE_ADMIN") %}
+        Administration : <a href="{{ path('admin_index') }}">Configuration</a><span> |</span>
+    {% endif %}
     <hr>
 
 </header>

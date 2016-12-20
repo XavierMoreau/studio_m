@@ -11,9 +11,9 @@
                 <th>Nom</th>
                 <th>Créé le </th>
                 <th>Dernière modification</th>
-                <th>Support</th>
-                <th>Diffusion</th>
-                <th>Utilisation</th>
+                {#<th>Support</th>#}
+                {#<th>Diffusion</th>#}
+                {#<th>Utilisation</th>#}
                 <th>Temps de diffusion</th>
                 <th>Montant HT</th>
                 <th>Datediffusion</th>
@@ -28,9 +28,9 @@
                 <td><a href="{{ path('projet_show', {'id':app.user.id, 'projet': projet.id }) }}">{{ projet.nomProjet }}</a></td>
                 <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if projet.dateModification %}{{ projet.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ projet.support }}</td>
-                <td>{{ projet.diffusion }}</td>
-                <td>{{ projet.utilisation }}</td>
+                {#<td>{{ projet.support }}</td>#}
+                {#<td>{{ projet.diffusion }}</td>#}
+                {#<td>{{ projet.utilisation }}</td>#}
                 <td>{{ projet.tempsDiffusion }}</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('Y-m-d') }}{% endif %}</td>
