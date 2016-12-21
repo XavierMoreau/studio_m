@@ -2,6 +2,7 @@
 
 namespace AppliBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,12 +14,36 @@ class ProjetType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nomProjet')
-                ->add('support')
-            ->add('diffusion')
-            ->add('utilisation')
-            ->add('tempsDiffusion')
-            ->add('dateDiffusion')
+        $builder->add('nomProjet','text',array('label'=>'Nom du projet :'))
+                ->add('support',
+                    EntityType::class, array(
+                    'class' => 'AppliBundle:Support',
+                    'choice_label' => 'supportType',
+                    'multiple' => true,
+                    'expanded' => true,
+                        'label'=>'Type de support :')
+                )
+                ->add('diffusion',
+                    EntityType::class, array(
+                    'class' => 'AppliBundle:Diffusion',
+                    'choice_label' => 'diffusionType',
+                    'multiple' => true,
+                    'expanded' => true,
+                        'label'=>'Type de diffusion :')
+                )
+                ->add('utilisation',
+                    EntityType::class, array(
+                    'class' => 'AppliBundle:Utilisation',
+                    'choice_label' => 'utilisationType',
+                    'multiple' => true,
+                    'expanded' => true,
+                        'label'=>"Type d'utilisation :")
+                )
+            ->add('dateDiffusion','date',array('label'=>'Date de diffusion prévue :'))
+            ->add('tempsDiffusion','integer',array('label'=>'Temps de diffusion (en années) :'))
+
+
+
             ;
     }
     

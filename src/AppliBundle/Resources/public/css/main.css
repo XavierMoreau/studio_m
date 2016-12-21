@@ -2,6 +2,11 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+
+a:hover{
+    text-decoration: none;
+}
+
 .nolarge{
     max-width : 500px;
     margin: auto;
@@ -10,15 +15,20 @@ body {
 
 .large{
 
-    margin: auto;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 header {
     background-color: #6897BB;
     color : white;
-    text-align: center;
+
 }
 
+header a{
+    color : white;
+
+}
 
 .login_form {
     max-width: 400px;

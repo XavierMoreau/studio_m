@@ -1,14 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Projet creation</h1>
+{% block content %}
+    <h1>Nouveau projet</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input class="btn btn-primary" type="submit" value="Create" />
+    <a class="btn btn-default" href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour</a>
     {{ form_end(form) }}
 
 
-            <a href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour aux Projets</a>
+
 
 {% endblock %}

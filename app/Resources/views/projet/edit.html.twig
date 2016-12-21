@@ -1,26 +1,20 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block content %}
 
 
 
-    <h1>Projet edit</h1>
+    <h1>Modification de projet</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    <input class="btn btn-primary" type="submit" value="Enregistrer" />
+    <a class="btn btn-default" href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour</a>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('projet_index', { 'id': app.user.id })  }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+
+
 
 
 

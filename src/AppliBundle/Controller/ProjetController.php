@@ -2,6 +2,9 @@
 
 namespace AppliBundle\Controller;
 
+use AppliBundle\Entity\Diffusion;
+use AppliBundle\Entity\Utilisation;
+use AppliBundle\Entity\Support;
 use AppliBundle\Entity\Projet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -27,9 +30,14 @@ class ProjetController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $projets = $em->getRepository('AppliBundle:Projet')->findByUtilisateur($user);
+            $datas = $em->getRepository('AppliBundle:Projet')->getSupports();
+            $datas = $em->getRepository('AppliBundle:Projet')->getDiffusions();
+            $datas = $em->getRepository('AppliBundle:Projet')->getUtilisations();
 
             return $this->render('projet/index.html.twig', array(
                 'projets' => $projets,
+                'datas' => $datas,
+
             ));
         }
         else{
@@ -47,7 +55,7 @@ class ProjetController extends Controller
     public function newAction(Request $request, User $user)
     {
         if ($user === $this->getUser()){
-        $projet = new Projet();
+            $projet = new Projet();
         $projet->setUtilisateur($user);
         $form = $this->createForm('AppliBundle\Form\ProjetType', $projet);
         $form->handleRequest($request);
@@ -57,7 +65,7 @@ class ProjetController extends Controller
             $em->persist($projet);
             $em->flush($projet);
 
-            return $this->redirectToRoute('projet_show', array('id' => $user->getId(), 'projet' => $projet->getId()));
+            return $this->redirectToRoute('projet_index', array('id' => $user->getId()));
         }
 
         return $this->render('projet/new.html.twig', array(
@@ -110,7 +118,7 @@ class ProjetController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('projet_show', array('id' => $user->getId(),'projet' => $projet->getId()));
+            return $this->redirectToRoute('projet_index', array('id' => $user->getId()));
         }
 
         return $this->render('projet/edit.html.twig', array(
@@ -128,19 +136,19 @@ class ProjetController extends Controller
     /**
      * Deletes a projet entity.
      *
-     * @Route("/{id}/{projet}", name="projet_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}/{projet}", name="projet_delete")
+     * @Method({"DELETE", "GET"})
      */
     public function deleteAction(User $user, Request $request, Projet $projet)
     {
-        $form = $this->createDeleteForm($projet, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+//        $form = $this->createDeleteForm($projet, $user);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($projet);
             $em->flush($projet);
-        }
+//        }
 
         return $this->redirectToRoute('projet_index', array('id' => $user->getId()));
     }

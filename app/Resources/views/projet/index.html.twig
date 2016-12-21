@@ -10,12 +10,17 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                {% if is_granted("ROLE_ADMIN") %}
+                <th>Utilisateur</th>
+                {% endif %}
                 <th>Nom</th>
+                <th></th>
+                <th></th>
                 <th>Créé le </th>
                 <th>Dernière modification</th>
-                {#<th>Support</th>#}
-                {#<th>Diffusion</th>#}
-                {#<th>Utilisation</th>#}
+                <th>Support</th>
+                <th>Diffusion</th>
+                <th>Utilisation</th>
                 <th>Temps de diffusion</th>
                 <th>Montant HT</th>
                 <th>Datediffusion</th>
@@ -26,16 +31,46 @@
         </thead>
         <tbody>
         {% for projet in projets %}
+
+
             <tr>
-                <td><a href="{{ path('projet_show', {'id':app.user.id, 'projet': projet.id }) }}">{{ projet.nomProjet }}</a></td>
-                <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if projet.dateModification %}{{ projet.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
-                {#<td>{{ projet.support }}</td>#}
-                {#<td>{{ projet.diffusion }}</td>#}
-                {#<td>{{ projet.utilisation }}</td>#}
-                <td>{{ projet.tempsDiffusion }}</td>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <th>{{ projet.utilisateur.username }}</th>
+                {% endif %}
+                <td>{{ projet.nomProjet }}</td>
+                <td><a class="btn-modifier" href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td><a class="btn-delete"  href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
+                <td>{% if projet.dateModification %}{{ projet.dateModification|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
+
+                <td><ul>
+                        {% set arraySupport = projet.support.getValues %}
+                        {% for support in arraySupport %}
+                            <li>
+                                {{ support.supportType }}
+                            </li>
+                        {% endfor %}
+                    </ul></td>
+                <td><ul>
+                        {% set arrayDiffusion = projet.diffusion.getValues %}
+                        {% for diffusion in arrayDiffusion %}
+                            <li>
+                                {{ diffusion.diffusionType }}
+                            </li>
+                        {% endfor %}
+                    </ul></td>
+                <td><ul>
+                        {% set arrayUtilisation = projet.utilisation.getValues %}
+                        {% for utilisation in arrayUtilisation %}
+                            <li>
+                                {{ utilisation.utilisationType }}
+                            </li>
+                        {% endfor %}
+                    </ul></td>
+
+                <td>{{ projet.tempsDiffusion }} an(s)</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
-                <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
                 <td>{% if projet.script %}Accéder au script{% else %}Ecrire le script{% endif %}</td>
                 <td>{% if projet.storyboard %}Accéder au storyboard{% else %}Créer le storyboard{% endif %}</td>
 
@@ -48,16 +83,13 @@
 
 {% block content %}
 
-    <a class="btn btn-primary" href="{{ path('projet_new', {'id': app.user.id }) }}">Nouveau</a>
-
-
-        {% if is_granted("ROLE_ADMIN") %}
+    <div style="text-align: center">
+        <a class="btn btn-primary" style="width: 120px" href="{{ path('projet_new', {'id': app.user.id }) }}">Nouveau</a>
 
 
 
-            <a class="btn btn-default" href="{{ path('admin_index') }}">Administration</a>
+    </div>
 
-        {% endif %}
 
 
 

@@ -13,26 +13,38 @@
 <body>
 
 <header>
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+    {% if is_granted("ROLE_USER") %}
 
-    Connecté en tant que <b>{{ app.user.username }}</b>
-        - Vous êtes un ....
-        <a href="{{ path('fos_user_profile_show') }}">Profil</a><span> |</span>
-        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a><span> |</span>
-        <a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a><span> |</span>
-        {#<a href="{{ path('expert_control') }}">Expert</a><span> |</span>#}
-        {#<a href="{{ path('contributeur_control') }}">Contributeur</a><span> |</span>#}
-        {#<a href="{{ path('admin_control') }}">Administrateur</a>#}
+        <div style="width: 100%; padding-top: 25px;">
+            <div style="width: 49%; text-align: left; display: inline-block; margin-left:20px;">
+                Bonjour <b>{{ app.user.username }}</b> !
+            </div>
+
+            <div style="width: 49%; text-align: right; display: inline-block; ">
+                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('index') }}">Accueil</a></div>
+                <div style="margin-right:50px;display: inline-block;"><a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></div>
+                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('fos_user_profile_show') }}">Profil</a></div>
+                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('admin_index') }}">Administration</a></div>
+                {% endif %}
+
+            </div>
 
 
     {% else %}
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a><span> |</span>
-        <a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>
-    {% endif %}
+        {#<a href="{{ path('fos_user_security_login') }}">Connexion</a><span> |</span>#}
+        {#<a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>#}
 
-    {% if is_granted("ROLE_ADMIN") %}
-        Administration : <a href="{{ path('admin_index') }}">Configuration</a><span> |</span>
+
+            <div style="text-align: center; margin-top: -10px; padding-top: 10px;">
+            <h3>Studio Bump</h3>
+
+            </div>
+
     {% endif %}
+        </div>
     <hr>
 
 </header>

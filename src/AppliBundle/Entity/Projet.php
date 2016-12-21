@@ -3,6 +3,7 @@
 namespace AppliBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 
@@ -108,6 +109,9 @@ class Projet
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
+        $this->support = new ArrayCollection();
+        $this->utilisation = new ArrayCollection();
+        $this->diffusion = new ArrayCollection();
     }
 
 

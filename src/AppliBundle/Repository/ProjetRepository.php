@@ -10,4 +10,29 @@ namespace AppliBundle\Repository;
  */
 class ProjetRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getSupports(){
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.support', 's')
+           ->addSelect('s');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getDiffusions(){
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.diffusion', 'd')
+            ->addSelect('d');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getUtilisations(){
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.utilisation', 'u')
+            ->addSelect('u');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 }

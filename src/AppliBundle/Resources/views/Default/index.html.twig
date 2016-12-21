@@ -7,7 +7,32 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    {#{% block fos_user_content %}{% endblock %}#}
-    Hello World! Coucou
+    {% if is_granted("ROLE_USER") %}
+
+        <div style="text-align: center">
+            <h1>Ici, c'est le Studio Bump</h1>
+        </div>
+
+    <table width="500" style="text-align: center">
+        <td width="167"><a class="btn btn-info" style="width: 120px" href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></td>
+        <td width="166"><a class="btn btn-success" style="width: 120px" href="{{ path('fos_user_profile_show') }}">Profil</a></td>
+
+        <td width="167"><a class="btn btn-default" style="width: 120px" href="{{ path('fos_user_security_logout') }}">Déconnection</a></td>
+    </table>
+{% endif %}
+{% if is_granted("ROLE_ADMIN") %}
+
+<table width="500" style="text-align: center">
+    <tr>
+        <td height="10"></td>
+    </tr>
+    <tr>
+        <td><a class="btn btn-danger" style="width: 120px"  href="{{ path('admin_index') }}">Administration</a></td>
+    </tr>
+</table>
+{% endif %}
+
 
 {% endblock %}
+
+
