@@ -3,6 +3,10 @@
 namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\ScriptReponse;
+use AppliBundle\Entity\Script;
+use AppliBundle\Entity\Projet;
+use AppliBundle\Entity\ScriptQuestion;
+use UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -34,27 +38,45 @@ class ScriptReponseController extends Controller
     /**
      * Creates a new scriptReponse entity.
      *
-     * @Route("/new", name="scriptreponse_new")
+     * @Route("/user={id}/projet={projet}/script={script}/new", name="scriptreponse_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, User $user, Projet $projet, Script $script, ScriptQuestion $questions)
     {
         $scriptReponse = new Scriptreponse();
-        $form = $this->createForm('AppliBundle\Form\ScriptReponseType', $scriptReponse);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($scriptReponse);
-            $em->flush($scriptReponse);
 
-            return $this->redirectToRoute('scriptreponse_show', array('id' => $scriptReponse->getId()));
+
+        $form = $this->createFormBuilder($scriptReponse);
+
+
+
+        $request = $this->get('request');
+        if ($request->getMethod() == 'POST'){
+            $form->bind($request);
+            if ($form->isValid()){
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($scriptReponse);
+                $em->flush($scriptReponse);
+
+                return $this->redirectToRoute('scriptecriture_new', array(
+                    'script' => $script->getId(),
+                    'id' => $user->getId(),
+                    'projet' => $projet->getId(),
+                    'reponses' => $scriptReponse->getId()
+                ));
+            }
+
         }
 
-        return $this->render('scriptreponse/new.html.twig', array(
-            'scriptReponse' => $scriptReponse,
-            'form' => $form->createView(),
-        ));
+
+            return $this->render('scriptreponse/new.html.twig', array(
+                'scriptReponse' => $scriptReponse,
+                'form' => $form,
+                ));
+
+
+
     }
 
     /**

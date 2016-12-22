@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1>Script</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ script.id }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{% if script.dateCreation %}{{ script.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datemodification</th>
+                <td>{% if script.dateModification %}{{ script.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datevalidation</th>
+                <td>{% if script.dateValidation %}{{ script.dateValidation|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Validation</th>
+                <td>{% if script.validation %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Projet</th>
+                <td>{{ script.projet }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('script_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('script_edit', { 'id': script.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

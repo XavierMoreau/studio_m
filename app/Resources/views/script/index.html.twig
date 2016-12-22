@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h2>Débutons l'écriture de votre script</h2>
+
+    <h3>Afin d'écrire votre script, répondez aux questions suivantes :</h3>
+
+{{ dump(user) }}
+    {{ dump(projet) }}
+    {{ dump(questions) }}
+
+<form  method="post" action="{{ path('index') }}">
+
+    {% for question in questions %}
+<div class="form-group">
+    <label for="reponse{{ question.id }}">{{ question.question }}</label><br>
+    <textarea class="form-control" name="reponse{{ question.id }}">
+
+    </textarea>
+
+
+</div>
+        <br><hr>
+
+    {%  endfor %}
+
+    <input class="btn btn-primary" type="submit" value="Continuer" />
+</form>
+
+
+
+{% endblock %}

@@ -1,7 +1,7 @@
-{% extends 'layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Scriptreponse creation</h1>
+    <h1>Script creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('scriptreponse_index') }}">Back to the list</a>
+            <a href="{{ path('script_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}

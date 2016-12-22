@@ -47,7 +47,7 @@ class Script
      *
      * @ORM\Column(name="validation", type="boolean")
      */
-    private $validation;
+    private $validation = false;
 
     /**
      * @var int
@@ -55,6 +55,18 @@ class Script
      * @ORM\Column(name="projet", type="integer")
      */
     private $projet;
+
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+//        $this->support = new ArrayCollection();
+//        $this->utilisation = new ArrayCollection();
+//        $this->diffusion = new ArrayCollection();
+    }
+
+
+
 
 
     /**

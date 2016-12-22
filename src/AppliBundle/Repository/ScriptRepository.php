@@ -2,6 +2,9 @@
 
 namespace AppliBundle\Repository;
 
+
+
+
 /**
  * ScriptRepository
  *
@@ -10,4 +13,14 @@ namespace AppliBundle\Repository;
  */
 class ScriptRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getQuestions(){
+
+                $qb = $this->createQueryBuilder('s')
+                ->leftJoin('s.question', 's')
+                ->addSelect('s');
+
+            return $qb->getQuery()->getResult();
+
+    }
 }

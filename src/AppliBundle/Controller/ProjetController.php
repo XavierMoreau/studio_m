@@ -60,12 +60,16 @@ class ProjetController extends Controller
         $form = $this->createForm('AppliBundle\Form\ProjetType', $projet);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($projet);
             $em->flush($projet);
 
-            return $this->redirectToRoute('projet_index', array('id' => $user->getId()));
+            return $this->redirectToRoute('script_index', array(
+                'id' => $user->getId(),
+                'projet' => $projet->getId(),
+            ));
         }
 
         return $this->render('projet/new.html.twig', array(
