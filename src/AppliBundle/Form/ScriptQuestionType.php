@@ -13,7 +13,7 @@ class ScriptQuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('question')        ;
+        $builder->add('question','text',array('label'=>' '))        ;
     }
     
     /**

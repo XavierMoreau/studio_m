@@ -1,39 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Scriptquestions list</h1>
+{% block content %}
+    <h2>Questions posées pour le script :</h2>
 
     <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Question</th>
-                <th>Actions</th>
+                <th height="30"></th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for scriptQuestion in scriptQuestions %}
             <tr>
-                <td><a href="{{ path('scriptquestion_show', { 'id': scriptQuestion.id }) }}">{{ scriptQuestion.id }}</a></td>
-                <td>{{ scriptQuestion.question }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('scriptquestion_show', { 'id': scriptQuestion.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('scriptquestion_edit', { 'id': scriptQuestion.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
+                <td height="30">{{ scriptQuestion.question }}</td>
+                <td width ="50" style="text-align: center"><a class="btn-modifier" href="{{ path('scriptquestion_edit', { 'id': scriptQuestion.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td width ="50" style="text-align: center"><a class="btn-delete"  href="{{ path('scriptquestion_delete', { 'id': scriptQuestion.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+
             </tr>
         {% endfor %}
+        <tr>
+            <td height="40"></td>
+        </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('scriptquestion_new') }}">Create a new scriptQuestion</a>
-        </li>
-    </ul>
+
+
+    <h3>Nouvelle question :</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input class="btn btn-primary" type="submit" value="Créer" />
+    <a class="btn btn-default" href="{{ path('admin_index') }}">Retour</a>
+    {{ form_end(form) }}
+
+
+
+
+
+
+
+
 {% endblock %}

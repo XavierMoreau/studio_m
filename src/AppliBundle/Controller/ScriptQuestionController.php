@@ -18,27 +18,14 @@ class ScriptQuestionController extends Controller
      * Lists all scriptQuestion entities.
      *
      * @Route("/", name="scriptquestion_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $scriptQuestions = $em->getRepository('AppliBundle:ScriptQuestion')->findAll();
 
-        return $this->render('scriptquestion/index.html.twig', array(
-            'scriptQuestions' => $scriptQuestions,
-        ));
-    }
-
-    /**
-     * Creates a new scriptQuestion entity.
-     *
-     * @Route("/new", name="scriptquestion_new")
-     * @Method({"GET", "POST"})
-     */
-    public function newAction(Request $request)
-    {
         $scriptQuestion = new Scriptquestion();
         $form = $this->createForm('AppliBundle\Form\ScriptQuestionType', $scriptQuestion);
         $form->handleRequest($request);
@@ -47,8 +34,37 @@ class ScriptQuestionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($scriptQuestion);
             $em->flush($scriptQuestion);
+            return $this->redirectToRoute('scriptquestion_index');
+        }
 
-            return $this->redirectToRoute('scriptquestion_show', array('id' => $scriptQuestion->getId()));
+
+
+        return $this->render('scriptquestion/index.html.twig', array(
+            'scriptQuestions' => $scriptQuestions,
+
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
+     * Creates a new scriptQuestion entity.
+     *
+     * @Route("/", name="scriptquestion_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+
+        $scriptQuestion = new Scriptquestion();
+        $form = $this->createForm('AppliBundle\Form\ScriptQuestionType', $scriptQuestion);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($scriptQuestion);
+            $em->flush($scriptQuestion);
+            return $this->redirectToRoute('scriptquestion_index');
         }
 
         return $this->render('scriptquestion/new.html.twig', array(
@@ -88,7 +104,7 @@ class ScriptQuestionController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('scriptquestion_edit', array('id' => $scriptQuestion->getId()));
+            return $this->redirectToRoute('scriptquestion_index');
         }
 
         return $this->render('scriptquestion/edit.html.twig', array(
@@ -101,19 +117,15 @@ class ScriptQuestionController extends Controller
     /**
      * Deletes a scriptQuestion entity.
      *
-     * @Route("/{id}", name="scriptquestion_delete")
-     * @Method("DELETE")
+     * @Route("/delete/{id}", name="scriptquestion_delete")
+     * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(Request $request, ScriptQuestion $scriptQuestion)
+    public function deleteAction(ScriptQuestion $scriptQuestion)
     {
-        $form = $this->createDeleteForm($scriptQuestion);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($scriptQuestion);
             $em->flush($scriptQuestion);
-        }
+
 
         return $this->redirectToRoute('scriptquestion_index');
     }

@@ -44,3 +44,7 @@ diffusion:
     type:     annotation
     prefix:   /admin/
 
+scriptQuestion:
+    resource: "@AppliBundle/Controller/ScriptQuestionController.php"
+    type:     annotation
+    prefix:   /admin/

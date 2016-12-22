@@ -1,21 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Scriptquestion edit</h1>
+{% block content %}
+    <h3>Modification de question</h3>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        <input class="btn btn-primary" type="submit" value="Modifier" />
+    <a class="btn btn-default" href="{{ path('scriptquestion_index') }}">Retour</a>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('scriptquestion_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
 {% endblock %}
