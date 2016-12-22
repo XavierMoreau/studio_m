@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Scriptquestions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Question</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scriptQuestion in scriptQuestions %}
+            <tr>
+                <td><a href="{{ path('scriptquestion_show', { 'id': scriptQuestion.id }) }}">{{ scriptQuestion.id }}</a></td>
+                <td>{{ scriptQuestion.question }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('scriptquestion_show', { 'id': scriptQuestion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('scriptquestion_edit', { 'id': scriptQuestion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('scriptquestion_new') }}">Create a new scriptQuestion</a>
+        </li>
+    </ul>
+{% endblock %}

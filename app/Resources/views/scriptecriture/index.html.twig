@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Scriptecritures list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Voixoff</th>
+                <th>Tempsestime</th>
+                <th>Tempsforce</th>
+                <th>Datemodification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scriptEcriture in scriptEcritures %}
+            <tr>
+                <td><a href="{{ path('scriptecriture_show', { 'id': scriptEcriture.id }) }}">{{ scriptEcriture.id }}</a></td>
+                <td>{{ scriptEcriture.description }}</td>
+                <td>{{ scriptEcriture.voixoff }}</td>
+                <td>{% if scriptEcriture.tempsEstime %}{{ scriptEcriture.tempsEstime|date('H:i:s') }}{% endif %}</td>
+                <td>{% if scriptEcriture.tempsForce %}{{ scriptEcriture.tempsForce|date('H:i:s') }}{% endif %}</td>
+                <td>{% if scriptEcriture.dateModification %}{{ scriptEcriture.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('scriptecriture_show', { 'id': scriptEcriture.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('scriptecriture_edit', { 'id': scriptEcriture.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('scriptecriture_new') }}">Create a new scriptEcriture</a>
+        </li>
+    </ul>
+{% endblock %}
