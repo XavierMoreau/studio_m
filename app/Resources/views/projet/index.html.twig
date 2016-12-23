@@ -71,7 +71,10 @@
                 <td>{{ projet.tempsDiffusion }} an(s)</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
-                <td>{% if projet.script %}Accéder au script{% else %}Ecrire le script{% endif %}</td>
+
+                <td>{% if projet.script %}<a class="btn btn-info" href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,}) }}">Accéder au script</a>
+                    {% else %}<a class="btn btn-primary" href="{{ path('script_index', {'id':app.user.id, 'projet': projet.id,}) }}">Ecrire le script</a>{% endif %}</td>
+
                 <td>{% if projet.storyboard %}Accéder au storyboard{% else %}Créer le storyboard{% endif %}</td>
 
             </tr>

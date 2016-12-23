@@ -4,6 +4,7 @@ namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Script;
 use AppliBundle\Entity\Projet;
+use AppliBundle\Form\ScriptReponseType;
 use UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,40 +18,18 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ScriptController extends Controller
 {
-    /**
-     * Lists all script entities.
-     *
-     * @Route("//user={id}/projet={projet}", name="script_index")
-     * @Method({"GET", "POST"})
-     */
-    public function indexAction(Request $request, User $user, Projet $projet)
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $questions = $em->getRepository('AppliBundle:ScriptQuestion')->findAll();
-
-
-
-        return $this->render('script/index.html.twig', array(
-            'user' => $user->getId(),
-            'projet' => $projet->getId(),
-            'questions' => $questions
-        ));
-    }
-
 
     /**
      * Creates a new script entity.
      *
-     * @Route("/user={id}/projet={projet}/questions", name="script_questions")
+     * @Route("/user={id}/projet={projet}/questions", name="script_index")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, User $user, Projet $projet)
     {
         if ($user === $this->getUser()){
-        $script = new Script();
-        $script->setProjet($projet->getId());
-
+            $script = new Script();
+            $script->setProjet($projet->getId());
 
 
             $form = $this->createForm('AppliBundle\Form\ScriptType', $script);
@@ -61,13 +40,18 @@ class ScriptController extends Controller
             $em->flush($script);
 
 
+            $projet->setScript($script->getId());
+            $em2 = $this->getDoctrine()->getManager();
+            $em2->persist($projet);
+            $em2->flush($projet);
 
 
-            return $this->redirectToRoute('scriptreponse_new', array(
+
+            return $this->redirectToRoute('script_questions', array(
                 'script' => $script->getId(),
                 'id' => $user->getId(),
                 'projet' => $projet->getId(),
-                ));
+            ));
 
 
 
@@ -76,6 +60,68 @@ class ScriptController extends Controller
             return $this->render('AppliBundle:Default:unauthorized.html.twig');
         }
     }
+
+
+
+    /**
+     * Ask base questions.
+     *
+     * @Route("/questions/user={id}/projet={projet}", name="script_questions")
+     * @Method({"GET", "POST"})
+     */
+    public function questionsAction(Request $request, User $user, Projet $projet)
+    {
+//
+//        $form = $this->createForm(new ScriptReponseType());
+////        return $this->render('header.html.twig', array(
+////            'form' => $form->createView()
+////        ));
+
+        $em = $this->getDoctrine()->getManager();
+        $questions = $em->getRepository('AppliBundle:ScriptQuestion')->findAll();
+//
+//
+//
+        return $this->render('script/index.html.twig', array(
+//             'form' => $form->createView(),
+            'user' => $user->getId(),
+            'projet' => $projet,
+            'questions' => $questions
+        ));
+
+
+
+    }
+
+
+    /**
+     * Flush answers to questions in DB.
+     *
+     * @Route("/reponses/user={id}/projet={projet}/script={script}", name="script_reponses")
+     * @Method({"GET", "POST"})
+     */
+    public function reponsesAction(Request $request, User $user, Projet $projet)
+    {
+        var_dump($_POST);
+
+
+
+        foreach ($_POST as $key=>$reponse){
+
+
+            $idQuestion = str_replace("reponse", "", $key);
+
+            var_dump($idQuestion);
+        }
+        die;
+    }
+
+
+
+
+
+
+
 
     /**
      * Finds and displays a script entity.
