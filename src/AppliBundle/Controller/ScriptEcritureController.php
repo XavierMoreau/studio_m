@@ -2,6 +2,7 @@
 
 namespace AppliBundle\Controller;
 
+use AppliBundle\Entity\Script;
 use AppliBundle\Entity\ScriptEcriture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -34,11 +35,19 @@ class ScriptEcritureController extends Controller
     /**
      * Creates a new scriptEcriture entity.
      *
-     * @Route("/new", name="scriptecriture_new")
+     * @Route("/new/user={id}/projet={projet}/script={script}", name="scriptecriture_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Script $script)
+
     {
+
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppliBundle:ScriptReponse');
+
+        $reponses = $repository->findByScript($script);
+
         $scriptEcriture = new Scriptecriture();
         $form = $this->createForm('AppliBundle\Form\ScriptEcritureType', $scriptEcriture);
         $form->handleRequest($request);
@@ -54,6 +63,7 @@ class ScriptEcritureController extends Controller
         return $this->render('scriptecriture/new.html.twig', array(
             'scriptEcriture' => $scriptEcriture,
             'form' => $form->createView(),
+            'script' => $script
         ));
     }
 

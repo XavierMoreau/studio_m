@@ -4,12 +4,15 @@ namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Script;
 use AppliBundle\Entity\Projet;
+use AppliBundle\Entity\ScriptQuestion;
+use AppliBundle\Entity\ScriptReponse;
 use AppliBundle\Form\ScriptReponseType;
 use UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
  * Script controller.
@@ -71,25 +74,38 @@ class ScriptController extends Controller
      */
     public function questionsAction(Request $request, User $user, Projet $projet)
     {
-//
-//        $form = $this->createForm(new ScriptReponseType());
-////        return $this->render('header.html.twig', array(
-////            'form' => $form->createView()
-////        ));
-
+        // On recherche toutes les questions à poser
         $em = $this->getDoctrine()->getManager();
         $questions = $em->getRepository('AppliBundle:ScriptQuestion')->findAll();
-//
-//
-//
-        return $this->render('script/index.html.twig', array(
-//             'form' => $form->createView(),
-            'user' => $user->getId(),
-            'projet' => $projet,
-            'questions' => $questions
-        ));
 
 
+        // On vérifie s'il n'y a pas déjà des réponses pour ce script
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppliBundle:ScriptReponse');
+        $reponses = $repository->findByScript($projet->getScript());
+
+        if ($reponses){
+            return $this->render('script/edit.html.twig', array(
+
+                'user' => $user->getId(),
+                'projet' => $projet,
+                'questions' => $questions,
+                'reponses' => $reponses,
+
+            ));
+        }
+        // On envoie à la page script_index, formulaire des questions de base
+        else{
+            return $this->render('script/index.html.twig', array(
+
+                'user' => $user->getId(),
+                'projet' => $projet,
+                'questions' => $questions,
+
+
+            ));
+        }
 
     }
 
@@ -97,26 +113,64 @@ class ScriptController extends Controller
     /**
      * Flush answers to questions in DB.
      *
-     * @Route("/reponses/user={id}/projet={projet}/script={script}", name="script_reponses")
+     * @Route("/reponsesnew/user={id}/projet={projet}/script={script}", name="script_reponses_new")
      * @Method({"GET", "POST"})
      */
-    public function reponsesAction(Request $request, User $user, Projet $projet)
+    public function reponsesNewAction(Request $request, User $user, Projet $projet, Script $script)
     {
-        var_dump($_POST);
 
+        foreach ($_POST as $key=>$reponse){
+
+            $questionId = str_replace("reponse", "", $key);
+
+            $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppliBundle:ScriptQuestion');
+
+            $question = $repository->findOneById($questionId);
+
+            $scriptReponse = new ScriptReponse();
+            $scriptReponse->setScript($script->getId());
+            $scriptReponse->setQuestion($question);
+            $scriptReponse->setReponse($reponse);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($scriptReponse);
+            $em->flush($script);
+
+        }
+        return $this->redirectToRoute('scriptecriture_new', array(
+            'script' => $script->getId(),
+            'id' => $user->getId(),
+            'projet' => $projet->getId(),
+        ));
+    }
+
+
+
+    /**
+     * Flush modificated answers to questions in DB.
+     *
+     * @Route("/reponsesedit/user={id}/projet={projet}/script={script}", name="script_reponses_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function reponsesEditAction(Request $request, User $user, Projet $projet, Script $script)
+    {
 
 
         foreach ($_POST as $key=>$reponse){
 
+            $scriptReponse = $this->getDoctrine()->getRepository('AppliBundle:ScriptReponse')->findOneById($key);
+            $scriptReponse->setReponse($reponse);
+            $this->getDoctrine()->getEntityManager()->flush();
 
-            $idQuestion = str_replace("reponse", "", $key);
-
-            var_dump($idQuestion);
         }
-        die;
+        return $this->redirectToRoute('scriptecriture_new', array(
+            'script' => $script->getId(),
+            'id' => $user->getId(),
+            'projet' => $projet->getId(),
+        ));
     }
-
-
 
 
 

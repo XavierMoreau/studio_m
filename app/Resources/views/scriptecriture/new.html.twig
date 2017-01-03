@@ -1,6 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block content %}
+
+    {{ dump(script) }}
+
     <h1>Scriptecriture creation</h1>
 
     {{ form_start(form) }}
