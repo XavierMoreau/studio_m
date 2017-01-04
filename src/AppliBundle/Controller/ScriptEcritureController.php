@@ -3,6 +3,8 @@
 namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Script;
+use AppliBundle\Entity\Projet;
+use UserBundle\Entity\User;
 use AppliBundle\Entity\ScriptEcriture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,18 +20,42 @@ class ScriptEcritureController extends Controller
     /**
      * Lists all scriptEcriture entities.
      *
-     * @Route("/", name="scriptecriture_index")
+     * @Route("/user={id}/projet={projet}/script={script}", name="scriptecriture_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request, Script $script, Projet $projet, User $user)
     {
-        $em = $this->getDoctrine()->getManager();
+        // Controle de l'utilisateur
+        if ($user === $this->getUser()) {
 
-        $scriptEcritures = $em->getRepository('AppliBundle:ScriptEcriture')->findAll();
+            // Récupération des réponses
+            $repositoryR = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptReponse');
+            $reponses = $repositoryR->findByScript($script);
 
-        return $this->render('scriptecriture/index.html.twig', array(
-            'scriptEcritures' => $scriptEcritures,
-        ));
+            // Récupération des questions
+            $repositoryQ = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptQuestion');
+            $questions = $repositoryQ->findAll();
+
+            // Vérification si données déjà saisies
+            $ecriture = [];
+            foreach ($reponses as $key=>$value) {
+                $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
+                $ecriture[$key] = $repository->findByScriptReponse($value);
+
+            }
+            return $this->render('scriptecriture/new.html.twig', array(
+                'ecritures' => $ecriture,
+                'reponses' => $reponses,
+                'questions' => $questions,
+                'script' => $script->getId(),
+                'id' => $user->getId(),
+                'projet' => $projet->getId(),
+            ));
+
+        } // Si mauvais Utilisateur on renvoie vers page Unauthorized
+        else {
+            return $this->render('AppliBundle:Default:unauthorized.html.twig');
+        }
     }
 
     /**
@@ -38,33 +64,49 @@ class ScriptEcritureController extends Controller
      * @Route("/new/user={id}/projet={projet}/script={script}", name="scriptecriture_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Script $script)
+    public function newAction(Request $request, Script $script, Projet $projet, User $user)
 
     {
+        // Controle de l'utilisateur
+        if ($user === $this->getUser()) {
 
-        $repository = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppliBundle:ScriptReponse');
+            // Et on récupère l'entité reponse correspondante
+            $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppliBundle:ScriptReponse');
+            $reponse = $repository->findOneById($_POST[0]);
 
-        $reponses = $repository->findByScript($script);
 
-        $scriptEcriture = new Scriptecriture();
-        $form = $this->createForm('AppliBundle\Form\ScriptEcritureType', $scriptEcriture);
-        $form->handleRequest($request);
+            // Création de la nouvelle entité script réponse
+            $scriptEcriture = new ScriptEcriture();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+            // Attribution du script, de la question et de la réponse à l'entité ScriptReponse
+            $scriptEcriture->setScriptReponse($reponse);
+            $scriptEcriture->setVoixoff($_POST[1]);
+            $scriptEcriture->setDescription($_POST[2]);
+            $scriptEcriture->setTempsForceMin($_POST[3]);
+            $scriptEcriture->setTempsForceSec($_POST[4]);
+
+
+            // Envoi dans la BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($scriptEcriture);
-            $em->flush($scriptEcriture);
+            $em->flush($script);
 
-            return $this->redirectToRoute('scriptecriture_show', array('id' => $scriptEcriture->getId()));
+
+            return $this->redirectToRoute('scriptecriture_index', array(
+                'script' => $script->getId(),
+                'id' => $user->getId(),
+                'projet' => $projet->getId(),
+
+            ));
+
+
+
+        } // Si mauvais Utilisateur on renvoie vers page Unauthorized
+        else {
+            return $this->render('AppliBundle:Default:unauthorized.html.twig');
         }
-
-        return $this->render('scriptecriture/new.html.twig', array(
-            'scriptEcriture' => $scriptEcriture,
-            'form' => $form->createView(),
-            'script' => $script
-        ));
     }
 
     /**
@@ -86,27 +128,41 @@ class ScriptEcritureController extends Controller
     /**
      * Displays a form to edit an existing scriptEcriture entity.
      *
-     * @Route("/{id}/edit", name="scriptecriture_edit")
+     * @Route("/edit/user={id}/projet={projet}/script={script}/ecriture={ecriture}", name="scriptecriture_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, ScriptEcriture $scriptEcriture)
+    public function editAction(Request $request, ScriptEcriture $ecriture, User $user, Projet $projet, Script $script)
     {
-        $deleteForm = $this->createDeleteForm($scriptEcriture);
-        $editForm = $this->createForm('AppliBundle\Form\ScriptEcritureType', $scriptEcriture);
-        $editForm->handleRequest($request);
+        // Controle de l'utilisateur
+        if ($user === $this->getUser()) {
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            // Et on modifie la réponse dans la BDD
+            $ecriture->setVoixoff($_POST[1]);
+            $ecriture->setDescription($_POST[2]);
+            $ecriture->setTempsForceMin($_POST[3]);
+            $ecriture->setTempsForceSec($_POST[4]);
 
-            return $this->redirectToRoute('scriptecriture_edit', array('id' => $scriptEcriture->getId()));
+
+            // Envoi dans la BDD
+
+            $this->getDoctrine()->getEntityManager()->flush();
+
+
+            // Redirection vers l'écriture du script
+            return $this->redirectToRoute('scriptecriture_index', array(
+                'script' => $script->getId(),
+                'id' => $user->getId(),
+                'projet' => $projet->getId(),
+            ));
+
         }
 
-        return $this->render('scriptecriture/edit.html.twig', array(
-            'scriptEcriture' => $scriptEcriture,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        // Si mauvais Utilisateur on renvoie vers page Unauthorized
+        else{
+            return $this->render('AppliBundle:Default:unauthorized.html.twig');
+        }
     }
+
 
     /**
      * Deletes a scriptEcriture entity.

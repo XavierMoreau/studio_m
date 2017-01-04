@@ -1,19 +1,133 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
+{% block contentlarge %}
 
-    {{ dump(script) }}
 
-    <h1>Scriptecriture creation</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    <h1>Votre Script</h1>
 
-    <ul>
-        <li>
-            <a href="{{ path('scriptecriture_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{{ dump(ecritures) }}
+{{ dump(reponses) }}
+
+
+    {% for reponse in reponses %}
+
+        {% for ecriture in ecritures %}
+
+            {% for scriptecriture in ecriture %}
+
+            {% if scriptecriture and scriptecriture.scriptReponse.id == reponse.id %}
+
+            {#{{ form_start(form, {'action': path('scriptecriture_edit',{'id':app.user.id, 'projet': projet,'script': script, 'ecriture': ecriture.id })}) }}#}
+        {#<form  method="post" action="{{ path('index')}}">#}
+        <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet, 'script': script, 'ecriture': scriptecriture.id })}}">
+
+
+        <input type="hidden" name="0" value="{{ reponse.id }}">
+
+    <table class="table table-striped">
+        <thead>
+            <th>A la question :</th>
+            <th>Vous avez répondu :</th>
+        </thead>
+        <tbody>
+            <td>{{ reponse.question.question }}</td>
+            <td>{{ reponse.reponse }}</td>
+        </tbody>
+    </table>
+    <table class="table table-striped">
+        <thead>
+            <th>Saisissez la voix-off :</th>
+            <th>Saisissez la description :</th>
+            <th colspan="2">Temps voulu :</th>
+        </thead>
+
+
+
+        <tbody>
+        <tr>
+            <td><label for="voixoff{{ reponse.id }}"></label>
+                <textarea  rows="8" class="form-control" name="1" >{{ scriptecriture.voixoff }}</textarea></td>
+            <td><label for="description{{ reponse.id }}"></label>
+                <textarea  rows="8" class="form-control" name="2" >{{ scriptecriture.description }}</textarea></td>
+            <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{{ scriptecriture.tempsForceMin }}"></td>
+            <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{{ scriptecriture.tempsForceSec }}"></td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td><input class="btn btn-primary" type="submit" value="Mettre à jour" /></td>
+        </tr>
+        <tr ></tr>
+        </tbody>
+
+        {% else %}
+        <form  method="post" action="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet,'script': script })}}">
+
+            <input type="hidden" name="0" value="{{ reponse.id }}">
+
+            <table class="table table-striped">
+                <thead>
+                <th>A la question :</th>
+                <th>Vous avez répondu :</th>
+                </thead>
+                <tbody>
+                <td>{{ reponse.question.question }}</td>
+                <td>{{ reponse.reponse }}</td>
+                </tbody>
+            </table>
+            <table class="table table-striped">
+            <thead>
+            <th>Saisissez la voix-off :</th>
+            <th>Saisissez la description :</th>
+            <th colspan="2">Temps voulu :</th>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td><label for="voixoff{{ reponse.id }}"></label>
+                    <textarea  rows="8" class="form-control" name="1" ></textarea></td>
+                <td><label for="description{{ reponse.id }}"></label>
+                    <textarea  rows="8" class="form-control" name="2" ></textarea></td>
+                <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
+                    <input type="number" min="0" max="59" step="1" class="form-control" name="3" placeholder="00"></td>
+                <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
+                    <input type="number" min="0" max="59" step="1" class="form-control" name="4" placeholder="00"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td><input class="btn btn-primary" type="submit" value="Enregistrer" /></td>
+            </tr>
+            <tr ></tr>
+            </tbody>
+
+        {% endif %}
+
+
+
+    </table>
+
+
+
+
+
+
+        </form>
+
+            {% endfor %}
+
+        {% endfor %}
+        {% endfor %}
+
+
+
+    </table>
+
+
+
+
+
+
+
 {% endblock %}

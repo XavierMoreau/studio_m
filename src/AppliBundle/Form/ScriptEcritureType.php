@@ -13,7 +13,7 @@ class ScriptEcritureType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('description')->add('voixoff')->add('tempsEstime')->add('tempsForce')->add('dateModification')        ;
+//        $builder->add('description')->add('voixoff')->add('tempsForce')        ;
     }
     
     /**

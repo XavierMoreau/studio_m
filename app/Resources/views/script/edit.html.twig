@@ -3,26 +3,21 @@
 {% block content %}
     <h2>Débutons l'écriture de votre script</h2>
 
-    <h3>Afin d'écrire votre script, modifiez vos réponses aux questions suivantes :</h3>
+    <h3>Vous pouvez modifier vos réponses :</h3>
 
 
     <form  method="post" action="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script})}}">
-
-        {{ dump(projet) }}
-
-        {{ dump(reponses) }}
-        {{ dump(questions) }}
 
 
         {% for reponse in reponses %}
 
             <div class="form-group">
                 <label for="{{ reponse.id }}">{{ reponse.question.question }}</label><br>
-                <textarea class="form-control" name="{{ reponse.id }}" >{{ reponse.reponse }}</textarea>
+                <textarea rows="8" class="form-control" name="{{ reponse.id }}" >{{ reponse.reponse }}</textarea>
 
 
             </div>
-            <br><hr>
+
 
         {%  endfor %}
 

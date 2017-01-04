@@ -36,18 +36,32 @@ class ScriptEcriture
     private $voixoff;
 
     /**
-     * @var \DateTime
+     * @var int
      *
-     * @ORM\Column(name="tempsEstime", type="time", nullable=true)
+     * @ORM\Column(name="tempsEstimeMin", type="integer", nullable=true)
      */
-    private $tempsEstime;
+    private $tempsEstimeMin;
 
     /**
-     * @var \DateTime
+     * @var int
      *
-     * @ORM\Column(name="tempsForce", type="time", nullable=true)
+     * @ORM\Column(name="tempsEstimeSec", type="integer", nullable=true)
      */
-    private $tempsForce;
+    private $tempsEstimeSec;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="tempsForceSec", type="integer", nullable=true)
+     */
+    private $tempsForceSec;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="tempsForceMin", type="integer", nullable=true)
+     */
+    private $tempsForceMin;
 
     /**
      * @var \DateTime
@@ -55,6 +69,29 @@ class ScriptEcriture
      * @ORM\Column(name="dateModification", type="datetime", nullable=true)
      */
     private $dateModification;
+
+    /**
+     * @var int
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\ScriptReponse")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $scriptReponse;
+
+    /**
+     * @return int
+     */
+    public function getScriptReponse()
+    {
+        return $this->scriptReponse;
+    }
+
+    /**
+     * @param int $scriptReponse
+     */
+    public function setScriptReponse($scriptReponse)
+    {
+        $this->scriptReponse = $scriptReponse;
+    }
 
 
     /**
@@ -116,52 +153,70 @@ class ScriptEcriture
     }
 
     /**
-     * Set tempsEstime
-     *
-     * @param \DateTime $tempsEstime
-     *
-     * @return ScriptEcriture
+     * @return int
      */
-    public function setTempsEstime($tempsEstime)
+    public function getTempsEstimeMin()
     {
-        $this->tempsEstime = $tempsEstime;
-
-        return $this;
+        return $this->tempsEstimeMin;
     }
 
     /**
-     * Get tempsEstime
-     *
-     * @return \DateTime
+     * @param int $tempsEstimeMin
      */
-    public function getTempsEstime()
+    public function setTempsEstimeMin($tempsEstimeMin)
     {
-        return $this->tempsEstime;
+        $this->tempsEstimeMin = $tempsEstimeMin;
     }
 
     /**
-     * Set tempsForce
-     *
-     * @param \DateTime $tempsForce
-     *
-     * @return ScriptEcriture
+     * @return int
      */
-    public function setTempsForce($tempsForce)
+    public function getTempsEstimeSec()
     {
-        $this->tempsForce = $tempsForce;
-
-        return $this;
+        return $this->tempsEstimeSec;
     }
 
     /**
-     * Get tempsForce
-     *
-     * @return \DateTime
+     * @param int $tempsEstimeSec
      */
-    public function getTempsForce()
+    public function setTempsEstimeSec($tempsEstimeSec)
     {
-        return $this->tempsForce;
+        $this->tempsEstimeSec = $tempsEstimeSec;
     }
+
+    /**
+     * @return int
+     */
+    public function getTempsForceSec()
+    {
+        return $this->tempsForceSec;
+    }
+
+    /**
+     * @param int $tempsForceSec
+     */
+    public function setTempsForceSec($tempsForceSec)
+    {
+        $this->tempsForceSec = $tempsForceSec;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTempsForceMin()
+    {
+        return $this->tempsForceMin;
+    }
+
+    /**
+     * @param int $tempsForceMin
+     */
+    public function setTempsForceMin($tempsForceMin)
+    {
+        $this->tempsForceMin = $tempsForceMin;
+    }
+
+
 
     /**
      * Set dateModification

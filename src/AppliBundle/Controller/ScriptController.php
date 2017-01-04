@@ -146,8 +146,8 @@ class ScriptController extends Controller
                 // Création de la nouvelle entité script réponse
                 $scriptReponse = new ScriptReponse();
 
-                // Attribution du script, de la question et de la réponse
-                $scriptReponse->setScript($script->getId());
+                // Attribution du script, de la question et de la réponse à l'entité ScriptReponse
+                $scriptReponse->setScript($script);
                 $scriptReponse->setQuestion($question);
                 $scriptReponse->setReponse($reponse);
 

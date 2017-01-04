@@ -8,16 +8,13 @@
 
 <form  method="post" action="{{ path('script_reponses_new',{'id':app.user.id, 'projet': projet.id,'script': projet.script})}}">
 
-    {{ dump(projet) }}
-
-    {{ dump(questions) }}
 
 
     {% for question in questions %}
 
 <div class="form-group">
     <label for="reponse{{ question.id }}">{{ question.question }}</label><br>
-    <textarea class="form-control" name="reponse{{ question.id }}"></textarea>
+    <textarea rows="8" class="form-control" name="reponse{{ question.id }}"></textarea>
 
 
 </div>

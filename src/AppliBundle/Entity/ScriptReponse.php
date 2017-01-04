@@ -30,8 +30,8 @@ class ScriptReponse
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="script", type="integer")
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $script;
 
