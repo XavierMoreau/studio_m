@@ -37,12 +37,9 @@ class ScriptEcritureController extends Controller
             $questions = $repositoryQ->findAll();
 
             // Vérification si données déjà saisies
-            $ecriture = [];
-            foreach ($reponses as $key=>$value) {
-                $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
-                $ecriture[$key] = $repository->findByScriptReponse($value);
+            $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
+            $ecriture = $repository->findByScriptReponse($reponses);
 
-            }
             return $this->render('scriptecriture/new.html.twig', array(
                 'ecritures' => $ecriture,
                 'reponses' => $reponses,
@@ -109,21 +106,21 @@ class ScriptEcritureController extends Controller
         }
     }
 
-    /**
-     * Finds and displays a scriptEcriture entity.
-     *
-     * @Route("/{id}", name="scriptecriture_show")
-     * @Method("GET")
-     */
-    public function showAction(ScriptEcriture $scriptEcriture)
-    {
-        $deleteForm = $this->createDeleteForm($scriptEcriture);
-
-        return $this->render('scriptecriture/show.html.twig', array(
-            'scriptEcriture' => $scriptEcriture,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
+//    /**
+//     * Finds and displays a scriptEcriture entity.
+//     *
+//     * @Route("/{id}", name="scriptecriture_show")
+//     * @Method("GET")
+//     */
+//    public function showAction(ScriptEcriture $scriptEcriture)
+//    {
+//        $deleteForm = $this->createDeleteForm($scriptEcriture);
+//
+//        return $this->render('scriptecriture/show.html.twig', array(
+//            'scriptEcriture' => $scriptEcriture,
+//            'delete_form' => $deleteForm->createView(),
+//        ));
+//    }
 
     /**
      * Displays a form to edit an existing scriptEcriture entity.
@@ -163,40 +160,40 @@ class ScriptEcritureController extends Controller
         }
     }
 
-
-    /**
-     * Deletes a scriptEcriture entity.
-     *
-     * @Route("/{id}", name="scriptecriture_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, ScriptEcriture $scriptEcriture)
-    {
-        $form = $this->createDeleteForm($scriptEcriture);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($scriptEcriture);
-            $em->flush($scriptEcriture);
-        }
-
-        return $this->redirectToRoute('scriptecriture_index');
-    }
-
-    /**
-     * Creates a form to delete a scriptEcriture entity.
-     *
-     * @param ScriptEcriture $scriptEcriture The scriptEcriture entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(ScriptEcriture $scriptEcriture)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('scriptecriture_delete', array('id' => $scriptEcriture->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+//
+//    /**
+//     * Deletes a scriptEcriture entity.
+//     *
+//     * @Route("/{id}", name="scriptecriture_delete")
+//     * @Method("DELETE")
+//     */
+//    public function deleteAction(Request $request, ScriptEcriture $scriptEcriture)
+//    {
+//        $form = $this->createDeleteForm($scriptEcriture);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            $em->remove($scriptEcriture);
+//            $em->flush($scriptEcriture);
+//        }
+//
+//        return $this->redirectToRoute('scriptecriture_index');
+//    }
+//
+//    /**
+//     * Creates a form to delete a scriptEcriture entity.
+//     *
+//     * @param ScriptEcriture $scriptEcriture The scriptEcriture entity
+//     *
+//     * @return \Symfony\Component\Form\Form The form
+//     */
+//    private function createDeleteForm(ScriptEcriture $scriptEcriture)
+//    {
+//        return $this->createFormBuilder()
+//            ->setAction($this->generateUrl('scriptecriture_delete', array('id' => $scriptEcriture->getId())))
+//            ->setMethod('DELETE')
+//            ->getForm()
+//        ;
+//    }
 }

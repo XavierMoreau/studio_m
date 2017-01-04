@@ -27,15 +27,22 @@ a:hover{
 }
 
 header {
-    background-color: #6897BB;
-    color : white;
+    background-color: lightgrey;
+    color : black;
 
 }
 
 header a{
-    color : white;
-
+     color : black;
+     text-decoration: none;
 }
+
+header a:hover{
+    color : darkgrey;
+    text-decoration: none;
+}
+
+
 
 .login_form {
     max-width: 400px;
@@ -52,10 +59,17 @@ header a{
     display : inline-block;
     width: 50%;
     margin: auto;
+    padding : 3px;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    background-color: white;
+
+
 }
 
 .login_remember {
     text-align: center;
+    font-size: small;
 }
 
 

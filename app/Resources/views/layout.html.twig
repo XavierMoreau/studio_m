@@ -16,11 +16,13 @@
     {% if is_granted("ROLE_USER") %}
 
         <div style="width: 100%; padding-top: 25px;">
-            <div style="width: 49%; text-align: left; display: inline-block; margin-left:20px;">
+            <div style="width: 33%; text-align: left; display: inline-block; margin-left:20px;">
                 Bonjour <b>{{ app.user.username }}</b> !
             </div>
-
-            <div style="width: 49%; text-align: right; display: inline-block; ">
+            <div style="width: 32%; text-align: center; display: inline-block;">
+                <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump" height="70">
+            </div>
+            <div style="width: 33%; text-align: right; display: inline-block; ">
                 <div style="margin-right:40px;display: inline-block;"><a href="{{ path('index') }}">Accueil</a></div>
                 <div style="margin-right:50px;display: inline-block;"><a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></div>
                 <div style="margin-right:40px;display: inline-block;"><a href="{{ path('fos_user_profile_show') }}">Profil</a></div>
@@ -35,13 +37,12 @@
 
     {% else %}
         {#<a href="{{ path('fos_user_security_login') }}">Connexion</a><span> |</span>#}
-        {#<a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>#}
 
 
-            <div style="text-align: center; margin-top: -10px; padding-top: 10px;">
-            <h3>Studio Bump</h3>
 
-            </div>
+        <div style="text-align: center">
+            <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump">
+        </div>
 
     {% endif %}
         </div>

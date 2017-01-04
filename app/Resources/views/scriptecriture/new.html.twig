@@ -6,33 +6,39 @@
 
     <h1>Votre Script</h1>
 
-{{ dump(ecritures) }}
-{{ dump(reponses) }}
+{#{{ dump(reponses) }}#}
+{#{{ dump(ecritures) }}#}
 
 
+    {#Pour chaque réponse au questionnaire du script #}
     {% for reponse in reponses %}
-
-        {% for ecriture in ecritures %}
-
-            {% for scriptecriture in ecriture %}
-
-            {% if scriptecriture and scriptecriture.scriptReponse.id == reponse.id %}
-
-            {#{{ form_start(form, {'action': path('scriptecriture_edit',{'id':app.user.id, 'projet': projet,'script': script, 'ecriture': ecriture.id })}) }}#}
-        {#<form  method="post" action="{{ path('index')}}">#}
-        <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet, 'script': script, 'ecriture': scriptecriture.id })}}">
-
-
+            {#Si il y a déjà une saisie dans le script#}
+            {% if ecritures %}
+                {#Pour chaque saisie on compare l'id de la réponse#}
+                {% for scriptecriture in ecritures %}
+                    {#Si l'id de la réponse correspond#}
+                    {% if scriptecriture.scriptReponse.id == reponse.id %}
+    {#On affiche le formulaire d'édition#}
+    <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet, 'script': script, 'ecriture': scriptecriture.id })}}">
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+    {#Sinon on affiche le formulaire de création#}
+    <form  method="post" action="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet,'script': script })}}">
+            {% endif %}
+        {#On renvoie l'id de la réponse en caché#}
         <input type="hidden" name="0" value="{{ reponse.id }}">
 
     <table class="table table-striped">
         <thead>
             <th>A la question :</th>
             <th>Vous avez répondu :</th>
+            <th></th>
         </thead>
         <tbody>
             <td>{{ reponse.question.question }}</td>
             <td>{{ reponse.reponse }}</td>
+            <td width="200"><a class="btn btn-default" href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}">Retour aux questions</a></td>
         </tbody>
     </table>
     <table class="table table-striped">
@@ -42,92 +48,39 @@
             <th colspan="2">Temps voulu :</th>
         </thead>
 
-
-
         <tbody>
         <tr>
+            {#Si une saisie est existante on affiche les infos#}
             <td><label for="voixoff{{ reponse.id }}"></label>
-                <textarea  rows="8" class="form-control" name="1" >{{ scriptecriture.voixoff }}</textarea></td>
+                <textarea  rows="8" class="form-control" name="1" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.voixoff }}{% endif %}{% endfor %}{% endif %}</textarea></td>
             <td><label for="description{{ reponse.id }}"></label>
-                <textarea  rows="8" class="form-control" name="2" >{{ scriptecriture.description }}</textarea></td>
+                <textarea  rows="8" class="form-control" name="2" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.description }}{% endif %}{% endfor %}{% endif %}</textarea></td>
             <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
-                <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{{ scriptecriture.tempsForceMin }}"></td>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceMin }}{% endif %}{% endfor %}{% endif %}"></td>
             <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
-                <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{{ scriptecriture.tempsForceSec }}"></td>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceSec }}{% endif %}{% endfor %}{% endif %}"></td>
         </tr>
         <tr>
             <td colspan="3"></td>
-            <td><input class="btn btn-primary" type="submit" value="Mettre à jour" /></td>
+            <td><input class="btn btn-primary" type="submit" value="Enregistrer" /></td>
         </tr>
-        <tr ></tr>
+        <tr></tr>
         </tbody>
-
-        {% else %}
-        <form  method="post" action="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet,'script': script })}}">
-
-            <input type="hidden" name="0" value="{{ reponse.id }}">
-
-            <table class="table table-striped">
-                <thead>
-                <th>A la question :</th>
-                <th>Vous avez répondu :</th>
-                </thead>
-                <tbody>
-                <td>{{ reponse.question.question }}</td>
-                <td>{{ reponse.reponse }}</td>
-                </tbody>
-            </table>
-            <table class="table table-striped">
-            <thead>
-            <th>Saisissez la voix-off :</th>
-            <th>Saisissez la description :</th>
-            <th colspan="2">Temps voulu :</th>
-            </thead>
-
-            <tbody>
-            <tr>
-                <td><label for="voixoff{{ reponse.id }}"></label>
-                    <textarea  rows="8" class="form-control" name="1" ></textarea></td>
-                <td><label for="description{{ reponse.id }}"></label>
-                    <textarea  rows="8" class="form-control" name="2" ></textarea></td>
-                <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
-                    <input type="number" min="0" max="59" step="1" class="form-control" name="3" placeholder="00"></td>
-                <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
-                    <input type="number" min="0" max="59" step="1" class="form-control" name="4" placeholder="00"></td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td><input class="btn btn-primary" type="submit" value="Enregistrer" /></td>
-            </tr>
-            <tr ></tr>
-            </tbody>
-
-        {% endif %}
-
 
 
     </table>
-
-
-
 
 
 
         </form>
 
-            {% endfor %}
+
 
         {% endfor %}
-        {% endfor %}
+<hr>
 
+        <input class="btn btn-primary" type="submit" value="Valider le script" />
 
-
-    </table>
-
-
-
-
-
-
+        <br>
 
 {% endblock %}

@@ -158,7 +158,7 @@ class ScriptController extends Controller
 
             }
             // Redirection vers l'écriture du script
-            return $this->redirectToRoute('scriptecriture_new', array(
+            return $this->redirectToRoute('scriptecriture_index', array(
                 'script' => $script->getId(),
                 'id' => $user->getId(),
                 'projet' => $projet->getId(),
@@ -197,7 +197,7 @@ class ScriptController extends Controller
 
             }
             // Redirection vers l'écriture du script
-            return $this->redirectToRoute('scriptecriture_new', array(
+            return $this->redirectToRoute('scriptecriture_index', array(
                 'script' => $script->getId(),
                 'id' => $user->getId(),
                 'projet' => $projet->getId(),
