@@ -1,14 +1,33 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Nouveau projet</h1>
+    <div style="width: 100%; text-align: center">
+        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h4 style="color: #ff5419">Nouveau projet</h4>
+    </div>
+
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input class="btn btn-primary" type="submit" value="Script" />
-    <a class="btn btn-default" href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour</a>
-    {{ form_end(form) }}
 
+    <table style="width: 100%;">
+        <td style="width: 49%; text-align: left;">
+            <div style="width: 100px; text-align: center;">
+                <a href="{{ path('projet_index', { 'id': app.user.id })  }}">
+                    <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Nouveau Projet" height="70"><h4 style="color: #d97077">Retour</h4></a>
+            </div>
+
+        </td>
+        <td style="width: 49%; text-align: right;">
+            <button class="btn-iconflat" type="submit" value="Script">
+                <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Nouveau Projet" height="70"><h4 style="color: #34495e">Valider et écrire le script</h4>
+            </button>
+        </td>
+
+    </table>
+
+
+
+    {{ form_end(form) }}
 
 
 

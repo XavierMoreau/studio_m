@@ -14,8 +14,6 @@
                 <th>Utilisateur</th>
                 {% endif %}
                 <th>Nom</th>
-                <th></th>
-                <th></th>
                 <th>Créé le </th>
                 <th>Dernière modification</th>
                 <th>Support</th>
@@ -24,8 +22,10 @@
                 <th>Temps de diffusion</th>
                 <th>Montant HT</th>
                 <th>Datediffusion</th>
-                <th>Script</th>
-                <th>Storyboard</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
 
             </tr>
         </thead>
@@ -38,8 +38,7 @@
                     <th>{{ projet.utilisateur.username }}</th>
                 {% endif %}
                 <td>{{ projet.nomProjet }}</td>
-                <td><a class="btn-modifier" href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                <td><a class="btn-delete"  href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+
                 <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
                 <td>{% if projet.dateModification %}{{ projet.dateModification|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
 
@@ -71,11 +70,19 @@
                 <td>{{ projet.tempsDiffusion }} an(s)</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
+                <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}">
+                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h5 style="color: #ff5419">Modifier le projet</h5></a></td>
 
-                <td>{% if projet.script %}<a class="btn btn-info" href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,}) }}">Accéder au script</a>
-                    {% else %}<a class="btn btn-primary" href="{{ path('script_index', {'id':app.user.id, 'projet': projet.id,}) }}">Ecrire le script</a>{% endif %}</td>
+                <td style="text-align: center">{% if projet.script %}<a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,}) }}">
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h5 style="color: #34495e">Accéder au script</h5></a>
+                    {% else %}<a href="{{ path('script_index', {'id':app.user.id, 'projet': projet.id,}) }}">
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h5 style="color: #34495e">Ecrire le script</h5></a>{% endif %}</td>
 
-                <td>{% if projet.storyboard %}Accéder au storyboard{% else %}Créer le storyboard{% endif %}</td>
+                <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
+                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h5 style="color: #9db138">Créer le storyboard</h5>{% endif %}</td>
+
+                <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id }) }}">
+                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h5 style="color: #34495e">Supprimer le projet</h5></a></td>
 
             </tr>
         {% endfor %}
@@ -87,7 +94,8 @@
 {% block content %}
 
     <div style="text-align: center">
-        <a class="btn btn-primary" style="width: 120px" href="{{ path('projet_new', {'id': app.user.id }) }}">Nouveau</a>
+        <a href="{{ path('projet_new', {'id': app.user.id }) }}">
+            <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h4 style="color: #ff5419">Nouveau projet</h4></a>
 
 
 

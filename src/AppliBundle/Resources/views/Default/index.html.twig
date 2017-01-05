@@ -6,26 +6,31 @@
 
 {% block title %}{% endblock %}
 
-{% block content %}
+{% block contentlarge %}
     {% if is_granted("ROLE_USER") %}
 
+<br>
+<br>
+<br>
+<br>
 
+    <table style="text-align: center; width: 100%">
+        <td width="167"><a href="{{ path('projet_index', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projets" height="150"><h4 style="color: #4AB8A1">Projets</h4></a></td>
+        <td width="167"><a href="{{ path('fos_user_profile_show')}}"><img class="imgflat" src="{{ asset('images/astronaut.png')}}" alt="Projets" height="150"><h4 style="color: #386895">Profil</h4></a></td>
+        <td width="167"><a href="{{ path('fos_user_security_logout')}}"><img class="imgflat" src="{{ asset('images/logout.png')}}" alt="Projets" height="150"><h4 style="color: #FABC3D">Déconnection</h4></a></td>
 
-    <table width="500" style="text-align: center">
-        <td width="167"><a class="btn btn-info" style="width: 120px" href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></td>
-        <td width="166"><a class="btn btn-success" style="width: 120px" href="{{ path('fos_user_profile_show') }}">Profil</a></td>
-
-        <td width="167"><a class="btn btn-default" style="width: 120px" href="{{ path('fos_user_security_logout') }}">Déconnection</a></td>
     </table>
 {% endif %}
 {% if is_granted("ROLE_ADMIN") %}
 
-<table width="500" style="text-align: center">
+<br>
+<br>
+<table style="text-align: center; width: 100%">
     <tr>
         <td height="10"></td>
     </tr>
     <tr>
-        <td><a class="btn btn-danger" style="width: 120px"  href="{{ path('admin_index') }}">Administration</a></td>
+        <td><a href="{{ path('admin_index') }}"><img class="imgflat" src="{{ asset('images/process.png')}}" alt="Projets" height="150"><h4 style="color: #FC6F58">Administration</h4></a></td>
     </tr>
 </table>
 {% endif %}

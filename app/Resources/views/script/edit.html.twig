@@ -1,9 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h2>Débutons l'écriture de votre script</h2>
+    <div style="width: 100%; text-align: center">
+        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h4 style="color: #34495e">Script</h4>
+    </div>
 
-    <h3>Vous pouvez modifier vos réponses :</h3>
+
+    <h6>Vous pouvez mettre à jour les réponses au questionnaire du script :</h6>
+
 
 
     <form  method="post" action="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script})}}">
@@ -13,15 +17,30 @@
 
             <div class="form-group">
                 <label for="{{ reponse.id }}">{{ reponse.question.question }}</label><br>
-                <textarea rows="8" class="form-control" name="{{ reponse.id }}" >{{ reponse.reponse }}</textarea>
+                <textarea rows="4" class="form-control" name="{{ reponse.id }}" >{{ reponse.reponse }}</textarea>
 
 
             </div>
-
+            <br>
 
         {%  endfor %}
 
-        <input class="btn btn-primary" type="submit" value="Continuer" />
+
+        <table style="width: 100%;">
+            <td style="width: 49%; text-align: left;">
+                <div style="width: 100px; text-align: center;">
+                    <a href="{{ path('projet_index', { 'id': app.user.id })  }}">
+                        <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
+                </div>
+
+            </td>
+            <td style="width: 49%; text-align: right;">
+                <button class="btn-iconflat" type="submit" value="Continuer">
+                    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Continuer le script" height="70"><h4 style="color: #34495e">Continuer le script</h4>
+                </button>
+            </td>
+
+        </table>
     </form>
 
 

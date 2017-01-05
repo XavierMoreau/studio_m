@@ -3,15 +3,17 @@
 {% block contentlarge %}
 
 
+<div style="width: 100%; text-align: center">
+    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h4 style="color: #34495e">Script</h4>
+</div>
 
-    <h1>Votre Script</h1>
 
 {#{{ dump(reponses) }}#}
 {#{{ dump(ecritures) }}#}
 
 
     {#Pour chaque réponse au questionnaire du script #}
-    {% for reponse in reponses %}
+    {% for key, reponse in reponses %}
             {#Si il y a déjà une saisie dans le script#}
             {% if ecritures %}
                 {#Pour chaque saisie on compare l'id de la réponse#}
@@ -29,16 +31,22 @@
         {#On renvoie l'id de la réponse en caché#}
         <input type="hidden" name="0" value="{{ reponse.id }}">
 
+    <table style="width: 100%; color: #34495e; border-bottom: solid 1px #34495e; font-weight: bold">
+        <td>Ligne de script n° {{ key + 1 }}</td>
+    </table>
     <table class="table table-striped">
+
         <thead>
             <th>A la question :</th>
             <th>Vous avez répondu :</th>
+            <th></th>
             <th></th>
         </thead>
         <tbody>
             <td>{{ reponse.question.question }}</td>
             <td>{{ reponse.reponse }}</td>
-            <td width="200"><a class="btn btn-default" href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}">Retour aux questions</a></td>
+            <td width="80"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}"><img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="40"></a></td>
+            <td width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}"><h5 style="color: #d97077">Retour aux questions</h5></a></td>
         </tbody>
     </table>
     <table class="table table-striped">
@@ -51,20 +59,24 @@
         <tbody>
         <tr>
             {#Si une saisie est existante on affiche les infos#}
-            <td><label for="voixoff{{ reponse.id }}"></label>
+            <td rowspan="2"><label for="voixoff{{ reponse.id }}"></label>
                 <textarea  rows="8" class="form-control" name="1" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.voixoff }}{% endif %}{% endfor %}{% endif %}</textarea></td>
-            <td><label for="description{{ reponse.id }}"></label>
+            <td rowspan="2"><label for="description{{ reponse.id }}"></label>
                 <textarea  rows="8" class="form-control" name="2" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.description }}{% endif %}{% endfor %}{% endif %}</textarea></td>
             <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
                 <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceMin }}{% endif %}{% endfor %}{% endif %}"></td>
             <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
                 <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceSec }}{% endif %}{% endfor %}{% endif %}"></td>
+
         </tr>
         <tr>
-            <td colspan="3"></td>
-            <td><input class="btn btn-primary" type="submit" value="Enregistrer" /></td>
+             <td colspan="2" style="text-align: center">
+                 <button class="btn-iconflat" type="submit" value="Enregistrer">
+                     <img class="imgflat" src="{{ asset('images/save.png')}}" alt="Enregistrer" height="40"><h5 style="color: #ff8e31">Enregistrer</h5></button>
+             </td>
+
         </tr>
-        <tr></tr>
+
         </tbody>
 
 
@@ -74,7 +86,7 @@
 
         </form>
 
-
+        <br>
 
         {% endfor %}
 <hr>

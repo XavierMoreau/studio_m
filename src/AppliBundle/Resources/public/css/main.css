@@ -7,6 +7,7 @@ body {
 
 a:hover{
     text-decoration: none;
+    color : darkgrey;
 }
 
 .nolarge{
@@ -37,9 +38,15 @@ header a{
 }
 
 header a:hover{
-    color : darkgrey;
     text-decoration: none;
+    color : darkgrey;
 }
+
+main a:hover{
+    text-decoration: none;
+    color : darkgrey;
+}
+
 
 main{
     min-height: 725px;
@@ -90,7 +97,6 @@ footer span{
     border: 1px solid darkgrey;
     background-color: white;
 
-
 }
 
 .login_remember {
@@ -112,3 +118,16 @@ footer span{
 .btn-modifier{
     color: #337AB7;
 }
+
+.imgflat{
+    -webkit-filter: drop-shadow(5px 5px 5px grey);
+    filter:         drop-shadow(5px 5px 5px grey);
+    margin : 10px;
+}
+
+.btn-iconflat{
+    border: 0px;
+    background-color: transparent;
+
+}
+

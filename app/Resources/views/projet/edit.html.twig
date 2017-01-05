@@ -1,15 +1,34 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-
-
-
-    <h1>Modification de projet</h1>
+    <div style="width: 100%; text-align: center">
+        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h4 style="color: #ff5419">Modification de projet</h4>
+    </div>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-    <input class="btn btn-primary" type="submit" value="Enregistrer" />
-    <a class="btn btn-default" href="{{ path('projet_index', { 'id': app.user.id })  }}">Retour</a>
+
+
+    <table style="width: 100%;">
+        <td style="width: 49%; text-align: left;">
+            <div style="width: 100px; text-align: center;">
+                <a href="{{ path('projet_index', { 'id': app.user.id })  }}">
+                    <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
+            </div>
+
+        </td>
+        <td style="width: 49%; text-align: right;">
+            <button class="btn-iconflat" type="submit" value="Enregistrer">
+                <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Enregistrer Projet" height="70"><h4 style="color: #ff5419">Mettre à jour</h4>
+            </button>
+        </td>
+
+    </table>
+
+
+
+
+
     {{ form_end(edit_form) }}
 
 
