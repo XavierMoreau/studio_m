@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Conseils list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Temps</th>
+                <th>Daterequise</th>
+                <th>Datedemande</th>
+                <th>Quantite</th>
+                <th>Storyboard</th>
+                <th>Commande</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conseil in conseils %}
+            <tr>
+                <td><a href="{{ path('conseil_show', { 'id': conseil.id }) }}">{{ conseil.id }}</a></td>
+                <td>{{ conseil.temps }}</td>
+                <td>{% if conseil.dateRequise %}{{ conseil.dateRequise|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if conseil.dateDemande %}{{ conseil.dateDemande|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ conseil.quantite }}</td>
+                <td>{{ conseil.storyboard }}</td>
+                <td>{{ conseil.commande }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('conseil_show', { 'id': conseil.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('conseil_edit', { 'id': conseil.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('conseil_new') }}">Create a new conseil</a>
+        </li>
+    </ul>
+{% endblock %}

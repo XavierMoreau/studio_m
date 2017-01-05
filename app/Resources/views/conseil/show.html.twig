@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Conseil</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ conseil.id }}</td>
+            </tr>
+            <tr>
+                <th>Temps</th>
+                <td>{{ conseil.temps }}</td>
+            </tr>
+            <tr>
+                <th>Daterequise</th>
+                <td>{% if conseil.dateRequise %}{{ conseil.dateRequise|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datedemande</th>
+                <td>{% if conseil.dateDemande %}{{ conseil.dateDemande|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ conseil.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Storyboard</th>
+                <td>{{ conseil.storyboard }}</td>
+            </tr>
+            <tr>
+                <th>Commande</th>
+                <td>{{ conseil.commande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('conseil_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('conseil_edit', { 'id': conseil.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

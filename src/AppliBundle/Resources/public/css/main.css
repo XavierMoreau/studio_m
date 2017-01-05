@@ -1,3 +1,5 @@
+
+
 body {
     font-family: 'Nunito', sans-serif;
 }
@@ -10,18 +12,15 @@ a:hover{
 .nolarge{
     max-width : 500px;
     margin: auto;
-
 }
 
 .midsize{
     max-width : 1200px;
     margin: auto;
-
 }
 
 
 .large{
-
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -42,7 +41,34 @@ header a:hover{
     text-decoration: none;
 }
 
+main{
+    min-height: 725px;
+}
 
+footer {
+    background-color: lightgrey;
+    color : black;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: x-small;
+    width:100%;
+}
+
+footer a{
+    color : black;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color : darkgrey;
+    text-decoration: none;
+}
+
+footer span{
+    color : white;
+}
 
 .login_form {
     max-width: 400px;

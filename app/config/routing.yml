@@ -48,3 +48,13 @@ scriptQuestion:
     resource: "@AppliBundle/Controller/ScriptQuestionController.php"
     type:     annotation
     prefix:   /admin/
+
+expertType:
+    resource: "@AppliBundle/Controller/expertTypeController.php"
+    type:     annotation
+    prefix:   /admin/
+
+conseilType:
+    resource: "@AppliBundle/Controller/conseilTypeController.php"
+    type:     annotation
+    prefix:   /admin/

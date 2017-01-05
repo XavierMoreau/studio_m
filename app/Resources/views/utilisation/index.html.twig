@@ -6,7 +6,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th> Type proposés :</th>
+                <th> Types proposés :</th>
                 <th></th>
             </tr>
         </thead>
@@ -15,7 +15,7 @@
             <tr>
                 <td>{{ utilisation.utilisationType }}</td>
                 <td><a class="btn-modifier" href="{{ path('utilisation_edit', { 'id': utilisation.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-                <td><a class="btn-delete"  href="{{ path('utilisation_delete', { 'id': utilisation.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                <td><a class="btn-delete" href="{{ path('utilisation_delete', { 'id': utilisation.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
 
             </tr>
         {% endfor %}

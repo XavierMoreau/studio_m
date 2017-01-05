@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Types de conseil</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Types proposés :</th>
+                <th><a href="{{ path('experttype_index') }}">Métiers : </a></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for conseilType in conseilTypes %}
+
+              <tr>
+
+                <td>{{ conseilType.type }}</td>
+                <td>{{ conseilType.expertType.type }}</td>
+                <td><a class="btn-modifier" href="{{ path('conseiltype_edit', { 'id': conseilType.id }) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                <td><a class="btn-delete" href="{{ path('conseiltype_delete', { 'id': conseilType.id }) }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('conseiltype_new') }}">Nouveau</a>
+
+    <a class="btn btn-default" href="{{ path('admin_index') }}">Retour</a>
+
+
+
+
+{% endblock %}

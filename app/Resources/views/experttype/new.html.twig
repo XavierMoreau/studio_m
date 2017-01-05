@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Nouveau type de métier</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input class="btn btn-primary" type="submit" value="Créer" />
+    <a class="btn btn-default" href="{{ path('experttype_index') }}">Retour</a>
+    {{ form_end(form) }}
+
+
+{% endblock %}
