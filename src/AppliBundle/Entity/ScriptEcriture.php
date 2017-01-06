@@ -24,14 +24,14 @@ class ScriptEcriture
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="voixoff", type="text")
+     * @ORM\Column(name="voixoff", type="text", nullable=true)
      */
     private $voixoff;
 
@@ -70,28 +70,7 @@ class ScriptEcriture
      */
     private $dateModification;
 
-    /**
-     * @var int
-     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\ScriptReponse")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $scriptReponse;
 
-    /**
-     * @return int
-     */
-    public function getScriptReponse()
-    {
-        return $this->scriptReponse;
-    }
-
-    /**
-     * @param int $scriptReponse
-     */
-    public function setScriptReponse($scriptReponse)
-    {
-        $this->scriptReponse = $scriptReponse;
-    }
 
 
     /**

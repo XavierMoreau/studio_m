@@ -4,6 +4,7 @@ namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Script;
 use AppliBundle\Entity\Projet;
+use AppliBundle\Entity\ScriptEcriture;
 use AppliBundle\Entity\ScriptQuestion;
 use AppliBundle\Entity\ScriptReponse;
 use AppliBundle\Form\ScriptReponseType;
@@ -26,16 +27,16 @@ class ScriptController extends Controller
      * From Projet_index - Button "Ecrire le script"
      * Creates a new script entity.
      *
-     * @Route("/user={id}/projet={projet}/questions", name="script_index")
+     * @Route("/questions/user={id}/projet={projet}/script={script}", name="script_index")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, User $user, Projet $projet)
+    public function newAction(Request $request, User $user, Projet $projet, Script $script)
     {
         // Controle de l'utilisateur
         if ($user === $this->getUser()){
 
-            // Création d'unee l'entité Script
-            $script = new Script();
+//             Création d'unee l'entité Script
+//            $script = new Script();
 
             // Attribution de l'Id du Projet au script
             $script->setProjet($projet->getId());
@@ -47,7 +48,7 @@ class ScriptController extends Controller
             $em->flush($script);
 
             // Attribution de l'Id du script au Projet
-            $projet->setScript($script->getId());
+            $projet->setScript($script);
             $em2 = $this->getDoctrine()->getManager();
             $em2->persist($projet);
             $em2->flush($projet);
@@ -92,10 +93,10 @@ class ScriptController extends Controller
                 ->getRepository('AppliBundle:ScriptReponse');
             $reponses = $repository->findByScript($projet->getScript());
 
-            // Si on a des réponses existantes pour le scritp on renvoie vers formulaire Script Edit
+            // Si on a des réponses existantes pour le script on renvoie vers formulaire Script Edit
             if ($reponses){
                 return $this->render('script/edit.html.twig', array(
-                    'user' => $user->getId(),
+                    'user' => $user,
                     'projet' => $projet,
                     'questions' => $questions,
                     'reponses' => $reponses,
@@ -105,7 +106,7 @@ class ScriptController extends Controller
             // Sinon on renvoie vers formulaire Script New
             else{
                 return $this->render('script/new.html.twig', array(
-                    'user' => $user->getId(),
+                    'user' => $user,
                     'projet' => $projet,
                     'questions' => $questions,
                     ));
@@ -145,11 +146,13 @@ class ScriptController extends Controller
 
                 // Création de la nouvelle entité script réponse
                 $scriptReponse = new ScriptReponse();
+                $scriptEcriture = new ScriptEcriture();
 
                 // Attribution du script, de la question et de la réponse à l'entité ScriptReponse
                 $scriptReponse->setScript($script);
                 $scriptReponse->setQuestion($question);
                 $scriptReponse->setReponse($reponse);
+                $scriptReponse->setScriptEcriture($scriptEcriture);
 
                 // Envoi dans la BDD
                 $em = $this->getDoctrine()->getManager();
@@ -213,24 +216,41 @@ class ScriptController extends Controller
 
 
 
-//
-//
-//
-//    /**
-//     * Finds and displays a script entity.
-//     *
-//     * @Route("/user={id}", name="script_show")
-//     * @Method("GET")
-//     */
-//    public function showAction(Script $script)
-//    {
-//        $deleteForm = $this->createDeleteForm($script);
-//
-//        return $this->render('script/show.html.twig', array(
-//            'script' => $script,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
+
+    /**
+     * Finds and displays a script entity.
+     *
+     * @Route("/valid/user={id}/projet={projet}/script={script}", name="script_valid")
+     * @Method("GET")
+     */
+    public function validAction(User $user, Projet $projet, Script $script)
+    {
+        // Controle de l'utilisateur
+        if ($user === $this->getUser()) {
+
+            // Récupération des réponses
+            $repositoryR = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptReponse');
+            $reponses = $repositoryR->findByScript($script);
+
+//            // Récupération des questions
+//            $repositoryQ = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptQuestion');
+//            $questions = $repositoryQ->findAll();
+
+
+            return $this->render('script/show.html.twig', array(
+//                'ecritures' => $ecriture,
+                'reponses' => $reponses,
+//                'questions' => $questions,
+                'script' => $script,
+                'user' => $user,
+                'projet' => $projet,
+            ));
+
+        } // Si mauvais Utilisateur on renvoie vers page Unauthorized
+        else {
+            return $this->render('AppliBundle:Default:unauthorized.html.twig');
+        }
+    }
 //
 //    /**
 //     * Displays a form to edit an existing script entity.

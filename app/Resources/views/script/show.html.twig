@@ -1,48 +1,173 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Script</h1>
+{% block contentlarge %}
 
-    <table>
+
+
+    {% for key,reponse in reponses %}
+
+        <div style="width: 100%; border: solid 3px #dddddd; border-radius: 10px">
+
+
+                    <table style="width: 100%; background-color: #dddddd;  font-weight: bold; text-align: center">
+                        <td>Ligne de script n° {{ key + 1 }}</td>
+                    </table>
+                    <table class="table table-striped">
+
+                        <thead>
+                        <th>{{ reponse.question.question }}</th>
+                        </thead>
+                        <tbody>
+                        <td>{{ reponse.reponse }}</td>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped">
+                        <thead>
+                        <th>Voix-off :</th>
+                        <th>Description :</th>
+                        <th>Durée :</th>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            {#Si une saisie est existante on affiche les infos#}
+                            <td>{{ reponse.scriptEcriture.voixoff }}</td>
+                            <td>{{ reponse.scriptEcriture.description }}</td>
+                            <td width="150">{{ reponse.scriptEcriture.tempsForceMin }} min {{ reponse.scriptEcriture.tempsForceSec }} sec</td>
+
+                        </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+        <br>
+
+    {% endfor %}
+
+
+    <hr>
+
+
+    <table style="width: 100%;">
+        <td style="text-align: center;">
+
+            <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': script.id})  }}">
+                <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
+
+
+        </td>
+        {#<td style="width: 24%; text-align: center;">#}
+
+                {#<a href="#">#}
+                    {#<img class="imgflat" src="{{ asset('images/printer.png')}}" alt="Enregistrer" height="70"><h4 style="color: #ed7425">Imprimer</h4></a>#}
+
+       {#</td>#}
+        {#<td style="width: 24%; text-align: center;">#}
+
+            {#<a href="#">#}
+                {#<img class="imgflat" src="{{ asset('images/hand-shake.png')}}" alt="Enregistrer" height="70"><h4 style="color: #273b7a">Faire appel à un expert</h4></a>#}
+
+        {#</td>#}
+        {#<td style="width: 24%; text-align: center;">#}
+
+            {#<a href="#">#}
+                {#<img class="imgflat" src="{{ asset('images/trophy.png')}}" alt="Enregistrer" height="70"><h4 style="color: #c92f00">Valider le script</h4></a>#}
+
+        {#</td>#}
+
+    </table>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block aside %}
+
+    {% set min = 0 %}
+    {% set sec = 0 %}
+
+    {#Vérification si les résponses sont saisies, si oui la validation passe à 1 sinon elle reste à 0#}
+    {% for key,reponse in reponses %}
+
+        {% set sec = sec + reponse.scriptEcriture.tempsForceSec %}
+        {% if sec > 59 %}
+            {% set min = min +1 %}
+            {% set sec = 0 %}
+        {% endif %}
+        {% set min = min + reponse.scriptEcriture.tempsForceMin %}
+
+    {% endfor %}
+
+
+
+    <div style="width: 100%; text-align: center">
+        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h3>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div>
+
+    </div>
+    <table style="width: 100%; background-color: #d3d3d3">
+        <thead>
+        <tr>
+            <th style="width: 20%;"></th>
+            <th style="text-align: center" colspan="4">Durée totale :</th>
+            <th style="width: 20%;"></th>
+        </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ script.id }}</td>
-            </tr>
-            <tr>
-                <th>Datecreation</th>
-                <td>{% if script.dateCreation %}{{ script.dateCreation|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Datemodification</th>
-                <td>{% if script.dateModification %}{{ script.dateModification|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Datevalidation</th>
-                <td>{% if script.dateValidation %}{{ script.dateValidation|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Validation</th>
-                <td>{% if script.validation %}Yes{% else %}No{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Projet</th>
-                <td>{{ script.projet }}</td>
-            </tr>
+        <tr>
+            <td></td>
+            <td><h1>{{ min }}</h1></td>
+            <td><h5> min</h5></td>
+            <td><h1>{{ sec }}</h1></td>
+            <td><h5> sec</h5></td>
+            <td></td>
+        </tr>
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('script_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('script_edit', { 'id': script.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+<br>
+<br>
+
+
+
+
+    <div style="width: 100%; text-align: center">
+
+    <a href="#">
+    <img class="imgflat" src="{{ asset('images/printer.png')}}" alt="Enregistrer" height="70"><h4 style="color: #ed7425">Imprimer</h4></a>
+
+    </div>
+    <br>
+    <div style="width: 100%; text-align: center">
+
+    <a href="#">
+    <img class="imgflat" src="{{ asset('images/hand-shake.png')}}" alt="Enregistrer" height="70"><h4 style="color: #273b7a">Faire appel à un expert</h4></a>
+
+    </div>
+    <br>
+    <div style="width: 100%; text-align: center">
+
+    <a href="#">
+    <img class="imgflat" src="{{ asset('images/trophy.png')}}" alt="Enregistrer" height="70"><h4 style="color: #c92f00">Valider le script</h4></a>
+
+    </div>
+
+
 {% endblock %}

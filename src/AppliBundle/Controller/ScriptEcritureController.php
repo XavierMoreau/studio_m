@@ -36,17 +36,17 @@ class ScriptEcritureController extends Controller
             $repositoryQ = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptQuestion');
             $questions = $repositoryQ->findAll();
 
-            // Vérification si données déjà saisies
-            $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
-            $ecriture = $repository->findByScriptReponse($reponses);
+//            // Vérification si données déjà saisies
+//            $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
+//            $ecriture = $repository->findByScriptReponse($reponses);
 
             return $this->render('scriptecriture/new.html.twig', array(
-                'ecritures' => $ecriture,
+//                'ecritures' => $ecriture,
                 'reponses' => $reponses,
                 'questions' => $questions,
-                'script' => $script->getId(),
-                'id' => $user->getId(),
-                'projet' => $projet->getId(),
+                'script' => $script,
+                'id' => $user,
+                'projet' => $projet,
             ));
 
         } // Si mauvais Utilisateur on renvoie vers page Unauthorized

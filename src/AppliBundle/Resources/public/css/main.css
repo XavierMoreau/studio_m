@@ -1,7 +1,7 @@
 
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'News Cycle', sans-serif;
 }
 
 
@@ -10,31 +10,19 @@ a:hover{
     color : darkgrey;
 }
 
-.nolarge{
-    max-width : 500px;
-    margin: auto;
-}
-
-.midsize{
-    max-width : 1200px;
-    margin: auto;
-}
-
-
-.large{
-    margin-left: 20px;
-    margin-right: 20px;
-}
 
 header {
     background-color: lightgrey;
     color : black;
+    font-family: 'News Cycle', sans-serif;
+    font-size: 15px;
 
 }
 
 header a{
      color : black;
      text-decoration: none;
+     font-size: 17px;
 }
 
 header a:hover{
@@ -50,6 +38,39 @@ main a:hover{
 
 main{
     min-height: 725px;
+    font-family: 'News Cycle', sans-serif;
+    }
+
+.nolarge{
+    width : 40%;
+    margin: auto;
+}
+
+.midsize{
+    width : 60%;
+    max-height: 725px;
+    margin-left:19%;
+    display: inline-block;
+    overflow: scroll;
+}
+
+
+.large{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+main {
+    width : 100%;
+    margin: auto;
+}
+
+
+aside{
+    width:19% ;
+    position: absolute;
+    top: 80px;
+    padding-left: 20px;
 }
 
 footer {
@@ -59,8 +80,9 @@ footer {
     margin-top: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
-    font-size: x-small;
+    font-size: 14px;
     width:100%;
+    font-family: 'News Cycle', sans-serif;
 }
 
 footer a{
@@ -131,3 +153,26 @@ footer span{
 
 }
 
+.tabhead{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tabcells {
+    font-size: 15px;
+    background-color: #92c7ff;
+}
+
+.tabimgsmall{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+form label{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.scriptcolor{
+    color: #34495e;
+}

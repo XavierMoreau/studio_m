@@ -3,6 +3,7 @@
 namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Diffusion;
+use AppliBundle\Entity\Script;
 use AppliBundle\Entity\Utilisation;
 use AppliBundle\Entity\Support;
 use AppliBundle\Entity\Projet;
@@ -64,9 +65,11 @@ class ProjetController extends Controller
 
             // Création du nouveau projet
             $projet = new Projet();
+            $script = new Script();
 
             // Attribution de l'utilisateur au projet
             $projet->setUtilisateur($user);
+            $projet->setScript($script);
 
             // Formulaire de création du projet
             $form = $this->createForm('AppliBundle\Form\ProjetType', $projet);
@@ -82,13 +85,14 @@ class ProjetController extends Controller
                 return $this->redirectToRoute('script_index', array(
                     'id' => $user->getId(),
                     'projet' => $projet->getId(),
+                    'script' => $script->getId(),
                 ));
             }
 
             // Si formulaire invalide, on recommence
             return $this->render('projet/new.html.twig', array(
-                'user' => $user,
-                'projet' => $projet,
+                'user' => $user->getId(),
+                'projet' => $projet->getId(),
                 'form' => $form->createView(),
             ));
             }

@@ -8,9 +8,7 @@
 
     <form  method="post" action="{{ path('script_reponses_new',{'id':app.user.id, 'projet': projet.id,'script': projet.script})}}">
 
-        {{ dump(projet) }}
 
-        {{ dump(questions) }}
 
 
         {% for question in questions %}

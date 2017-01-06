@@ -52,17 +52,21 @@ class Script
     /**
      * @var int
      *
-     * @ORM\Column(name="projet", type="integer")
+     * @ORM\Column(name="projet", type="integer", nullable=true)
      */
     private $projet;
+
+
+
+
+
 
 
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
-//        $this->support = new ArrayCollection();
-//        $this->utilisation = new ArrayCollection();
-//        $this->diffusion = new ArrayCollection();
+
+
     }
 
 

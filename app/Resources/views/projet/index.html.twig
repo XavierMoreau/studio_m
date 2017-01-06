@@ -1,5 +1,18 @@
 {% extends 'layout.html.twig' %}
 
+
+
+{% block content %}
+
+    <div style="text-align: center">
+        <a href="{{ path('projet_new', {'id': app.user.id }) }}">
+            <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h3 style="color: #ff5419">Nouveau projet</h3></a>
+    </div>
+
+{% endblock %}
+
+
+
 {% block body %}
 
 
@@ -8,7 +21,7 @@
 
 
     <table class="table table-striped">
-        <thead>
+        <thead class="tabhead">
             <tr>
                 {% if is_granted("ROLE_ADMIN") %}
                 <th>Utilisateur</th>
@@ -29,7 +42,7 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody class="tabcells">
         {% for projet in projets %}
 
 
@@ -71,18 +84,18 @@
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
                 <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}">
-                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h5 style="color: #ff5419">Modifier le projet</h5></a></td>
+                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h4 style="color: #ff5419">Modifier le projet</h4></a></td>
 
                 <td style="text-align: center">{% if projet.script %}<a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h5 style="color: #34495e">Accéder au script</h5></a>
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Accéder au script</h4></a>
                     {% else %}<a href="{{ path('script_index', {'id':app.user.id, 'projet': projet.id,}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h5 style="color: #34495e">Ecrire le script</h5></a>{% endif %}</td>
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Ecrire le script</h4></a>{% endif %}</td>
 
                 <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
-                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h5 style="color: #9db138">Créer le storyboard</h5>{% endif %}</td>
+                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h4 style="color: #9db138">Créer le storyboard</h4>{% endif %}</td>
 
                 <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id }) }}">
-                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h5 style="color: #34495e">Supprimer le projet</h5></a></td>
+                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h4 style="color: #34495e">Supprimer le projet</h4></a></td>
 
             </tr>
         {% endfor %}
@@ -91,18 +104,3 @@
 
 {% endblock %}
 
-{% block content %}
-
-    <div style="text-align: center">
-        <a href="{{ path('projet_new', {'id': app.user.id }) }}">
-            <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h4 style="color: #ff5419">Nouveau projet</h4></a>
-
-
-
-    </div>
-
-
-
-
-
-{% endblock %}

@@ -86,10 +86,13 @@ class Projet
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="script", type="integer", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $script;
+     private $script;
+
+
+
 
     /**
      * @var int

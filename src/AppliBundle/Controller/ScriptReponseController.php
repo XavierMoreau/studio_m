@@ -60,10 +60,10 @@ class ScriptReponseController extends Controller
                 $em->flush($scriptReponse);
 
                 return $this->redirectToRoute('scriptecriture_new', array(
-                    'script' => $script->getId(),
-                    'id' => $user->getId(),
-                    'projet' => $projet->getId(),
-                    'reponses' => $scriptReponse->getId()
+                    'script' => $script,
+                    'id' => $user,
+                    'projet' => $projet,
+                    'reponses' => $scriptReponse
                 ));
             }
 

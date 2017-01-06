@@ -44,6 +44,14 @@ class ScriptReponse
 
 
     /**
+     * @var int
+     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\ScriptEcriture", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $scriptEcriture;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -124,5 +132,24 @@ class ScriptReponse
     {
         return $this->question;
     }
+
+    /**
+     * @return int
+     */
+    public function getScriptEcriture()
+    {
+        return $this->scriptEcriture;
+    }
+
+    /**
+     * @param int $scriptEcriture
+     */
+    public function setScriptEcriture($scriptEcriture)
+    {
+        $this->scriptEcriture = $scriptEcriture;
+    }
+
+
+
 }
 

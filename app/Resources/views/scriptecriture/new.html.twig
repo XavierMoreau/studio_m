@@ -3,50 +3,35 @@
 {% block contentlarge %}
 
 
-<div style="width: 100%; text-align: center">
-    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h4 style="color: #34495e">Script</h4>
-</div>
-
-
-{#{{ dump(reponses) }}#}
-{#{{ dump(ecritures) }}#}
-
 
     {#Pour chaque réponse au questionnaire du script #}
-    {% for key, reponse in reponses %}
-            {#Si il y a déjà une saisie dans le script#}
-            {% if ecritures %}
-                {#Pour chaque saisie on compare l'id de la réponse#}
-                {% for scriptecriture in ecritures %}
-                    {#Si l'id de la réponse correspond#}
-                    {% if scriptecriture.scriptReponse.id == reponse.id %}
+    {% for key,reponse in reponses %}
+
     {#On affiche le formulaire d'édition#}
-    <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet, 'script': script, 'ecriture': scriptecriture.id })}}">
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-    {#Sinon on affiche le formulaire de création#}
-    <form  method="post" action="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet,'script': script })}}">
-            {% endif %}
+    <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id, 'ecriture': reponse.scriptEcriture.id })}}">
+
         {#On renvoie l'id de la réponse en caché#}
         <input type="hidden" name="0" value="{{ reponse.id }}">
 
-    <table style="width: 100%; color: #34495e; border-bottom: solid 1px #34495e; font-weight: bold">
-        <td>Ligne de script n° {{ key + 1 }}</td>
+<div style="width: 100%; border: solid 3px #dddddd; border-radius: 10px">
+
+
+    <table style="width: 100%; background-color: #dddddd;  font-weight: bold; text-align: center">
+    <td>Ligne de script n° {{ key + 1 }}</td>
     </table>
     <table class="table table-striped">
 
-        <thead>
+        <thead class="tabhead scriptcolor">
             <th>A la question :</th>
             <th>Vous avez répondu :</th>
             <th></th>
             <th></th>
         </thead>
-        <tbody>
+        <tbody class="tabcells scriptcolor">
             <td>{{ reponse.question.question }}</td>
             <td>{{ reponse.reponse }}</td>
-            <td width="80"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}"><img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="40"></a></td>
-            <td width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet,}) }}"><h5 style="color: #d97077">Retour aux questions</h5></a></td>
+            <td width="80"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id}) }}"><img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="40"></a></td>
+            <td width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id}) }}"><h5 style="color: #d97077">Retour aux questions</h5></a></td>
         </tbody>
     </table>
     <table class="table table-striped">
@@ -60,19 +45,19 @@
         <tr>
             {#Si une saisie est existante on affiche les infos#}
             <td rowspan="2"><label for="voixoff{{ reponse.id }}"></label>
-                <textarea  rows="8" class="form-control" name="1" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.voixoff }}{% endif %}{% endfor %}{% endif %}</textarea></td>
+                <textarea  rows="8" class="form-control" name="1" >{% if reponse.scriptEcriture.voixoff %}{{ reponse.scriptEcriture.voixoff }}{% endif %}</textarea></td>
             <td rowspan="2"><label for="description{{ reponse.id }}"></label>
-                <textarea  rows="8" class="form-control" name="2" >{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.description }}{% endif %}{% endfor %}{% endif %}</textarea></td>
+                <textarea  rows="8" class="form-control" name="2" >{% if reponse.scriptEcriture.description %}{{ reponse.scriptEcriture.description }}{% endif %}</textarea></td>
             <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
-                <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceMin }}{% endif %}{% endfor %}{% endif %}"></td>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if reponse.scriptEcriture.tempsForceMin %}{{ reponse.scriptEcriture.tempsForceMin }}{% endif %}"></td>
             <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
-                <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecritures %}{% for scriptecriture in ecritures %}{% if scriptecriture.scriptReponse.id == reponse.id %}{{ scriptecriture.tempsForceSec }}{% endif %}{% endfor %}{% endif %}"></td>
+                <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if reponse.scriptEcriture.tempsForceSec %}{{ reponse.scriptEcriture.tempsForceSec }}{% endif %}"></td>
 
-        </tr>
+
         <tr>
              <td colspan="2" style="text-align: center">
                  <button class="btn-iconflat" type="submit" value="Enregistrer">
-                     <img class="imgflat" src="{{ asset('images/save.png')}}" alt="Enregistrer" height="40"><h5 style="color: #ff8e31">Enregistrer</h5></button>
+                     <img class="imgflat" src="{{ asset('images/save.png')}}" alt="Enregistrer" height="40"><h4 style="color: #ff8e31">Enregistrer</h4></button>
              </td>
 
         </tr>
@@ -83,16 +68,124 @@
     </table>
 
 
-
+        </div>
         </form>
 
+
+
+        <br>
         <br>
 
         {% endfor %}
 <hr>
 
-        <input class="btn btn-primary" type="submit" value="Valider le script" />
 
-        <br>
+    <table style="width: 100%;">
+        <td style="width: 49%; text-align: center;">
+
+                <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id})  }}">
+                    <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
+
+
+        </td>
+        <td style="width: 49%; text-align: center;">
+            {#controle si toutes les réponses sont bien saisies avant d'autoriser la validation#}
+
+            {#initialisation de la valeur validation à 1 par défault#}
+            {% set valid = 1 %}
+
+            {#Vérification si les résponses sont saisies, si oui la validation passe à 1 sinon elle reste à 0#}
+            {% for key,reponse in reponses %}
+                {% if valid == 0 %}
+                    {% set valid = 0 %}
+                {% else %}
+                    {% if reponse.scriptEcriture.voixoff and reponse.scriptEcriture.description %}
+                        {% set valid = 1 %}
+                    {% else %}
+                        {% set valid = 0 %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {#tant que la validation est à 0 on n'affiche le lien qu'en grisé#}
+            {% if valid == 0 %}
+
+               <div style="position: relative;">
+                <img style="opacity: 0.5" class="imgflat" src="{{ asset('images/pen.png')}}" alt="Enregistrer" height="70"><h4 style="color: #34495e;opacity: 0.5;">Continuer</h4>
+               <h4 style="position: absolute;top : 30px; width: 100%; color: #34495e">Remplissez tous les champs</h4>
+               </div>
+                {#sinon on l'active#}
+            {% else %}
+
+                <a href="{{ path('script_valid', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Enregistrer" height="70"><h4 style="color: #34495e">Continuer</h4></a>
+
+            {% endif %}
+        </td>
+
+    </table>
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block aside %}
+
+
+
+
+
+    {% set min = 0 %}
+    {% set sec = 0 %}
+
+    {#Vérification si les résponses sont saisies, si oui la validation passe à 1 sinon elle reste à 0#}
+    {% for key,reponse in reponses %}
+
+        {% set sec = sec + reponse.scriptEcriture.tempsForceSec %}
+        {% if sec > 59 %}
+            {% set min = min +1 %}
+            {% set sec = 0 %}
+        {% endif %}
+        {% set min = min + reponse.scriptEcriture.tempsForceMin %}
+
+    {% endfor %}
+
+
+    <div style="width: 100%; margin-left: 15px; text-align: center">
+
+
+        <div style="width: 100%; text-align: center">
+            <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h3>
+        </div>
+<br>
+<br>
+<br>
+
+        <table style="width: 100%; background-color: #d3d3d3">
+            <thead>
+            <tr>
+                <th style="width: 20%;"></th>
+                <th style="text-align: center" colspan="4">Durée totale :</th>
+                <th style="width: 20%;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td><h1>{{ min }}</h1></td>
+                <td><h5> min</h5></td>
+                <td><h1>{{ sec }}</h1></td>
+                <td><h5> sec</h5></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        
+    </div>
+
 
 {% endblock %}

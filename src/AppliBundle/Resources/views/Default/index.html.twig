@@ -15,9 +15,9 @@
 <br>
 
     <table style="text-align: center; width: 100%">
-        <td width="167"><a href="{{ path('projet_index', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projets" height="150"><h4 style="color: #4AB8A1">Projets</h4></a></td>
-        <td width="167"><a href="{{ path('fos_user_profile_show')}}"><img class="imgflat" src="{{ asset('images/astronaut.png')}}" alt="Projets" height="150"><h4 style="color: #386895">Profil</h4></a></td>
-        <td width="167"><a href="{{ path('fos_user_security_logout')}}"><img class="imgflat" src="{{ asset('images/logout.png')}}" alt="Projets" height="150"><h4 style="color: #FABC3D">Déconnection</h4></a></td>
+        <td width="167"><a href="{{ path('projet_index', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projets" height="150"><h3 style="color: #4AB8A1">Projets</h3></a></td>
+        <td width="167"><a href="{{ path('fos_user_profile_show')}}"><img class="imgflat" src="{{ asset('images/astronaut.png')}}" alt="Projets" height="150"><h3 style="color: #386895">Profil</h3></a></td>
+        <td width="167"><a href="{{ path('fos_user_security_logout')}}"><img class="imgflat" src="{{ asset('images/logout.png')}}" alt="Projets" height="150"><h3 style="color: #FABC3D">Déconnection</h3></a></td>
 
     </table>
 {% endif %}
@@ -30,7 +30,7 @@
         <td height="10"></td>
     </tr>
     <tr>
-        <td><a href="{{ path('admin_index') }}"><img class="imgflat" src="{{ asset('images/process.png')}}" alt="Projets" height="150"><h4 style="color: #FC6F58">Administration</h4></a></td>
+        <td><a href="{{ path('admin_index') }}"><img class="imgflat" src="{{ asset('images/process.png')}}" alt="Projets" height="150"><h3 style="color: #FC6F58">Administration</h3></a></td>
     </tr>
 </table>
 {% endif %}
