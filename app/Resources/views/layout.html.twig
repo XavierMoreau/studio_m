@@ -57,6 +57,13 @@
     {% endfor %}
 {% endfor %}
 <main>
+    <aside style="display: inline-block">
+        {% block aside %}
+        {% endblock %}
+
+    </aside>
+
+
     <div class="nolarge">
         {% block content %}
         {% endblock %}
@@ -71,11 +78,7 @@
         {% endblock %}
     </div>
 
-    <aside style="display: inline-block">
-        {% block aside %}
-        {% endblock %}
 
-    </aside>
     </main>
 
 

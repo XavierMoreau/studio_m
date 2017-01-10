@@ -15,9 +15,16 @@
 <br>
 
     <table style="text-align: center; width: 100%">
-        <td width="167"><a href="{{ path('projet_index', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projets" height="150"><h3 style="color: #4AB8A1">Projets</h3></a></td>
-        <td width="167"><a href="{{ path('fos_user_profile_show')}}"><img class="imgflat" src="{{ asset('images/astronaut.png')}}" alt="Projets" height="150"><h3 style="color: #386895">Profil</h3></a></td>
-        <td width="167"><a href="{{ path('fos_user_security_logout')}}"><img class="imgflat" src="{{ asset('images/logout.png')}}" alt="Projets" height="150"><h3 style="color: #FABC3D">Déconnection</h3></a></td>
+        <tr>
+            <td width="167"><a href="{{ path('projet_new', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau projets" height="150"><h3 style="color: #ff5419">Nouveau Projet</h3></a></td>
+            <td width="167"><a href="{{ path('fos_user_profile_show')}}"><img class="imgflat" src="{{ asset('images/astronaut.png')}}" alt="Projets" height="150"><h3 style="color: #386895">Profil</h3></a></td>
+
+        </tr>
+        <tr>
+            <td width="167"><a href="{{ path('projet_index', { 'id': app.user.id }) }}"><img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projets" height="150"><h3 style="color: #4AB8A1">Projets</h3></a></td>
+
+                  <td width="167"><a href="{{ path('fos_user_security_logout')}}"><img class="imgflat" src="{{ asset('images/logout.png')}}" alt="Projets" height="150"><h3 style="color: #FABC3D">Déconnection</h3></a></td>
+        </tr>
 
     </table>
 {% endif %}

@@ -71,6 +71,12 @@ class ScriptEcriture
     private $dateModification;
 
 
+    /**
+     * @var int
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\ScriptReponse", cascade={"persist","remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $scriptReponse;
 
 
     /**
@@ -220,5 +226,24 @@ class ScriptEcriture
     {
         return $this->dateModification;
     }
+
+    /**
+     * @return int
+     */
+    public function getScriptReponse()
+    {
+        return $this->scriptReponse;
+    }
+
+    /**
+     * @param int $scriptReponse
+     */
+    public function setScriptReponse($scriptReponse)
+    {
+        $this->scriptReponse = $scriptReponse;
+    }
+
+
+
 }
 

@@ -86,8 +86,8 @@ class Projet
 
     /**
      * @var int
-     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\Script", mappedBy="projet_id", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
      private $script;
 

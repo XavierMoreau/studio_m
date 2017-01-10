@@ -4,6 +4,7 @@ namespace AppliBundle\Controller;
 
 use AppliBundle\Entity\Script;
 use AppliBundle\Entity\Projet;
+use AppliBundle\Entity\ScriptReponse;
 use UserBundle\Entity\User;
 use AppliBundle\Entity\ScriptEcriture;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,18 +37,46 @@ class ScriptEcritureController extends Controller
             $repositoryQ = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptQuestion');
             $questions = $repositoryQ->findAll();
 
-//            // Vérification si données déjà saisies
-//            $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
-//            $ecriture = $repository->findByScriptReponse($reponses);
+            // Vérification si données déjà saisies
+            $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
+            $ecriture = $repository->findByScriptReponse($reponses);
 
-            return $this->render('scriptecriture/new.html.twig', array(
-//                'ecritures' => $ecriture,
-                'reponses' => $reponses,
-                'questions' => $questions,
-                'script' => $script,
-                'id' => $user,
-                'projet' => $projet,
-            ));
+            // s'il y a des données on les renvoie dans le formulaire
+            if ($ecriture) {
+                return $this->render('scriptecriture/edit.html.twig', array(
+                    'ecritures' => $ecriture,
+                    'reponses' => $reponses,
+                    'questions' => $questions,
+                    'script' => $script,
+                    'id' => $user,
+                    'projet' => $projet,
+                ));
+            // s'il n'y a pas de données écritures, on en créé une pour chaque question
+            }else{
+
+                foreach ($reponses as $key=>$reponse){
+                    $scriptEcriture = new ScriptEcriture();
+                    $scriptEcriture->setScriptReponse($reponse);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($scriptEcriture);
+                    $em->flush($script);
+
+                }
+
+                // et on les renvoie vides dans le formulaire
+                return $this->render('scriptecriture/edit.html.twig', array(
+                    'reponses' => $reponses,
+                    'questions' => $questions,
+                    'script' => $script,
+                    'id' => $user,
+                    'projet' => $projet,
+                ));
+
+
+            }
+
+
 
         } // Si mauvais Utilisateur on renvoie vers page Unauthorized
         else {
@@ -58,37 +87,25 @@ class ScriptEcritureController extends Controller
     /**
      * Creates a new scriptEcriture entity.
      *
-     * @Route("/new/user={id}/projet={projet}/script={script}", name="scriptecriture_new")
+     * @Route("/new/user={id}/projet={projet}/script={script}/reponse={reponse}", name="scriptecriture_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Script $script, Projet $projet, User $user)
+    public function newAction(Request $request, Script $script, Projet $projet, User $user, ScriptReponse $reponse )
 
     {
         // Controle de l'utilisateur
         if ($user === $this->getUser()) {
-
-            // Et on récupère l'entité reponse correspondante
-            $repository = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppliBundle:ScriptReponse');
-            $reponse = $repository->findOneById($_POST[0]);
-
 
             // Création de la nouvelle entité script réponse
             $scriptEcriture = new ScriptEcriture();
 
             // Attribution du script, de la question et de la réponse à l'entité ScriptReponse
             $scriptEcriture->setScriptReponse($reponse);
-            $scriptEcriture->setVoixoff($_POST[1]);
-            $scriptEcriture->setDescription($_POST[2]);
-            $scriptEcriture->setTempsForceMin($_POST[3]);
-            $scriptEcriture->setTempsForceSec($_POST[4]);
-
 
             // Envoi dans la BDD
             $em = $this->getDoctrine()->getManager();
             $em->persist($scriptEcriture);
-            $em->flush($script);
+            $em->flush($scriptEcriture);
 
 
             return $this->redirectToRoute('scriptecriture_index', array(

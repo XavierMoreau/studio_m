@@ -86,15 +86,16 @@
                 <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}">
                         <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h4 style="color: #ff5419">Modifier le projet</h4></a></td>
 
-                <td style="text-align: center">{% if projet.script %}<a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Accéder au script</h4></a>
-                    {% else %}<a href="{{ path('script_index', {'id':app.user.id, 'projet': projet.id,}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Ecrire le script</h4></a>{% endif %}</td>
+                <td style="text-align: center">
+
+                    <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Ecrire le script</h4></a>
+
 
                 <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
-                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h4 style="color: #9db138">Créer le storyboard</h4>{% endif %}</td>
+                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h4 style="color: #9db138">Ecrire le storyboard</h4>{% endif %}</td>
 
-                <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id }) }}">
+                <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id, 'script': projet.script.id}) }}">
                         <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h4 style="color: #34495e">Supprimer le projet</h4></a></td>
 
             </tr>

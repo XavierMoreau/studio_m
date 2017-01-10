@@ -1,0 +1,138 @@
+
+
+{% extends 'layout.html.twig' %}
+
+{% block contentlarge %}
+
+
+
+
+
+<form  method="post" action="{{ path('script_voixoff_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script.id})}}">
+
+
+
+
+        <div class="form-group">
+            <label for="voixoffglobal"><h4>Rédigez le texte de la voix-off :</h4></label><br>
+            <textarea placeholder="Rédigez votre voix-off..." rows="17" class="form-control" name="voixoff">{{ script.voixoffGlobal }}</textarea>
+
+            <table style="width: 100%;text-align: center">
+                <td>
+                    <button class="btn-iconflat" type="submit" value="Continuer">
+                        <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Continuer le script" height="70"><h4 style="color: #34495e">Enregistrer</h4>
+                    </button>
+
+                </td>
+
+                </table>
+        </div>
+</form>
+
+
+
+        <hr>
+
+
+
+
+
+
+
+
+
+    <table style="width: 100%;">
+        <td style="width: 49%; text-align: left;">
+            <div style="width: 100px; text-align: center;">
+                <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
+            </div>
+
+        </td>
+        <td style="width: 49%; text-align: left;">
+            <div style="width: 100px; text-align: center;">
+                <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Retour" height="70"><h4 style="color: #34495e">Questionnaire guide</h4></a>
+            </div>
+
+        </td>
+        <td style="width: 49%; text-align: left;">
+            <div style="width: 100px; text-align: center;">
+                <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Retour" height="70"><h4 style="color: #34495e">Ecrire le script</h4></a>
+            </div>
+
+        </td>
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block aside %}
+    {% if count > 0 %}
+        {% set timing = count/2.5 %}
+        {%  set minround = timing/60 %}
+        {%  set min = minround|round(0, 'floor') %}
+        {%  set sec = timing%60 %}
+    {% else %}
+    {% set count = app.request.get('count', NULL, true) %}
+        {% set timing = count/2.5 %}
+        {%  set minround = timing/60 %}
+        {%  set min = minround|round(0, 'floor') %}
+        {%  set sec = timing%60 %}
+    {% endif %}
+
+
+    <div style="width: 100%; margin-left: 15px; text-align: center">
+
+
+        <div style="width: 100%; text-align: center">
+            <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h3>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <table style="width: 85%; background-color: #d3d3d3">
+            <tr>
+                <td style="width: 20%;"></td>
+                <td style="text-align: center" colspan="2">Nombre de mots : </td>
+                <td style="text-align: center" colspan="2"><h3>{{ count }}</h3></td>
+                <td style="width: 20%;"></td>
+            </tr>
+            <tr>
+                <td style="text-align: center" colspan="4"> ----------- </td>
+            </tr>
+            <tr>
+                <td style="width: 20%;"></td>
+                <td style="text-align: center" colspan="4">Durée estimée (150 mots/min) :</td>
+                <td style="width: 20%;"></td>
+            </tr>  </thead>
+
+            <tr>
+                <td></td>
+                <td><h1>{{ min }}</h1></td>
+                <td><h5> min</h5></td>
+                <td><h1>{{ sec }}</h1></td>
+                <td><h5> sec</h5></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+{% endblock %}

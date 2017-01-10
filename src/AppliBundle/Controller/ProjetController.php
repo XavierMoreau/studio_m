@@ -67,22 +67,26 @@ class ProjetController extends Controller
             $projet = new Projet();
             $script = new Script();
 
-            // Attribution de l'utilisateur au projet
+            // Attribution de l'utilisateur et du script au projet
             $projet->setUtilisateur($user);
             $projet->setScript($script);
+            $script->setProjet($projet);
 
             // Formulaire de création du projet
             $form = $this->createForm('AppliBundle\Form\ProjetType', $projet);
             $form->handleRequest($request);
 
-            // Si Formulaire valide, on persiste dans la BD
+//            // Si Formulaire valide, on persiste dans la BD
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($projet);
-                $em->flush($projet);
+                $em->persist($projet, $script);
+
+//                $em->persist($script);
+                $em->flush($projet, $script);
+//                $em->flush($script);
 
                 // et on renvoie vers la création du script
-                return $this->redirectToRoute('script_index', array(
+                return $this->redirectToRoute('script_orientation', array(
                     'id' => $user->getId(),
                     'projet' => $projet->getId(),
                     'script' => $script->getId(),
@@ -102,29 +106,6 @@ class ProjetController extends Controller
             return $this->render('AppliBundle:Default:unauthorized.html.twig');
         }
     }
-//
-//    /**
-//     * Finds and displays a projet entity.
-//     *
-//     * @Route("/{id}/{projet}", name="projet_show")
-//     * @Method("GET")
-//     */
-//    public function showAction(User $user, Projet $projet)
-//    {
-//        if ($user === $this->getUser()){
-//
-//        $deleteForm = $this->createDeleteForm($projet, $user);
-//
-//        return $this->render('projet/show.html.twig', array(
-//            'user' => $user,
-//            'projet' => $projet,
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//        }
-//        else{
-//            return $this->render('AppliBundle:Default:unauthorized.html.twig');
-//        }
-//    }
 
     /**
      * Displays a form to edit an existing projet entity.
@@ -168,18 +149,25 @@ class ProjetController extends Controller
     /**
      * Deletes a projet entity.
      *
-     * @Route("/delete/{id}/{projet}", name="projet_delete")
+     * @Route("/delete/{id}/{projet}/{script}", name="projet_delete")
      * @Method({"DELETE", "GET"})
      */
-    public function deleteAction(User $user, Request $request, Projet $projet)
+    public function deleteAction(User $user, Request $request, Projet $projet, Script $script)
     {
         // Controle de l'utilisateur
         if ($user === $this->getUser()){
+
 
             // Suppression dans la BDD du projet séléctionné
             $em = $this->getDoctrine()->getManager();
             $em->remove($projet);
             $em->flush($projet);
+
+            // Suppression dans la BDD du projet séléctionné
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($script);
+            $em->flush($script);
+
             // et on redirige vers la liste des projets
             return $this->redirectToRoute('projet_index', array('id' => $user->getId()));
         }
@@ -190,19 +178,19 @@ class ProjetController extends Controller
     }
 
 
-    /**
-     * Creates a form to delete a projet entity.
-     *
-     * @param Projet $projet The projet entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Projet $projet, User $user)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('projet_delete', array('id' => $user->getId(), 'projet' => $projet->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
+//    /**
+//     * Creates a form to delete a projet entity.
+//     *
+//     * @param Projet $projet The projet entity
+//     *
+//     * @return \Symfony\Component\Form\Form The form
+//     */
+//    private function createDeleteForm(Projet $projet, User $user)
+//    {
+//        return $this->createFormBuilder()
+//            ->setAction($this->generateUrl('projet_delete', array('id' => $user->getId(), 'projet' => $projet->getId())))
+//            ->setMethod('DELETE')
+//            ->getForm()
+//        ;
+//    }
 }

@@ -39,14 +39,28 @@ class ProjetType extends AbstractType
                     'expanded' => true,
                         'label'=>"Type d'utilisation :")
                 )
-            ->add('dateDiffusion','date',array('label'=>'Date de diffusion prévue :'))
-            ->add('tempsDiffusion','integer',array('label'=>'Temps de diffusion (en années) :'))
+            ->add('dateDiffusion','date',array('label'=>'Date de diffusion prévue :',
+                'attr' => array('min' => '01-01-2017')))
+            ->add('tempsDiffusion','integer',
+                array('label'=>'Temps de diffusion (en années) :',
+                'attr' => array('style' => 'width : 80px;', 'min' => '0')))
 
 
 
             ;
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildVoixOffForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('voixoffGlobal','text',array('label'=>''));
+    }
+
+
+
+
     /**
      * {@inheritdoc}
      */

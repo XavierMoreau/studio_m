@@ -51,13 +51,17 @@ class Script
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="projet", type="integer", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\Projet", inversedBy="script", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="projet_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $projet;
 
-
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="voixoff_global", type="text", nullable=true)
+     */
+    private $voixoffGlobal;
 
 
 
@@ -202,5 +206,23 @@ class Script
     {
         return $this->projet;
     }
+
+    /**
+     * @return string
+     */
+    public function getVoixoffGlobal()
+    {
+        return $this->voixoffGlobal;
+    }
+
+    /**
+     * @param string $voixoffGlobal
+     */
+    public function setVoixoffGlobal($voixoffGlobal)
+    {
+        $this->voixoffGlobal = $voixoffGlobal;
+    }
+
+
 }
 

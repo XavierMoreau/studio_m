@@ -43,12 +43,12 @@ class ScriptReponse
     private $question;
 
 
-    /**
-     * @var int
-     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\ScriptEcriture", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $scriptEcriture;
+//    /**
+//     * @var int
+//     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\ScriptEcriture", cascade={"persist"})
+//     * @ORM\JoinColumn(nullable=false)
+//     */
+//    private $scriptEcriture;
 
 
     /**

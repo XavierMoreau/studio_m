@@ -1,9 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div style="width: 100%; text-align: center">
-        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h3 style="color: #ff5419">Modification de projet</h3>
-    </div>
+
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -35,6 +33,26 @@
 
 
 
+
+
+{% endblock %}
+
+
+{% block aside %}
+
+    <div style="width: 100%; margin-left: 15px; text-align: center">
+
+
+        <div style="width: 100%; text-align: center">
+            <img class="imgflat" src="{{ asset('images/projection.png')}}" alt="Projet" height="100"><h3 style="color: #4ab8a1">Nouveau Projet</h3>
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+
+    </div>
 
 
 {% endblock %}

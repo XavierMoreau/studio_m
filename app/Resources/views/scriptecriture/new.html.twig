@@ -2,7 +2,9 @@
 
 {% block contentlarge %}
 
-
+{#{{ dump(script) }}#}
+{#{{ dump(reponses) }}#}
+{#{{ dump(ecritures) }}#}
 
     {#Pour chaque réponse au questionnaire du script #}
     {% for key,reponse in reponses %}
@@ -13,10 +15,10 @@
         {#On renvoie l'id de la réponse en caché#}
         <input type="hidden" name="0" value="{{ reponse.id }}">
 
-<div style="width: 100%; border: solid 3px #dddddd; border-radius: 10px">
+<div style="width: 100%; border: solid 3px #34495e; border-radius: 10px">
 
 
-    <table style="width: 100%; background-color: #dddddd;  font-weight: bold; text-align: center">
+    <table style="width: 100%; background-color: #34495e;  font-weight: bold; text-align: center; color: white">
     <td>Ligne de script n° {{ key + 1 }}</td>
     </table>
     <table class="table table-striped">
@@ -36,9 +38,9 @@
     </table>
     <table class="table table-striped">
         <thead>
-            <th>Saisissez la voix-off :</th>
-            <th>Saisissez la description :</th>
-            <th colspan="2">Temps voulu :</th>
+            <th style="color: palevioletred; font-size: 20px">Saisissez la voix-off ici : <img src="{{ asset('images/arrowpink.png')}}" width="60"></th>
+            <th style="color: #5BDB7F; font-size: 20px; text-align: right"><img src="{{ asset('images/arrowgreen.png')}}" width="60">Saisissez la description ici :</th>
+            <th style="color: #4c8ab0; font-size: 20px; text-align: right" colspan="2">Et la durée ici : <img src="{{ asset('images/arrowblue.png')}}" width="40"></th>
         </thead>
 
         <tbody>
@@ -165,7 +167,7 @@
 <br>
 <br>
 
-        <table style="width: 100%; background-color: #d3d3d3">
+        <table style="width: 85%; background-color: #d3d3d3">
             <thead>
             <tr>
                 <th style="width: 20%;"></th>

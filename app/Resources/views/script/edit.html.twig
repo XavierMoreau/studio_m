@@ -1,11 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div style="width: 100%; text-align: center">
-        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h4>
-    </div>
 
 
+    <h5>Afin d'écrire votre script, répondez aux questions suivantes :</h5>
 
     <form  method="post" action="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script.id})}}">
 
@@ -22,19 +20,33 @@
 
         {%  endfor %}
 
+        <table style="width: 100%;text-align: center">
+            <td>
+                <button class="btn-iconflat" type="submit" value="Continuer">
+                    <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Continuer le script" height="70"><h4 style="color: #34495e">Enregistrer</h4>
+                </button>
+
+            </td>
+
+        </table>
+
+        <hr>
+
+
+
 
         <table style="width: 100%;">
             <td style="width: 49%; text-align: left;">
                 <div style="width: 100px; text-align: center;">
-                    <a href="{{ path('projet_index', { 'id': app.user.id })  }}">
+                    <a href="{{ path('script_orientation', { 'id': app.user.id,'projet': projet.id,'script': projet.script.id })  }}">
                         <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
                 </div>
 
             </td>
             <td style="width: 49%; text-align: right;">
-                <button class="btn-iconflat" type="submit" value="Continuer">
-                    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Continuer le script" height="70"><h4 style="color: #34495e">Continuer le script</h4>
-                </button>
+                <a href="{{ path('script_voixoff', { 'id': app.user.id, 'projet': projet.id,'script': projet.script.id })  }}">
+                    <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Continuer le script" height="70"><h4 style="color: #34495e">Continuer en écrivant la voix-off</h4>
+                </a>
             </td>
 
         </table>
@@ -48,3 +60,21 @@
 
 
 
+{% block aside %}
+
+    <div style="width: 100%; margin-left: 15px; text-align: center">
+
+
+        <div style="width: 100%; text-align: center">
+            <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Ecriture du script</h3>
+        </div>
+        <br>
+        <br>
+        <br>
+
+
+
+    </div>
+
+
+{% endblock %}
