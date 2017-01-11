@@ -2,86 +2,85 @@
 
 {% block contentlarge %}
 
-
-
     {#Pour chaque réponse au questionnaire du script#}
-    {% for key,reponse in reponses %}
 
-        <div style="width: 100%; border: solid 2px #919191;
-        ">
+            {% for key,ecriture in ecritures %}
+
+                {#<div style="width: 100%;">#}
 
 
-            <table style="width: 100%; background-color: #d3d3d3;  font-weight: bold; text-align: center; color: white">
-                <td>Ligne de script n° {{ key + 1 }}</td>
-            </table>
-            <table class="table table-striped">
-
-                    <thead class="tabhead scriptcolor">
-                    <th>A la question :</th>
-                    <th>Vous avez répondu :</th>
-                    <th></th>
-                    <th></th>
-                    </thead>
-                    <tbody class="tabcells scriptcolor">
-                    <td>{{ reponse.question.question }}</td>
-                    <td>{{ reponse.reponse }}</td>
-                    <td width="80"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="40"></a></td>
-                    <td width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><h5 style="color: #d97077">Retour aux questions</h5></a></td>
-                    </tbody>
+                <table style="width: 100%; font-weight: bold; color: #34495e; border-bottom: solid 1px #dddddd; margin-bottom: 10px">
+                    <td style="padding: 10px;"><h3>Ligne de script n° {{ key + 1 }}</h3></td>
                 </table>
-
-            {% for ecriture in ecritures %}
-            {% if ecriture.scriptReponse == reponse %}
 
         {#On affiche le formulaire d'édition#}
         <form  method="post" action="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id, 'ecriture': ecriture.id })}}">
 
             {#On renvoie l'id de la réponse en caché#}
-            <input type="hidden" name="0" value="{{ reponse.id }}">
+            <input type="hidden" name="0" value="{{ ecriture.id }}">
 
-                <table class="table table-striped">
-                    <thead>
-                    <th style="color: palevioletred; font-size: 20px">Voix-off : <img src="{{ asset('images/arrowpink.png')}}" width="60"></th>
-                    <th style="color: #5BDB7F; font-size: 20px; text-align: right"><img src="{{ asset('images/arrowgreen.png')}}" width="60">Description :</th>
-                    <th style="color: #4c8ab0; font-size: 20px; text-align: right" colspan="2">Durée : <img src="{{ asset('images/arrowblue.png')}}" width="40"></th>
-                    </thead>
+                <div style="width: 100%;">
+                    <div style="width: 49%; display: inline-block">
+                        <div style="width: 100%; color: #34495e; font-size: 17px; text-align: center">Voix-off</div>
+                        <div style="width: 100%; padding: 10px; ">
+                            <label for="voixoff{{ ecriture.id }}"></label>
+                            <textarea style="width: 100%; margin-top: -30px;" class="form-control" placeholder="Saisissez la voixoff ici..." rows="8" name="1" >{% if ecriture.voixoff %}{{ ecriture.voixoff }}{% endif %}</textarea>
+                        </div>
+                    </div>
+                    <div style="width: 49%; display: inline-block">
+                        <div style="width: 100%; color: #34495e; font-size: 17px; text-align: center">Description</div>
+                        <div style="width: 100%; padding: 10px;">
+                            <label for="description{{ ecriture.id }}"></label>
+                            <textarea style="width: 100%; margin-top: -30px;" class="form-control" placeholder="Saisissez la description ici..." rows="8" name="2" >{% if ecriture.description %}{{ ecriture.description }}{% endif %}</textarea>
+                        </div>
+                    </div>
 
-                    <tbody>
+                </div>
+                            {% set timing = ecriture.count/2.5 %}
+                            {%  set minround = timing/60 %}
+                            {%  set min = minround|round(0, 'floor') %}
+                            {%  set sec = timing%60 %}
+
+                        <div style="display: inline-block; font-size: 16px; color: #919191; padding-left: 20px; padding-right: 5px;">{{ ecriture.count }}</div>
+                        <div style="display: inline-block; font-size: 13px; color: #919191; padding-right: 20px; margin-right: 20px ;border-right: solid 1px #dddddd;">mots</div>
+
+                        <div style="display: inline-block; font-size: 16px; color: #919191; padding-right: 5px;">{{ min }}</div>
+                        <div style="display: inline-block; font-size: 13px; color: #919191; padding-right: 5px;">min</div>
+                        <div style="display: inline-block; font-size: 16px; color: #919191; padding-right: 5px;">{{ sec }}</div>
+                        <div style="display: inline-block; font-size: 13px; color: #919191; padding-right: 20px; margin-right: 20px ; border-right: solid 1px #dddddd;">sec</div>
 
 
-                    <tr>
-                        {#Si une saisie est existante on affiche les infos#}
-                        <td rowspan="2"><label for="voixoff{{ reponse.id }}"></label>
-                            <textarea  placeholder="Saisissez la voixoff ici..." rows="8" class="form-control" name="1" >{% if ecriture.voixoff %}{{ ecriture.voixoff }}{% endif %}</textarea></td>
-                        <td rowspan="2"><label for="description{{ reponse.id }}"></label>
-                            <textarea  placeholder="Saisissez la description ici..." rows="8" class="form-control" name="2" >{% if ecriture.description %}{{ ecriture.description }}{% endif %}</textarea></td>
-                        <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
-                            <input placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}"></td>
-                        <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
-                            <input placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}"></td>
+                        <div style="display: inline-block; font-size: 13px; color: #919191; padding: 10px;">Forcer la durée :</div>
+
+                            <input style="display: inline-block; width: 70px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}">
+                        <div style="display: inline-block; font-size: 14px; color: #919191;padding-right: 5px;"> min</div>
+
+                            <input style="display: inline-block; width: 70px;padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}">
+                        <div style="display: inline-block; font-size: 14px; color: #919191; padding-right: 20px; margin-right: 20px ; border-right: solid 1px #dddddd;"> sec</div>
 
 
-                    <tr>
-                        <td colspan="2" style="text-align: center">
-                            Temps calculé
-                        </td>
-
-                    </tr>
-                    </tbody>
 
 
-                </table>
 
-                <table width="100%">
-                    <tbody>
-                    <tr>
-                        <td colspan="2" style="text-align: center">
+
+
+
+                    <div style="display: inline-block">
+
+                        <div style="display: inline-block">
                             <button class="btn-iconflat" type="submit" value="Enregistrer">
-                                <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Enregistrer" height="40"><h4 style="color: #34495e">Enregistrer</h4></button>
-                        </td>
-                    </tr>
+                                    <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Enregistrer" height="28">
+                            </button>
+                        </div>
+                        <div style="display: inline-block">
+                            <h4 style="color: #34495e">Enregistrer</h4>
+                        </div>
+
+                    </div>
 
 
+
+            <div style="width: 100%; margin:50px; border-bottom: solid 1px #dddddd;"></div>
 
 
 
@@ -90,28 +89,27 @@
         </form>
 
 
-        {% endif %}
+
         {% endfor %}
-                        <tr>
-                        <td colspan="2" style="text-align: center">
-                            <a href="{{ path('scriptecriture_new', {'id':app.user.id, 'projet': projet.id, 'script': script.id, 'reponse': reponse.id}) }}">
+                        {#<tr>#}
+                        {#<td colspan="2" style="text-align: center">#}
+                            <a href="{{ path('scriptecriture_new', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
                                 <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Enregistrer" height="40"><h4 style="color: #34495e">Ajouter un nouvelle ligne de script</h4></a>
 
 
-                        </td>
+                        {#</td>#}
 
-                             </tr>
+                             {#</tr>#}
 
-                    </tbody>
+                    {#</tbody>#}
 
 
-                </table>
+                {#</table>#}
 
-        </div>
+        {#</div>#}
         <br>
 
 
-    {% endfor %}
 
 
 
@@ -205,11 +203,36 @@
     </div>
 
 
+
+    <tr>
+        <td rowspan="3" width="50"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Retour aux questions" height="40"></a></td>
+        <td rowspan="3" width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><h5 style="color: #34495e">Questions</h5></a></td>
+    </tr>
+
 {% endblock %}
 
 {% block asideright %}
 
-<h3>Votre voix-off :</h3>
+    <h3>Vos réponses :</h3>
+    {% for key,reponse in reponses %}
+
+
+
+        <div style="display: inline-block; font-size: 14px; color: #919191; padding: 10px; border-right: solid 1px #dddddd; margin: 10px;">
+            <span>{{ reponse.question.question }}</span>
+        </div>
+
+
+        <div style="display:inline-block; font-size: 14px; color: #34495e; padding: 10px;">
+            <span>{{ reponse.reponse }}</span>
+        </div>
+
+
+        {% endfor %}
+
+
+
+    <h3>Votre voix-off :</h3>
 
     {% set text = script.voixoffGlobal|split('\n') %}
     {% for paragraph in text %}

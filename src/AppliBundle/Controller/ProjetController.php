@@ -178,19 +178,4 @@ class ProjetController extends Controller
     }
 
 
-//    /**
-//     * Creates a form to delete a projet entity.
-//     *
-//     * @param Projet $projet The projet entity
-//     *
-//     * @return \Symfony\Component\Form\Form The form
-//     */
-//    private function createDeleteForm(Projet $projet, User $user)
-//    {
-//        return $this->createFormBuilder()
-//            ->setAction($this->generateUrl('projet_delete', array('id' => $user->getId(), 'projet' => $projet->getId())))
-//            ->setMethod('DELETE')
-//            ->getForm()
-//        ;
-//    }
 }

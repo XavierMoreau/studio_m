@@ -39,7 +39,7 @@ class ScriptEcritureController extends Controller
 
             // Vérification si données déjà saisies
             $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
-            $ecriture = $repository->findByScriptReponse($reponses);
+            $ecriture = $repository->findByScript($script);
 
             // s'il y a des données on les renvoie dans le formulaire
             if ($ecriture) {
@@ -51,21 +51,24 @@ class ScriptEcritureController extends Controller
                     'id' => $user,
                     'projet' => $projet,
                 ));
-            // s'il n'y a pas de données écritures, on en créé une pour chaque question
+            // s'il n'y a pas de données écritures, on en créé une
             }else{
 
-                foreach ($reponses as $key=>$reponse){
                     $scriptEcriture = new ScriptEcriture();
-                    $scriptEcriture->setScriptReponse($reponse);
+                    $scriptEcriture->setScript($script);
+                    $scriptEcriture->setCount('0');
 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($scriptEcriture);
-                    $em->flush($script);
+                    $em->flush($scriptEcriture);
 
-                }
 
-                // et on les renvoie vides dans le formulaire
+                $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
+                $ecriture = $repository->findByScript($script);
+
+                // et on la renvoie vide dans le formulaire
                 return $this->render('scriptecriture/edit.html.twig', array(
+                    'ecritures' => $ecriture,
                     'reponses' => $reponses,
                     'questions' => $questions,
                     'script' => $script,
@@ -76,8 +79,6 @@ class ScriptEcritureController extends Controller
 
             }
 
-
-
         } // Si mauvais Utilisateur on renvoie vers page Unauthorized
         else {
             return $this->render('AppliBundle:Default:unauthorized.html.twig');
@@ -87,10 +88,10 @@ class ScriptEcritureController extends Controller
     /**
      * Creates a new scriptEcriture entity.
      *
-     * @Route("/new/user={id}/projet={projet}/script={script}/reponse={reponse}", name="scriptecriture_new")
+     * @Route("/new/user={id}/projet={projet}/script={script}", name="scriptecriture_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Script $script, Projet $projet, User $user, ScriptReponse $reponse )
+    public function newAction(Request $request, Script $script, Projet $projet, User $user)
 
     {
         // Controle de l'utilisateur
@@ -99,8 +100,8 @@ class ScriptEcritureController extends Controller
             // Création de la nouvelle entité script réponse
             $scriptEcriture = new ScriptEcriture();
 
-            // Attribution du script, de la question et de la réponse à l'entité ScriptReponse
-            $scriptEcriture->setScriptReponse($reponse);
+            // Attribution du script
+            $scriptEcriture->setScript($script);
 
             // Envoi dans la BDD
             $em = $this->getDoctrine()->getManager();
@@ -112,6 +113,7 @@ class ScriptEcritureController extends Controller
                 'script' => $script->getId(),
                 'id' => $user->getId(),
                 'projet' => $projet->getId(),
+
 
             ));
 
@@ -150,11 +152,14 @@ class ScriptEcritureController extends Controller
         // Controle de l'utilisateur
         if ($user === $this->getUser()) {
 
+            $count = str_word_count($_POST[1], 0);
+
             // Et on modifie la réponse dans la BDD
             $ecriture->setVoixoff($_POST[1]);
             $ecriture->setDescription($_POST[2]);
             $ecriture->setTempsForceMin($_POST[3]);
             $ecriture->setTempsForceSec($_POST[4]);
+            $ecriture->setCount($count);
 
 
             // Envoi dans la BDD

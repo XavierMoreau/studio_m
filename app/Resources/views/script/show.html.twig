@@ -10,7 +10,7 @@
 
     <div style="width: 100%; text-align: center">
 
-    <a href="#">
+    <a href="{{ path('script_print', {'id':app.user.id, 'projet': projet.id, 'script' : script.id})  }}" target=_blank>
     <img class="imgflat" src="{{ asset('images/printer.png')}}" alt="Enregistrer" height="70"><h4 style="color: #ed7425">Imprimer</h4></a>
 
     </div>

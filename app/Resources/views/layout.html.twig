@@ -56,10 +56,19 @@
         </div>
     {% endfor %}
 {% endfor %}
+
+<div style="position: fixed; top: 80px; left: 20px;">
+
+    {% block aside %}
+    {% endblock %}
+</div>
+
+
+
 <main>
     <aside class="asideleft" style="display: inline-block">
-        {% block aside %}
-        {% endblock %}
+        {#{% block aside %}#}
+        {#{% endblock %}#}
 
     </aside>
 

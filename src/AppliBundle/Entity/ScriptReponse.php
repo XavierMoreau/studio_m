@@ -30,7 +30,7 @@ class ScriptReponse
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script")
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $script;
@@ -43,12 +43,6 @@ class ScriptReponse
     private $question;
 
 
-//    /**
-//     * @var int
-//     * @ORM\OneToOne(targetEntity="AppliBundle\Entity\ScriptEcriture", cascade={"persist"})
-//     * @ORM\JoinColumn(nullable=false)
-//     */
-//    private $scriptEcriture;
 
 
     /**

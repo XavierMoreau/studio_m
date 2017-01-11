@@ -38,6 +38,13 @@ class ScriptEcriture
     /**
      * @var int
      *
+     * @ORM\Column(name="compteurMots", type="integer", nullable=true)
+     */
+    private $count;
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="tempsEstimeMin", type="integer", nullable=true)
      */
     private $tempsEstimeMin;
@@ -73,10 +80,10 @@ class ScriptEcriture
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\ScriptReponse", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist","remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $scriptReponse;
+    private $script;
 
 
     /**
@@ -230,17 +237,36 @@ class ScriptEcriture
     /**
      * @return int
      */
-    public function getScriptReponse()
+    public function getScript()
     {
-        return $this->scriptReponse;
+        return $this->script;
     }
 
     /**
-     * @param int $scriptReponse
+     * @param int $script
      */
-    public function setScriptReponse($scriptReponse)
+    public function setScript($script)
     {
-        $this->scriptReponse = $scriptReponse;
+        $this->script = $script;
+    }
+
+
+
+
+    /**
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->count;
+    }
+
+    /**
+     * @param int $count
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
     }
 
 

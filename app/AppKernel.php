@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
             new AppliBundle\AppliBundle(),
+            new Ensepar\Html2pdfBundle\EnseparHtml2pdfBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

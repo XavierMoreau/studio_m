@@ -82,6 +82,7 @@ aside{
 }
 
 .asideright {
+    display: inline-block;
     padding-left: 20px;
     background-color: white;
     color: #34495e;
