@@ -2,17 +2,16 @@
 
 {% block contentlarge %}
 
-{{ dump(reponses) }}
 
-    {{ dump(ecritures) }}
 
     {#Pour chaque réponse au questionnaire du script#}
     {% for key,reponse in reponses %}
 
-        <div style="width: 100%; border: solid 3px #34495e; border-radius: 10px">
+        <div style="width: 100%; border: solid 2px #919191;
+        ">
 
 
-            <table style="width: 100%; background-color: #34495e;  font-weight: bold; text-align: center; color: white">
+            <table style="width: 100%; background-color: #d3d3d3;  font-weight: bold; text-align: center; color: white">
                 <td>Ligne de script n° {{ key + 1 }}</td>
             </table>
             <table class="table table-striped">
@@ -42,9 +41,9 @@
 
                 <table class="table table-striped">
                     <thead>
-                    <th style="color: palevioletred; font-size: 20px">Saisissez la voix-off ici : <img src="{{ asset('images/arrowpink.png')}}" width="60"></th>
-                    <th style="color: #5BDB7F; font-size: 20px; text-align: right"><img src="{{ asset('images/arrowgreen.png')}}" width="60">Saisissez la description ici :</th>
-                    <th style="color: #4c8ab0; font-size: 20px; text-align: right" colspan="2">Et la durée ici : <img src="{{ asset('images/arrowblue.png')}}" width="40"></th>
+                    <th style="color: palevioletred; font-size: 20px">Voix-off : <img src="{{ asset('images/arrowpink.png')}}" width="60"></th>
+                    <th style="color: #5BDB7F; font-size: 20px; text-align: right"><img src="{{ asset('images/arrowgreen.png')}}" width="60">Description :</th>
+                    <th style="color: #4c8ab0; font-size: 20px; text-align: right" colspan="2">Durée : <img src="{{ asset('images/arrowblue.png')}}" width="40"></th>
                     </thead>
 
                     <tbody>
@@ -53,13 +52,13 @@
                     <tr>
                         {#Si une saisie est existante on affiche les infos#}
                         <td rowspan="2"><label for="voixoff{{ reponse.id }}"></label>
-                            <textarea  rows="8" class="form-control" name="1" >{% if ecriture.voixoff %}{{ ecriture.voixoff }}{% endif %}</textarea></td>
+                            <textarea  placeholder="Saisissez la voixoff ici..." rows="8" class="form-control" name="1" >{% if ecriture.voixoff %}{{ ecriture.voixoff }}{% endif %}</textarea></td>
                         <td rowspan="2"><label for="description{{ reponse.id }}"></label>
-                            <textarea  rows="8" class="form-control" name="2" >{% if ecriture.description %}{{ ecriture.description }}{% endif %}</textarea></td>
+                            <textarea  placeholder="Saisissez la description ici..." rows="8" class="form-control" name="2" >{% if ecriture.description %}{{ ecriture.description }}{% endif %}</textarea></td>
                         <td width="100"><label for="timeMin{{ reponse.id }}">Min : </label><br>
-                            <input type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}"></td>
+                            <input placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="3" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}"></td>
                         <td width="100"><label for="timeSec{{ reponse.id }}">Sec :</label><br>
-                            <input type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}"></td>
+                            <input placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="4" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}"></td>
 
 
                     <tr>
@@ -110,7 +109,7 @@
 
         </div>
         <br>
-        <br>
+
 
     {% endfor %}
 
@@ -120,7 +119,7 @@
     <hr>
 
 
-
+<div>
 
     <table style="width: 100%;">
         <td style="width: 49%; text-align: center;">
@@ -140,7 +139,7 @@
 
     </table>
 
-
+</div>
 
 
 
@@ -183,7 +182,7 @@
         <br>
         <br>
 
-        <table style="width: 85%; background-color: #d3d3d3">
+        <table style="width: 85%">
             <thead>
             <tr>
                 <th style="width: 20%;"></th>
@@ -205,5 +204,16 @@
 
     </div>
 
+
+{% endblock %}
+
+{% block asideright %}
+
+<h3>Votre voix-off :</h3>
+
+    {% set text = script.voixoffGlobal|split('\n') %}
+    {% for paragraph in text %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
 
 {% endblock %}

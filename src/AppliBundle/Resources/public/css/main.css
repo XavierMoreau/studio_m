@@ -25,21 +25,30 @@ header a{
      font-size: 17px;
 }
 
+
 header a:hover{
     text-decoration: none;
     color : darkgrey;
 }
+
+main{
+    min-height: 545px;
+    font-family: 'News Cycle', sans-serif;
+    width : 100%;
+    margin: auto;
+    margin-bottom: 180px;
+}
+
 
 main a:hover{
     text-decoration: none;
     color : darkgrey;
 }
 
-
-main{
-    min-height: 725px;
+div{
     font-family: 'News Cycle', sans-serif;
-    }
+}
+
 
 .nolarge{
     width : 40%;
@@ -51,7 +60,7 @@ main{
     max-height: 725px;
     margin-left:19%;
     display: inline-block;
-    overflow: scroll;
+    /*overflow: scroll;*/
 
 }
 
@@ -61,17 +70,21 @@ main{
     margin-right: 20px;
 }
 
-main {
-    width : 100%;
-    margin: auto;
-}
+
 
 
 aside{
     width:19% ;
     position: absolute;
+    margin: auto;
     /*top: 80px;*/
     /*padding-left: 20px;*/
+}
+
+.asideright {
+    padding-left: 20px;
+    background-color: white;
+    color: #34495e;
 }
 
 footer {
@@ -84,6 +97,7 @@ footer {
     font-size: 14px;
     width:100%;
     font-family: 'News Cycle', sans-serif;
+
 }
 
 footer a{
