@@ -234,26 +234,28 @@ class ScriptEcritureController extends Controller
     }
 
 //
-//    /**
-//     * Deletes a scriptEcriture entity.
-//     *
-//     * @Route("/{id}", name="scriptecriture_delete")
-//     * @Method("DELETE")
-//     */
-//    public function deleteAction(Request $request, ScriptEcriture $scriptEcriture)
-//    {
-//        $form = $this->createDeleteForm($scriptEcriture);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->remove($scriptEcriture);
-//            $em->flush($scriptEcriture);
-//        }
-//
-//        return $this->redirectToRoute('scriptecriture_index');
-//    }
-//
+    /**
+     * Deletes a scriptEcriture entity.
+     *
+     * @Route("/delete/user={id}/projet={projet}/script={script}/scritpEcriture={scriptEcriture}", name="scriptecriture_delete")
+     * @Method({"DELETE", "GET"})
+     */
+    public function deleteAction(Request $request, ScriptEcriture $scriptEcriture, Script $script, Projet $projet, User $user)
+    {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($scriptEcriture);
+            $em->flush($scriptEcriture);
+
+
+        return $this->redirectToRoute('scriptecriture_index', array(
+            'script' => $script->getId(),
+            'id' => $user->getId(),
+            'projet' => $projet->getId()
+        ));
+
+    }
+
 //    /**
 //     * Creates a form to delete a scriptEcriture entity.
 //     *

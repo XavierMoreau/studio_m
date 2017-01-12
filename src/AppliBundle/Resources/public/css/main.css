@@ -23,9 +23,21 @@ div{
     display: inline-block;
 }
 
-.largeur-totale{
+.txt-center{
+    text-align: center;
+}
+
+.vertical-center{
+    height: 5em; /* hauteur du parent */
+    line-height: 10em; /* hauteur de ligne (identique) */
+    white-space: nowrap; /* interdiction de passer à la ligne */
+}
+
+
+.largeur-totale {
     width: 100%;
 }
+
 
 .largeur-half{
     width: 49%;
@@ -294,7 +306,7 @@ form label{
     margin-bottom: 10px
 }
 .padding-ten{
-    padding: 10px;
+    padding: 15px;
 }
 
 
@@ -335,4 +347,28 @@ form label{
     }
 .btn-save-petit{
     margin-left: -15px;
+}
+
+.left-menu{
+    margin-left: 30px;
+}
+
+.reponses{
+    padding-bottom: 10px;
+}
+
+.script-footer{
+    background-color: #34495e;
+    padding: 2em;
+  }
+
+.script-footer a{
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.blanc {
+    height: auto; /* hauteur du parent */
+
 }

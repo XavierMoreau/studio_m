@@ -42,86 +42,82 @@
 
                 </div>
 
-                {% set timing = ecriture.count/2.5 %}
-                {%  set minround = timing/60 %}
-                {%  set min = minround|round(0, 'floor') %}
-                {%  set sec = timing%60 %}
-                <div class="ib">
-                    <div class="ib padding-ten sub-txt-big">{{ ecriture.count }}</div>
-                    <div class="ib sub-txt-small bord-droit">mots</div>
-                </div>
-                <div class="ib">
-                    <div class="ib sub-txt-small">Durée estimée :</div>
-                    <div class="ib sub-txt-big">{{ min }}</div>
-                    <div class="ib sub-txt-small">min</div>
-                    <div class="ib sub-txt-big">{{ sec }}</div>
-                    <div class="ib sub-txt-small bord-droit">sec</div>
-                </div>
+                <div class="padding-ten">
+                    {% set timing = ecriture.count/2.5 %}
+                    {%  set minround = timing/60 %}
+                    {%  set min = minround|round(0, 'floor') %}
+                    {%  set sec = timing%60 %}
                     <div class="ib">
-                    <div class="ib sub-txt-small">Forcer la durée :</div>
-                        <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="min{{ ecriture.id }}" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}">
-                    <div class="ib sub-txt-small"> min</div>
-                        <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="sec{{ ecriture.id }}" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}">
-                    <div class="ib sub-txt-small bord-droit"> sec</div>
-                </div>
+                        <div class="ib padding-ten sub-txt-big">{{ ecriture.count }}</div>
+                        <div class="ib sub-txt-small bord-droit">mots</div>
+                    </div>
+                    <div class="ib">
+                        <div class="ib sub-txt-small">Durée estimée :</div>
+                        <div class="ib sub-txt-big">{{ min }}</div>
+                        <div class="ib sub-txt-small">min</div>
+                        <div class="ib sub-txt-big">{{ sec }}</div>
+                        <div class="ib sub-txt-small bord-droit">sec</div>
+                    </div>
+                        <div class="ib">
+                        <div class="ib sub-txt-small">Forcer la durée :</div>
+                            <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="min{{ ecriture.id }}" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}">
+                        <div class="ib sub-txt-small"> min</div>
+                            <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="sec{{ ecriture.id }}" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}">
+                        <div class="ib sub-txt-small bord-droit"> sec</div>
+                    </div>
 
-                {% if ecriture.tempsForceMin and ecriture.tempsForceSec %}
-                    {% set mintotal = mintotal + ecriture.tempsForceMin %}
-                    {% set sectotal = sectotal + ecriture.tempsForceSec %}
-                    {% if sectotal > 59 %}
-                        {% set mintotal = mintotal +1 %}
-                        {% set sectotal = sectotal - 60 %}
+                    {% if ecriture.tempsForceMin or ecriture.tempsForceSec %}
+                        {% set mintotal = mintotal + ecriture.tempsForceMin %}
+                        {% set sectotal = sectotal + ecriture.tempsForceSec %}
+                        {% if sectotal > 59 %}
+                            {% set mintotal = mintotal +1 %}
+                            {% set sectotal = sectotal - 60 %}
+                        {% endif %}
+                    {% else %}
+                        {% set mintotal = mintotal + min %}
+                        {% set sectotal = sectotal + sec %}
+                        {% if sectotal > 59 %}
+                            {% set mintotal = mintotal +1 %}
+                            {% set sectotal = sectotal - 60 %}
+                        {% endif %}
                     {% endif %}
-                {% else %}
-                    {% set mintotal = mintotal + min %}
-                    {% set sectotal = sectotal + sec %}
-                    {% if sectotal > 59 %}
-                        {% set mintotal = mintotal +1 %}
-                        {% set sectotal = sectotal - 60 %}
-                    {% endif %}
-                {% endif %}
 
 
-                <div class="ib">
-                    <div class="ib sub-txt-small">Durée depuis le début :</div>
-                    <div class="ib sub-txt-big">{{ mintotal }}</div>
-                    <div class="ib sub-txt-small">min</div>
-                    <div class="ib sub-txt-big">{{ sectotal }}</div>
-                    <div class="ib sub-txt-small bord-droit">sec</div>
+                    <div class="ib">
+                        <div class="ib sub-txt-small">Durée depuis le début :</div>
+                        <div class="ib sub-txt-big">{{ mintotal }}</div>
+                        <div class="ib sub-txt-small">min</div>
+                        <div class="ib sub-txt-big">{{ sectotal }}</div>
+                        <div class="ib sub-txt-small bord-droit">sec</div>
+                    </div>
+
+                    <div class="ib">
+                        <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}">
+                            <div class="ib enregistrer">Mettre à jour</div>
+                            <img src="{{ asset('images/update-arrows.png')}}" alt="Mettre à jour" height="19">
+                        </button>
+                        <a href="{{ path('scriptecriture_delete', {'id':app.user.id, 'projet': projet.id, 'script': script.id, 'scriptEcriture': ecriture.id}) }}">
+                            <div class="ib enregistrer">Supprimer</div>
+                            <img src="{{ asset('images/delete.png')}}" alt="Supprimer la ligne de script" height="19"></a>
+
+                    </div>
                 </div>
-
-                <div class="ib">
-                    <div class="ib enregistrer">Mettre à jour</div>
-                    <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}">
-                        <img src="{{ asset('images/update-arrows.png')}}" alt="Enregistrer" height="18">
-                    </button>
-                </div>
-
-
-
-
-
-
-
 
             <div class="title-tab"></div>
-
+<br>
 
 
 
 
         {% endfor %}
 
-        <div class="ib">
+        <div class="largeur-totale txt-center ib">
 
             <div class="ib">
-                <button class="btn-iconflat" type="submit" formmethod="post" formaction="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}" value="Enregistrer">
-                    <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Enregistrer" height="28">
-                </button>
-            </div>
-            <div class="ib">
                 <button class="btn-iconflat" type="submit" formmethod="post" formaction="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}" value="Enregistrer">
-                    <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Enregistrer" height="28">
+                    <img class="imgflat" src="{{ asset('images/add-plus-button.png')}}" alt="Ajouter une ligne de script" height="14">
+                    <div class="ib enregistrer">Ajouter une ligne de script</div>
+                    <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Ajouter une ligne de script" height="35">
                 </button>
             </div>
 
@@ -130,49 +126,19 @@
 
 
     </form>
-                            {#<a href="{{ path('scriptecriture_new', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">#}
-                                {#<img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Enregistrer" height="40"><h4 style="color: #34495e">Ajouter un nouvelle ligne de script</h4></a>#}
-
-
-                        {#</td>#}
-
-                             {#</tr>#}
-
-                    {#</tbody>#}
-
-
-                {#</table>#}
-
-        {#</div>#}
         <br>
 
 
 
 
+<div class="txt-center script-footer">
+    <a href="{{ path('script_valid', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
+                <img src="{{ asset('images/print-blanc.png')}}" alt="Enregistrer" height="50">
 
-    <br>
-    <hr>
-
-
-<div>
-
-    <table style="width: 100%;">
-        <td style="width: 49%; text-align: center;">
-
-            <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id})  }}">
-                <img class="imgflat" src="{{ asset('images/back.png')}}" alt="Retour" height="70"><h4 style="color: #d97077">Retour</h4></a>
-
-
-        </td>
-        <td style="width: 49%; text-align: center;">
-
-                <a href="{{ path('script_valid', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
-                    <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Enregistrer" height="70"><h4 style="color: #34495e">Continuer</h4></a>
-
-            {#{% endif %}#}
-        </td>
-
-    </table>
+            <div>
+                Imprimer
+            </div>
+    </a>
 
 </div>
 
@@ -192,26 +158,57 @@
 
 
 
-    <div style="width: 100%; margin-left: 15px; text-align: center">
 
 
-        <div style="width: 100%; text-align: center">
-            <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h3>
+
+        <div class="largeur-totale txt-center padding-ten">
+
+                <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="100"><h3 style="color: #34495e">Script</h3>
+           <br>
+            <div class="title-tab">
         </div>
-        <br>
-        <br>
-        <br>
+       </div>
 
 
 
+        <div class="largeur-totale left-menu">
+
+
+            <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
+
+
+                <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Questionnaire" height="30">
+                <div class="ib title-txt-petit">Questionnaire</div>
+            </a>
+
+        </div>
+
+        <div class="largeur-totale left-menu">
+
+            <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
+                <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Voix-off" height="30">
+                <div class="ib title-txt-petit">Voix-off</div>
+            </a>
+
+        </div>
+
+
+        <div class="largeur-totale left-menu">
+
+            <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}">
+                <img class="imgflat" src="{{ asset('images/parameters.png')}}" alt="Voix-off" height="30">
+                <div class="ib title-txt-petit">Paramètres du projet</div>
+            </a>
+
+        </div>
+
+
+    <div class="largeur-totale txt-center padding-ten">
+
+        <br>
+        <div class="title-tab">
+        </div>
     </div>
-
-
-
-    <tr>
-        <td rowspan="3" width="50"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Retour aux questions" height="40"></a></td>
-        <td rowspan="3" width="100"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}"><h5 style="color: #34495e">Questions</h5></a></td>
-    </tr>
 
 {% endblock %}
 
@@ -222,21 +219,35 @@
 
 
 
-        <div style="display: inline-block; font-size: 14px; color: #919191; padding: 10px; border-right: solid 1px #dddddd; margin: 10px;">
-            <span>{{ reponse.question.question }}</span>
+        <div class="id sub-txt-small reponses">
+            {{ reponse.question.question }}
         </div>
 
 
-        <div style="display:inline-block; font-size: 14px; color: #34495e; padding: 10px;">
-            <span>{{ reponse.reponse }}</span>
+
+        <div class="id enregistrer reponses">
+            {{ reponse.reponse }}
         </div>
 
 
         {% endfor %}
 
+    <div class="title-tab"></div>
 
 
-    <h3>Votre voix-off :</h3>
+    <h3 class="ib bord-droit">Votre voix-off :</h3>
+
+
+    {% set timing = script.count/2.5 %}
+    {%  set minround = timing/60 %}
+    {%  set minvo = minround|round(0, 'floor') %}
+    {%  set secvo = timing%60 %}
+
+    <div class="ib sub-txt-big">{{ minvo }}</div>
+    <div class="ib sub-txt-small">min</div>
+    <div class="ib sub-txt-big">{{ secvo }}</div>
+    <div class="ib sub-txt-small">sec</div>
+
 
     {% set text = script.voixoffGlobal|split('\n') %}
     {% for paragraph in text %}

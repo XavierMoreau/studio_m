@@ -63,6 +63,13 @@ class Script
      */
     private $voixoffGlobal;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="compteurMots", type="integer", nullable=true)
+     */
+    private $count;
+
 
 
 
@@ -222,6 +229,23 @@ class Script
     {
         $this->voixoffGlobal = $voixoffGlobal;
     }
+
+    /**
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->count;
+    }
+
+    /**
+     * @param int $count
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+    }
+
 
 
 }

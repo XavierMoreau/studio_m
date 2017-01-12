@@ -60,23 +60,23 @@ class ScriptController extends Controller
 
             // On recherche toutes les questions à poser
             if ($script->getVoixoffGlobal()) {
-                $count = str_word_count($script->getVoixoffGlobal(), 0);
 
                 return $this->render('script/voixoff.html.twig', array(
                     'user' => $user,
                     'projet' => $projet,
-                    'script' => $script,
-                    'count' => $count
+                    'script' => $script
+
+
                 ));
 
             } else {
-                $count = 0;
+
 
                 return $this->render('script/voixoff.html.twig', array(
                     'user' => $user,
                     'projet' => $projet,
-                    'script' => $script,
-                    'count' => $count
+                    'script' => $script
+
                 ));
             }
 
@@ -99,7 +99,7 @@ class ScriptController extends Controller
         if ($user === $this->getUser()) {
 
             $count = str_word_count($_POST["voixoff"], 0);
-
+            $script->setCount($count);
             $script->setVoixoffGlobal($_POST["voixoff"]);
             $this->getDoctrine()->getEntityManager()->flush();
 

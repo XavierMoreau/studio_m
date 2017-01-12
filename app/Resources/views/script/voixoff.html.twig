@@ -81,18 +81,12 @@
 
 
 {% block aside %}
-    {% if count > 0 %}
-        {% set timing = count/2.5 %}
+
+        {% set timing = script.count/2.5 %}
         {%  set minround = timing/60 %}
         {%  set min = minround|round(0, 'floor') %}
         {%  set sec = timing%60 %}
-    {% else %}
-    {% set count = app.request.get('count', NULL, true) %}
-        {% set timing = count/2.5 %}
-        {%  set minround = timing/60 %}
-        {%  set min = minround|round(0, 'floor') %}
-        {%  set sec = timing%60 %}
-    {% endif %}
+
 
 
     <div style="width: 100%; margin-left: 15px; text-align: center">
@@ -109,7 +103,7 @@
             <tr>
                 <td style="width: 20%;"></td>
                 <td style="text-align: center" colspan="2">Nombre de mots : </td>
-                <td style="text-align: center" colspan="2"><h3>{{ count }}</h3></td>
+                <td style="text-align: center" colspan="2"><h3>{{ script.count }}</h3></td>
                 <td style="width: 20%;"></td>
             </tr>
             <tr>

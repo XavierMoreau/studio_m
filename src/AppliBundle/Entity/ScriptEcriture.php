@@ -80,7 +80,7 @@ class ScriptEcriture
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script")
      * @ORM\JoinColumn(nullable=true)
      */
     private $script;
