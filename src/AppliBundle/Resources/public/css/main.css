@@ -1,3 +1,8 @@
+@media screen and (min-width: 421px) {
+    .menu select {
+        display: none;
+    }
+}
 
 
 body {
@@ -5,11 +10,34 @@ body {
 }
 
 
+
 a:hover{
     text-decoration: none;
     color : darkgrey;
 }
+div{
+    font-family: 'News Cycle', sans-serif;
+}
 
+.ib{
+    display: inline-block;
+}
+
+.largeur-totale{
+    width: 100%;
+}
+
+.largeur-half{
+    width: 49%;
+}
+
+.fix{
+    position: fixed;
+    top: 80px;
+    left: 20px;
+}
+
+/*-------------------------------HEADER---------------------------------------*/
 
 header {
     background-color: lightgrey;
@@ -31,6 +59,42 @@ header a:hover{
     color : darkgrey;
 }
 
+.header{
+    width: 100%;
+    padding-top: 25px;
+}
+
+.menuleft{
+    width: 33%;
+    text-align: left;
+    display: inline-block;
+    margin-left:20px;
+}
+
+.menucenter{
+    width: 32%;
+    text-align: center;
+    display: inline-block;
+}
+
+.menuright{
+    width: 29%;
+    text-align: right;
+    display: inline-block;
+}
+
+.menuright div{
+    margin-right:40px;
+    display: inline-block;
+}
+
+
+
+
+
+/*-------------------------------MAIN---------------------------------------*/
+
+
 main{
     min-height: 545px;
     font-family: 'News Cycle', sans-serif;
@@ -45,9 +109,6 @@ main a:hover{
     color : darkgrey;
 }
 
-div{
-    font-family: 'News Cycle', sans-serif;
-}
 
 
 .nolarge{
@@ -71,8 +132,6 @@ div{
 }
 
 
-
-
 aside{
     width:19% ;
     position: absolute;
@@ -88,32 +147,12 @@ aside{
     color: #34495e;
 }
 
-footer {
-    background-color: lightgrey;
-    color : black;
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 14px;
-    width:100%;
-    font-family: 'News Cycle', sans-serif;
 
+.asideleft {
+    display: inline-block;
+    background-color: white;
 }
 
-footer a{
-    color : black;
-    text-decoration: none;
-}
-
-footer a:hover{
-    color : darkgrey;
-    text-decoration: none;
-}
-
-footer span{
-    color : white;
-}
 
 .login_form {
     max-width: 400px;
@@ -148,9 +187,46 @@ footer span{
 }
 
 
+
+/*-------------------------------FOOTER---------------------------------------*/
+
+
+footer {
+    background-color: lightgrey;
+    color : black;
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 14px;
+    width:100%;
+    font-family: 'News Cycle', sans-serif;
+}
+
+
+footer a{
+    color : black;
+    text-decoration: none;
+}
+
+footer a:hover{
+    color : darkgrey;
+    text-decoration: none;
+}
+
+footer span{
+    color : white;
+}
+
 .btn-delete{
     color: darkred;
    }
+
+
+
+/*-------------------------------IMAGES---------------------------------------*/
+
+
 
 
 .btn-modifier{
@@ -169,6 +245,13 @@ footer span{
 
 }
 
+
+
+/*-------------------------------TABLES---------------------------------------*/
+
+
+
+
 .tabhead{
     font-size: 16px;
     font-weight: bold;
@@ -184,6 +267,12 @@ footer span{
     font-weight: bold;
 }
 
+
+
+/*-------------------------------FORMS---------------------------------------*/
+
+
+
 form label{
     font-size: 16px;
     font-weight: bold;
@@ -191,4 +280,59 @@ form label{
 
 .scriptcolor{
     color: #34495e;
+}
+
+
+
+/*-------------------------------SCRIPT ECRITURE---------------------------------------*/
+
+.title-tab{
+    width: 100%;
+    font-weight: bold;
+    color: #34495e;
+    border-bottom: solid 1px #dddddd;
+    margin-bottom: 10px
+}
+.padding-ten{
+    padding: 10px;
+}
+
+
+.title-txt-petit{
+    color: #34495e;
+    font-size: 17px;
+    text-align: center;
+}
+
+.txtarea{
+    width: 100%;
+    margin-top: -30px;
+}
+
+.sub-txt-big{
+    font-size: 16px;
+    color: #919191;
+    padding-right: 5px;
+}
+
+.sub-txt-small{
+    font-size: 13px;
+    color: #919191;
+    padding-right: 5px;
+}
+
+.bord-droit{
+    padding-right: 20px;
+    margin-right: 20px ;
+    border-right: solid 1px #dddddd;
+}
+
+.enregistrer{
+    font-size: 13px;
+    font-weight: bold;
+    color: #34495e;
+
+    }
+.btn-save-petit{
+    margin-left: -15px;
 }

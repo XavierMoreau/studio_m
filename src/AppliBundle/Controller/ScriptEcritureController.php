@@ -95,7 +95,11 @@ class ScriptEcritureController extends Controller
 
     {
         // Controle de l'utilisateur
+
+
         if ($user === $this->getUser()) {
+
+            $this->saveAction();
 
             // Création de la nouvelle entité script réponse
             $scriptEcriture = new ScriptEcriture();
@@ -144,28 +148,15 @@ class ScriptEcritureController extends Controller
     /**
      * Displays a form to edit an existing scriptEcriture entity.
      *
-     * @Route("/edit/user={id}/projet={projet}/script={script}/ecriture={ecriture}", name="scriptecriture_edit")
+     * @Route("/edit/user={id}/projet={projet}/script={script}", name="scriptecriture_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, ScriptEcriture $ecriture, User $user, Projet $projet, Script $script)
+    public function editAction(Request $request, User $user, Projet $projet, Script $script)
     {
         // Controle de l'utilisateur
         if ($user === $this->getUser()) {
 
-            $count = str_word_count($_POST[1], 0);
-
-            // Et on modifie la réponse dans la BDD
-            $ecriture->setVoixoff($_POST[1]);
-            $ecriture->setDescription($_POST[2]);
-            $ecriture->setTempsForceMin($_POST[3]);
-            $ecriture->setTempsForceSec($_POST[4]);
-            $ecriture->setCount($count);
-
-
-            // Envoi dans la BDD
-
-            $this->getDoctrine()->getEntityManager()->flush();
-
+            $this->saveAction();
 
             // Redirection vers l'écriture du script
             return $this->redirectToRoute('scriptecriture_index', array(
@@ -180,6 +171,66 @@ class ScriptEcritureController extends Controller
         else{
             return $this->render('AppliBundle:Default:unauthorized.html.twig');
         }
+    }
+
+
+
+    /**
+     * Displays a form to edit an existing scriptEcriture entity.
+     *
+     * @Route("/edit/user={id}/projet={projet}/script={script}", name="scriptecriture_save")
+     * @Method({"GET", "POST"})
+     */
+    public function saveAction()
+    {
+        // Controle de l'utilisateur
+
+            foreach ($_POST as $key => $result){
+
+
+                if (preg_match("/^vo/", $key)){
+                    $id = str_replace("vo", "", $key);
+
+                    $ecriture = $this->getDoctrine()->getRepository('AppliBundle:ScriptEcriture')->findOneById($id);
+
+                    $count = str_word_count($result, 0);
+                    $ecriture->setVoixoff($result);
+                    $ecriture->setCount($count);
+                    $this->getDoctrine()->getEntityManager()->flush();
+                }
+
+                elseif (preg_match("/^desc/", $key)){
+                    $id = str_replace("desc", "", $key);
+
+
+
+                    $ecriture = $this->getDoctrine()->getRepository('AppliBundle:ScriptEcriture')->findOneById($id);
+
+                    $ecriture->setDescription($result);
+                    $this->getDoctrine()->getEntityManager()->flush();
+                }
+
+                elseif (preg_match("/^min/", $key)){
+                    $id = str_replace("min", "", $key);
+
+
+                    $ecriture = $this->getDoctrine()->getRepository('AppliBundle:ScriptEcriture')->findOneById($id);
+
+                    $ecriture->setTempsForceMin($result);
+                    $this->getDoctrine()->getEntityManager()->flush();
+                }
+
+                elseif (preg_match("/^sec/", $key)){
+                    $id = str_replace("sec", "", $key);
+
+                    $ecriture = $this->getDoctrine()->getRepository('AppliBundle:ScriptEcriture')->findOneById($id);
+
+                    $ecriture->setTempsForceSec($result);
+                    $this->getDoctrine()->getEntityManager()->flush();
+                }
+            }
+
+
     }
 
 //

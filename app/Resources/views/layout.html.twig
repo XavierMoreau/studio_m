@@ -15,21 +15,21 @@
 <header>
     {% if is_granted("ROLE_USER") %}
 
-        <div style="width: 100%; padding-top: 25px;">
-            <div style="width: 33%; text-align: left; display: inline-block; margin-left:20px;">
+        <div class="header">
+            <div class="menuleft">
                 Bonjour <b>{{ app.user.username }}</b> !
             </div>
-            <div style="width: 32%; text-align: center; display: inline-block;">
+            <div class="menucenter">
                 <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump" height="70">
             </div>
-            <div style="width: 33%; text-align: right; display: inline-block; ">
-                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('index') }}">Accueil</a></div>
-                <div style="margin-right:50px;display: inline-block;"><a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></div>
-                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('fos_user_profile_show') }}">Profil</a></div>
-                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
+            <div class="menuright">
+                <div><a href="{{ path('index') }}">Accueil</a></div>
+                <div><a href="{{ path('projet_index', { 'id': app.user.id }) }}">Projets</a></div>
+                <div><a href="{{ path('fos_user_profile_show') }}">Profil</a></div>
+                <div><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
 
                 {% if is_granted("ROLE_ADMIN") %}
-                <div style="margin-right:40px;display: inline-block;"><a href="{{ path('admin_index') }}">Administration</a></div>
+                <div><a href="{{ path('admin_index') }}">Administration</a></div>
                 {% endif %}
 
             </div>
@@ -57,18 +57,18 @@
     {% endfor %}
 {% endfor %}
 
-<div style="position: fixed; top: 80px; left: 20px;">
+<div class="fix">
 
-    {% block aside %}
+    {% block fix %}
     {% endblock %}
 </div>
 
 
 
 <main>
-    <aside class="asideleft" style="display: inline-block">
-        {#{% block aside %}#}
-        {#{% endblock %}#}
+    <aside class="asideleft">
+        {% block aside %}
+        {% endblock %}
 
     </aside>
 
@@ -87,7 +87,7 @@
         {% endblock %}
     </div>
 
-    <aside class="asideright" style="display: inline-block">
+    <aside class="asideright">
         {% block asideright %}
         {% endblock %}
 
