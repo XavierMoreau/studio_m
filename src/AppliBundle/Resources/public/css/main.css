@@ -7,8 +7,16 @@
 
 body {
     font-family: 'News Cycle', sans-serif;
+    background: url(/studio_m/web/images/fond1.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
+p, span , h1 , h2 , h3 , h4 , h5 , h6 {
+    font-family: 'News Cycle', sans-serif;
+}
 
 
 a:hover{
@@ -25,6 +33,10 @@ div{
 
 .txt-center{
     text-align: center;
+}
+
+.txt-right{
+    text-align: right;
 }
 
 .vertical-center{
@@ -49,10 +61,24 @@ div{
     left: 20px;
 }
 
+.round{
+    width: 13em;
+    height: 13em;
+    border-radius: 50%;
+    background-color: #DDDDDD;
+    -webkit-filter: drop-shadow(5px 5px 5px grey);
+    filter:         drop-shadow(5px 5px 5px grey);
+    margin : 10px;
+    text-align: center;
+
+    }
+
+
 /*-------------------------------HEADER---------------------------------------*/
 
 header {
     background-color: lightgrey;
+    opacity: 0.8;
     color : black;
     font-family: 'News Cycle', sans-serif;
     font-size: 15px;
@@ -108,11 +134,16 @@ header a:hover{
 
 
 main{
+    background-color: white;
+    /*opacity: 0.9;*/
     min-height: 545px;
     font-family: 'News Cycle', sans-serif;
     width : 100%;
     margin: auto;
     margin-bottom: 180px;
+    -webkit-filter: drop-shadow(5px 5px 5px grey);
+    filter:         drop-shadow(5px 5px 5px grey);
+
 }
 
 
@@ -133,7 +164,7 @@ main a:hover{
     max-height: 725px;
     margin-left:19%;
     display: inline-block;
-    /*overflow: scroll;*/
+    padding-left: 10px;
 
 }
 
@@ -148,8 +179,6 @@ aside{
     width:19% ;
     position: absolute;
     margin: auto;
-    /*top: 80px;*/
-    /*padding-left: 20px;*/
 }
 
 .asideright {
@@ -163,7 +192,7 @@ aside{
 .asideleft {
     display: inline-block;
     background-color: white;
-}
+    }
 
 
 .login_form {
@@ -211,8 +240,10 @@ footer {
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 14px;
-    width:100%;
+    width:50%;
     font-family: 'News Cycle', sans-serif;
+    opacity: 0.8;
+    margin-left: 25%;
 }
 
 
@@ -261,7 +292,8 @@ footer span{
 
 /*-------------------------------TABLES---------------------------------------*/
 
-
+table {
+}
 
 
 .tabhead{
@@ -271,7 +303,8 @@ footer span{
 
 .tabcells {
     font-size: 15px;
-    background-color: #92c7ff;
+    background-color: #d3d3d3;
+
 }
 
 .tabimgsmall{
@@ -285,10 +318,31 @@ footer span{
 
 
 
-form label{
+form .fromprojet{
     font-size: 16px;
     font-weight: bold;
 }
+
+label .checkbox{
+    font-size: 13px;
+    font-weight: bolder;
+    color: #919191;
+
+}
+
+.control-label{
+    font-size: 13px;
+    font-weight: bolder;
+    color: #919191;
+}
+.checkbox{
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+    }
 
 .scriptcolor{
     color: #34495e;
@@ -303,7 +357,8 @@ form label{
     font-weight: bold;
     color: #34495e;
     border-bottom: solid 1px #dddddd;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    font-family: 'News Cycle', sans-serif;
 }
 .padding-ten{
     padding: 15px;
@@ -311,9 +366,18 @@ form label{
 
 
 .title-txt-petit{
-    color: #34495e;
-    font-size: 17px;
+        font-size: 17px;
     text-align: center;
+    font-family: 'News Cycle', sans-serif;
+}
+
+.script{
+    color: #34495e;
+}
+
+
+.projet{
+    color: #ff5419;
 }
 
 .txtarea{
@@ -340,11 +404,9 @@ form label{
 }
 
 .enregistrer{
-    font-size: 13px;
+    font-size: 1em;
     font-weight: bold;
-    color: #34495e;
-
-    }
+   }
 .btn-save-petit{
     margin-left: -15px;
 }
@@ -353,22 +415,26 @@ form label{
     margin-left: 30px;
 }
 
+.actuel{
+    margin-left: 35px;
+    padding-left: 10px;
+    background-color: #DDDDDD;
+    width: 80%;
+}
+
 .reponses{
     padding-bottom: 10px;
 }
 
 .script-footer{
-    background-color: #34495e;
-    padding: 2em;
-  }
-
-.script-footer a{
-    color: white;
-    font-size: 13px;
-    font-weight: bold;
+   text-align: right;
+    margin-bottom: -30px;
 }
 
-.blanc {
-    height: auto; /* hauteur du parent */
+.icontop{
+  margin-right: 40px;
+}
 
+.orientation{
+    margin-bottom: -50px;
 }

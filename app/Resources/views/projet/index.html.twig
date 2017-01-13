@@ -83,7 +83,7 @@
                 <td>{{ projet.tempsDiffusion }} an(s)</td>
                 <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
                 <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
-                <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id }) }}">
+                <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : projet.script.id }) }}">
                         <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h4 style="color: #ff5419">Modifier le projet</h4></a></td>
 
                 <td style="text-align: center">

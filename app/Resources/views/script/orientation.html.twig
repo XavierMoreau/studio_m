@@ -5,30 +5,110 @@
 
 
 
-
-
-    <table style="text-align: center; width: 100%">
-        <tr>
-            <td colspan="3"><img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Nouveau script" height="70"><h5 style="color: #34495e">Pour écrire votre script, vous voulez :</h5></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-
-        </tr>
-        <tr>
-            <td  width="167"><a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-                    <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Etre guidé en répondant à des questions</h4></a></td>
-            <td  width="167">
-                <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-                    <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Ecrire la voix-off</h4>
-                </a>
-            </td>
-
-
-        </tr>
-
+    <table class="title-tab">
+        <td class="padding-ten"><h3>Pour écrire votre script, vous souhaitez :</h3></td>
     </table>
+
+
+<div class="largeur-totale orientation">
+            <div class="ib round">
+                <br>
+                <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Script" height="50">
+                    <div class="title-txt-petit script">Etre guidé en répondant à des questions</div>
+                </a>
+            </div>
+            </div>
+    <div class="largeur-totale txt-center orientation">
+            <div class="ib round">
+                <br>
+                <br>
+                <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Script" height="50">
+                    <div class="title-txt-petit script">Ecrire la voix-off</div>
+                </a>
+            </div>
+            </div>
+<div class="largeur-totale txt-right orientation">
+            <div class="ib round">
+            <br>
+            <br>
+                <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                    <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Retour" height="50">
+                    <div class="title-txt-petit script">Ecrire le script</div></a>
+            </div>
+            </div>
+
+
 
 {% endblock %}
 
+
+
+
+{% block aside %}
+
+
+
+
+    <div class="largeur-totale txt-center">
+        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Script" height="50"><h4 style="color: #ff5419">Projet</h4>
+    </div>
+
+
+
+
+    <div class="largeur-totale left-menu">
+        <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
+            <img class="imgflat" src="{{ asset('images/parameters.png')}}" alt="Voix-off" height="30">
+            <div class="ib title-txt-petit projet">Paramètres</div>
+        </a>
+    </div>
+
+    <div class="largeur-totale txt-center padding-ten">
+
+        <div class="title-tab">
+        </div>
+    </div>
+
+
+
+
+    <div class="largeur-totale txt-center">
+        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Script</h4>
+    </div>
+
+    <div class="largeur-totale left-menu">
+        <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
+            <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Questionnaire" height="30">
+            <div class="ib title-txt-petit script">Questionnaire</div>
+        </a>
+    </div>
+
+    <div class="largeur-totale left-menu">
+        <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
+            <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Voix-off" height="30">
+            <div class="ib title-txt-petit script">Voix-off</div>
+        </a>
+    </div>
+
+    <div class="largeur-totale left-menu">
+        <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': script.id}) }}">
+            <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Script" height="30">
+            <div class="ib title-txt-petit script">Script</div>
+        </a>
+    </div>
+
+
+
+
+
+    <div class="largeur-totale txt-center padding-ten">
+
+        <br>
+        <div class="title-tab">
+        </div>
+    </div>
+
+
+{% endblock %}

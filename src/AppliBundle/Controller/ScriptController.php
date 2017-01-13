@@ -58,27 +58,32 @@ class ScriptController extends Controller
         // Controle de l'utilisateur
         if ($user === $this->getUser()) {
 
-            // On recherche toutes les questions à poser
-            if ($script->getVoixoffGlobal()) {
+//            // On recherche toutes les questions à poser
+//            if ($script->getVoixoffGlobal()) {
 
-                return $this->render('script/voixoff.html.twig', array(
-                    'user' => $user,
-                    'projet' => $projet,
-                    'script' => $script
-
-
-                ));
-
-            } else {
+            $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppliBundle:ScriptReponse');
+            $reponses = $repository->findByScript($script);
 
 
                 return $this->render('script/voixoff.html.twig', array(
                     'user' => $user,
                     'projet' => $projet,
-                    'script' => $script
-
+                    'script' => $script,
+                    'reponses' => $reponses
                 ));
-            }
+
+//            } else {
+//
+//
+//                return $this->render('script/voixoff.html.twig', array(
+//                    'user' => $user,
+//                    'projet' => $projet,
+//                    'script' => $script
+//
+//                ));
+//            }
 
         } // Si mauvais Utilisateur on renvoie vers page Unauthorized
         else {
@@ -275,22 +280,18 @@ class ScriptController extends Controller
             $repositoryR = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptReponse');
             $reponses = $repositoryR->findByScript($script);
 
-//            // Récupération des questions
-//            $repositoryQ = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptQuestion');
-//            $questions = $repositoryQ->findAll();
 
             // Récupération des écritures
             $repository = $this->getDoctrine()->getManager()->getRepository('AppliBundle:ScriptEcriture');
-            $ecriture = $repository->findByScriptReponse($script);
+            $ecriture = $repository->findByScript($script);
 
             // s'il y a des données on les renvoie dans le formulaire
 
-            return $this->render('scriptecriture/edit.html.twig', array(
+            return $this->render('script/print.html.twig', array(
                 'ecritures' => $ecriture,
                 'reponses' => $reponses,
-//                'questions' => $questions,
                 'script' => $script,
-                'id' => $user,
+                'user' => $user,
                 'projet' => $projet,
             ));
         }

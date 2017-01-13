@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Bump{% block title %}{% endblock %}
+    </title>
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bundles/appli/css/main.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png')}}">
+</head>
+<body>
+
+
+<h4 class="ib title-tab">Votre projet : {{ projet.nomProjet }}</h4>
+
+
+<div class="ib">
+    <div class="ib sub-txt-small">
+        Projet créé par
+    </div>
+    <div class="ib enregistrer">
+        {{ projet.utilisateur.prenom }} {{ projet.utilisateur.nom}}
+    </div>
+</div>
+
+<div class="ib">
+    <div class="ib sub-txt-small">
+        le
+    </div>
+    <div class="ib enregistrer">
+        {{ projet.dateCreation.date|date('d/m/Y') }}
+    </div>
+</div>
+
+<div>
+    <div class="ib sub-txt-small">
+        Supports :
+    </div>
+        {% set arraySupport = projet.support.getValues %}
+        {% for support in arraySupport %}
+            <div class="ib enregistrer bord-droit">
+                {{ support.supportType }}
+            </div>
+        {% endfor %}
+</div>
+<div>
+    <div class="ib sub-txt-small">
+        Diffusion :
+    </div>
+        {% set arrayDiffusion = projet.diffusion.getValues %}
+        {% for diffusion in arrayDiffusion %}
+    <div class="ib enregistrer bord-droit">
+                {{ diffusion.diffusionType }}
+    </div>
+        {% endfor %}
+</div>
+<div>
+    <div class="ib sub-txt-small">
+        Utilisation :
+    </div>
+    {% set arrayUtilisation = projet.utilisation.getValues %}
+    {% for utilisation in arrayUtilisation %}
+    <div class="ib enregistrer bord-droit">
+            {{ utilisation.utilisationType }}
+    </div>
+    {% endfor %}
+</div>
+
+<div class="ib">
+    <div class="ib sub-txt-small">
+        Diffusion prévue à partir du
+    </div>
+    <div class="ib enregistrer">
+        {{ projet.dateDiffusion.date|date('d/m/Y') }}
+    </div>
+</div>
+<div class="ib">
+    <div class="ib sub-txt-small">
+        pour
+    </div>
+    <div class="ib enregistrer">
+        {{ projet.tempsDiffusion }} an(s).
+    </div>
+</div>
+
+
+
+<div class="title-tab"></div>
+
+<h4 class="ib title-tab">Vos réponses :</h4>
+{% for key,reponse in reponses %}
+
+
+
+<div class="id sub-txt-small reponses">
+    {{ reponse.question.question }}
+</div>
+
+
+
+<div class="id enregistrer reponses">
+    {{ reponse.reponse }}
+</div>
+
+{% endfor %}
+
+<div class="title-tab"></div>
+
+
+
+<h4 class="ib title-tab">Votre voix-off :</h4>
+
+
+
+{% set text = script.voixoffGlobal|split('\n') %}
+    {% for paragraph in text %}
+        <p>{{ paragraph }}</p>
+    {% endfor %}
+
+
+{% set timing = script.count/2.5 %}
+{%  set minround = timing/60 %}
+{%  set minvo = minround|round(0, 'floor') %}
+{%  set secvo = timing%60 %}
+
+
+<div class="ib padding-ten sub-txt-big">{{ script.count }}</div>
+<div class="ib sub-txt-small bord-droit">mots</div>
+
+<div class="ib sub-txt-small">Durée estimée de la voix-off :</div>
+<div class="ib sub-txt-big">{{ minvo }}</div>
+<div class="ib sub-txt-small">min</div>
+<div class="ib sub-txt-big">{{ secvo }}</div>
+<div class="ib sub-txt-small">sec</div>
+
+
+<div class="title-tab"></div>
+
+    {% set mintotal = 0 %}
+    {% set sectotal = 0 %}
+
+
+
+    {#Pour chaque réponse au questionnaire du script#}
+
+<h4 class="ib title-tab">Votre script :</h4>
+
+        {% for key,ecriture in ecritures %}
+
+            {#<div style="width: 100%;">#}
+
+
+            <table class="title-txt-petit">
+                <td><h5>Ligne de script n° {{ key + 1 }}</h5></td>
+            </table>
+            <div class="largeur-totale padding-ten">
+                <div class="sub-txt-small">Description</div>
+                <div>{{ ecriture.description }}</div>
+            </div>
+            <div class="largeur-totale padding-ten">
+                <div class="sub-txt-small">Voix-off</div>
+                <div>{{ ecriture.voixoff }} </div>
+            </div>
+
+            <div>
+                {% set timing = ecriture.count/2.5 %}
+                {%  set minround = timing/60 %}
+                {%  set min = minround|round(0, 'floor') %}
+                {%  set sec = timing%60 %}
+                <div class="ib">
+                    <div class="ib padding-ten sub-txt-big">{{ ecriture.count }}</div>
+                    <div class="ib sub-txt-small bord-droit">mots</div>
+                </div>
+                <div class="ib">
+                    <div class="ib sub-txt-small">Durée estimée :</div>
+                    <div class="ib sub-txt-big">{{ min }}</div>
+                    <div class="ib sub-txt-small">min</div>
+                    <div class="ib sub-txt-big">{{ sec }}</div>
+                    <div class="ib sub-txt-small bord-droit">sec</div>
+                </div>
+
+
+
+                {% if ecriture.tempsForceMin or ecriture.tempsForceSec %}
+                    <div class="ib">
+                        <div class="ib sub-txt-small">Durée forcée :</div>
+                        <div class="ib sub-txt-big">{{ ecriture.tempsForceMin }}</div>
+                        <div class="ib sub-txt-small"> min</div>
+                        <div class="ib sub-txt-big">{{  ecriture.tempsForceSec }}</div>
+                        <div class="ib sub-txt-small bord-droit"> sec</div>
+                    </div>
+
+                    {% set mintotal = mintotal + ecriture.tempsForceMin %}
+                    {% set sectotal = sectotal + ecriture.tempsForceSec %}
+                    {% if sectotal > 59 %}
+                        {% set mintotal = mintotal +1 %}
+                        {% set sectotal = sectotal - 60 %}
+                    {% endif %}
+                {% else %}
+                    {% set mintotal = mintotal + min %}
+                    {% set sectotal = sectotal + sec %}
+                    {% if sectotal > 59 %}
+                        {% set mintotal = mintotal +1 %}
+                        {% set sectotal = sectotal - 60 %}
+                    {% endif %}
+                {% endif %}
+
+
+                <div class="ib">
+                    <div class="ib sub-txt-small">Durée depuis le début :</div>
+                    <div class="ib sub-txt-big">{{ mintotal }}</div>
+                    <div class="ib sub-txt-small">min</div>
+                    <div class="ib sub-txt-big">{{ sectotal }}</div>
+                    <div class="ib sub-txt-small bord-droit">sec</div>
+                </div>
+
+
+            </div>
+
+            <div class="title-tab"></div>
+            <br>
+
+
+
+
+        {% endfor %}
+
+</body>
+
+
+
+</html>

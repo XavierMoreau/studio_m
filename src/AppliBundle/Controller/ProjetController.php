@@ -110,10 +110,10 @@ class ProjetController extends Controller
     /**
      * Displays a form to edit an existing projet entity.
      *
-     * @Route("/{id}/{projet}/edit", name="projet_edit")
+     * @Route("/edit/user={id}/projet={projet}/script={script}", name="projet_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(User $user, Request $request, Projet $projet)
+    public function editAction(User $user, Request $request, Projet $projet, Script $script)
     {
 
         // Controle de l'utilisateur
@@ -136,8 +136,9 @@ class ProjetController extends Controller
             return $this->render('projet/edit.html.twig', array(
                 'user' => $user,
                 'projet' => $projet,
+                'script' => $script,
                 'edit_form' => $editForm->createView(),
-//                'delete_form' => $deleteForm->createView(),
+//
         ));
         }
         // Si mauvais Utilisateur on renvoie vers page Unauthorized
