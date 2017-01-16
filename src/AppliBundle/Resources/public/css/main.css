@@ -4,10 +4,15 @@
     }
 }
 
+html{
+    height: 100%;
+}
 
 body {
     font-family: 'News Cycle', sans-serif;
-    background: url(/studio_m/web/images/fond1.jpg) no-repeat center center fixed;
+    height:100%;
+    margin: 0;
+    background: url(/studio_m/web/images/fond2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -16,13 +21,23 @@ body {
 
 p, span , h1 , h2 , h3 , h4 , h5 , h6 {
     font-family: 'News Cycle', sans-serif;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+
 }
 
+
+a {
+    text-decoration: none;
+}
 
 a:hover{
     text-decoration: none;
     color : darkgrey;
 }
+
 div{
     font-family: 'News Cycle', sans-serif;
 }
@@ -73,40 +88,49 @@ div{
 
     }
 
+/*-------------------------------FONTS---------------------------------------*/
 
+
+.hand{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.fine{
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.normale{
+    font-family: 'News Cycle', sans-serif;
+}
+
+.petite{
+    font-size: 0.6em;
+}
 /*-------------------------------HEADER---------------------------------------*/
 
-header {
-    background-color: lightgrey;
-    opacity: 0.8;
-    color : black;
-    font-family: 'News Cycle', sans-serif;
-    font-size: 15px;
-
+.headerlogo{
+    text-align: center;
+    padding-top: 1.5%;
+    width: 100%;
+    height: 100%;
 }
 
-header a{
-     color : black;
-     text-decoration: none;
-     font-size: 17px;
-}
-
-
-header a:hover{
-    text-decoration: none;
-    color : darkgrey;
+.headerlogo img{
+    height: 70%;
 }
 
 .header{
+    background-color: #3d3e40;
+    opacity:0.8;
     width: 100%;
-    padding-top: 25px;
+    height: 100%;
 }
 
 .menuleft{
     width: 33%;
     text-align: left;
     display: inline-block;
-    margin-left:20px;
+    margin-left: 1%;
 }
 
 .menucenter{
@@ -126,7 +150,10 @@ header a:hover{
     display: inline-block;
 }
 
+.deconnexion {
+    font-size: 0.8em;
 
+}
 
 
 
@@ -134,17 +161,12 @@ header a:hover{
 
 
 main{
-    background-color: white;
-    /*opacity: 0.9;*/
-    min-height: 545px;
-    font-family: 'News Cycle', sans-serif;
-    width : 100%;
-    margin: auto;
-    margin-bottom: 180px;
-    -webkit-filter: drop-shadow(5px 5px 5px grey);
-    filter:         drop-shadow(5px 5px 5px grey);
 
-}
+    height: 100%;
+    width : 81%;
+    margin-left: 19%;
+
+  }
 
 
 main a:hover{
@@ -154,32 +176,66 @@ main a:hover{
 
 
 
-.nolarge{
-    width : 40%;
-    margin: auto;
-}
 
 .midsize{
     width : 60%;
-    max-height: 725px;
+
     margin-left:19%;
     display: inline-block;
     padding-left: 10px;
+    background-color: white;
+    height: 100%;
+    opacity: 0.8;
 
 }
 
 
 .large{
-    margin-left: 20px;
-    margin-right: 20px;
+    background-color: white;
+    height: 100%;
+    opacity: 0.9;
+    display: inline-block;
 }
 
 
 aside{
-    width:19% ;
     position: absolute;
-    margin: auto;
+    background-color: #3d3e40;
+    color : #e4e8e9;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.1em;
+    width :18%;
+    height :100%;
 }
+
+
+aside a{
+    color : #e4e8e9;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+
+
+}
+
+
+aside a:hover{
+    text-decoration: none;
+    color : darkgrey;
+}
+
+
+.mentions{
+    position: absolute;
+    bottom: 3%;
+}
+
+
+.menulogo{
+    width: 100%;
+}
+
+
 
 .asideright {
     display: inline-block;
@@ -190,42 +246,93 @@ aside{
 
 
 .asideleft {
-    display: inline-block;
-    background-color: white;
+    width: 100%;
+    text-align: center;
+margin-top: 15%;
+
     }
+
+
+
+/*-------------------------------LOGIN FORM---------------------------------------*/
+
+.connection{
+    height:100%;
+    width: 100%;
+    text-align: -webkit-center;
+
+}
+
+
+.conn-middle {
+    height:25%;
+    width:50%;
+    opacity: 0.8;
+    -webkit-filter: drop-shadow(5px 5px 5px grey);
+    filter:         drop-shadow(5px 5px 5px grey);
+    padding-top: 3%;
+    padding-bottom: 3%;
+
+}
+
 
 
 .login_form {
     max-width: 400px;
-    margin: auto;
+    margin-top: 25%;
 }
 
 .login_label {
     display : inline-block;
     width: 40%;
     margin: auto;
+    text-align: center;
 }
 
 .login_input {
     display : inline-block;
     width: 50%;
-    margin: auto;
-    padding : 3px;
+    height :2.3em;
+    margin: 7px;
+    padding : 1%;
+    text-align: center;
     border-radius: 5px;
     border: 1px solid darkgrey;
     background-color: white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.5em;
+
 
 }
 
 .login_remember {
     text-align: center;
-    font-size: small;
+    font-size: 1em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
+
+/*.login_submit {*/
+    /*text-align: center;*/
+    /*font-family: 'Yanone Kaffeesatz', sans-serif;*/
+/*}*/
+
+#login_submit {
+    text-align: center;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.1em;
+    height: 3em;
+    width: 6em;
+    border-radius: 5px;
+    border: solid 0px #b3b4b4;
+    color: white;
+    background-color: #38383a;
+}
 
 .login_submit {
-    text-align: center;
+   margin-top: 1em;
 }
+
 
 
 
@@ -233,17 +340,13 @@ aside{
 
 
 footer {
-    background-color: lightgrey;
     color : black;
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 14px;
-    width:50%;
+    font-size: 0.8em;
+    width:100%;
+    height:6%;
     font-family: 'News Cycle', sans-serif;
-    opacity: 0.8;
-    margin-left: 25%;
+    padding-top: 1%;
 }
 
 
@@ -350,6 +453,22 @@ label .checkbox{
 
 
 
+
+/*-------------------------------PROJETS---------------------------------------*/
+
+.newproject-small{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.newproject-big{
+
+
+}
+
+
+
+
 /*-------------------------------SCRIPT ECRITURE---------------------------------------*/
 
 .title-tab{
@@ -380,20 +499,22 @@ label .checkbox{
     color: #ff5419;
 }
 
+.grey{
+    color: #919191;
+}
+
 .txtarea{
     width: 100%;
     margin-top: -30px;
 }
 
 .sub-txt-big{
-    font-size: 16px;
-    color: #919191;
+    font-size: 1em;
     padding-right: 5px;
 }
 
 .sub-txt-small{
-    font-size: 13px;
-    color: #919191;
+    font-size: 0.8em;
     padding-right: 5px;
 }
 

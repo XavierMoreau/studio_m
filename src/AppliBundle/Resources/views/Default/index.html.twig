@@ -9,10 +9,8 @@
 {% block contentlarge %}
     {% if is_granted("ROLE_USER") %}
 
-<br>
-<br>
-<br>
-<br>
+
+
 
     <table style="text-align: center; width: 100%">
         <tr>
@@ -28,21 +26,11 @@
 
     </table>
 {% endif %}
-{% if is_granted("ROLE_ADMIN") %}
 
-<br>
-<br>
-<table style="text-align: center; width: 100%">
-    <tr>
-        <td height="10"></td>
-    </tr>
-    <tr>
-        <td><a href="{{ path('admin_index') }}"><img class="imgflat" src="{{ asset('images/process.png')}}" alt="Projets" height="150"><h3 style="color: #FC6F58">Administration</h3></a></td>
-    </tr>
-</table>
-{% endif %}
+
 
 
 {% endblock %}
+
 
 

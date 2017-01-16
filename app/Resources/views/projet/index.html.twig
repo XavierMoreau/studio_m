@@ -2,87 +2,116 @@
 
 
 
-{% block content %}
-
-    <div style="text-align: center">
-        <a href="{{ path('projet_new', {'id': app.user.id }) }}">
-            <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="100"><h3 style="color: #ff5419">Nouveau projet</h3></a>
-    </div>
-
-{% endblock %}
-
-
 
 {% block body %}
 
+    <a href="{{ path('projet_new', {'id': app.user.id }) }}">
+    <table>
+        <td>
+            <img class="imgflat ib" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="35">
+        </td>
+       <td>
+           <h3 class="grey ib">Créer un nouveau projet</h3>
+       </td>
 
-    <h1>Vos Projets</h1>
+    </table>
+    </a>
 
 
 
-    <table class="table table-striped">
-        <thead class="tabhead">
+    <table class="title-tab">
+        <td class="padding-ten projet"><h3>Vos projets</h3></td>
+    </table>
+
+
+
+{% for projet in projets %}
+
+    <table style="width:100%">
             <tr>
-                {% if is_granted("ROLE_ADMIN") %}
-                <th>Utilisateur</th>
-                {% endif %}
-                <th>Nom</th>
-                <th>Créé le </th>
-                <th>Dernière modification</th>
-                <th>Support</th>
-                <th>Diffusion</th>
-                <th>Utilisation</th>
-                <th>Temps de diffusion</th>
-                <th>Montant HT</th>
-                <th>Datediffusion</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+               <td>
+                    <div>
 
-            </tr>
-        </thead>
-        <tbody class="tabcells">
-        {% for projet in projets %}
+                       <h4 class="ib sub-txt-big projet">{{ projet.nomProjet }}</h4>
 
 
-            <tr>
-                {% if is_granted("ROLE_ADMIN") %}
-                    <th>{{ projet.utilisateur.username }}</th>
-                {% endif %}
-                <td>{{ projet.nomProjet }}</td>
+                        <div class="ib">
+                            <div class="ib sub-txt-small grey">
+                                Créé le :
+                            </div>
+                            <div class="ib sub-txt-small projet">
+                                {{ projet.dateCreation.date|date('d/m/Y') }}
+                            </div>
 
-                <td>{% if projet.dateCreation %}{{ projet.dateCreation|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
-                <td>{% if projet.dateModification %}{{ projet.dateModification|date('d/m/Y \\à\\ H\\hi') }}{% endif %}</td>
+                            {% if is_granted("ROLE_ADMIN") %}
+                                <div class="ib sub-txt-small grey">
+                                    par
+                                </div>
+                                <div class="ib sub-txt-small projet">
+                                    {{ projet.utilisateur.prenom }} {{ projet.utilisateur.nom}} ({{ projet.utilisateur.username }})
+                                </div>
+                            {% endif %}
+                        </div>
 
-                <td><ul>
-                        {% set arraySupport = projet.support.getValues %}
-                        {% for support in arraySupport %}
-                            <li>
-                                {{ support.supportType }}
-                            </li>
-                        {% endfor %}
-                    </ul></td>
-                <td><ul>
-                        {% set arrayDiffusion = projet.diffusion.getValues %}
-                        {% for diffusion in arrayDiffusion %}
-                            <li>
-                                {{ diffusion.diffusionType }}
-                            </li>
-                        {% endfor %}
-                    </ul></td>
-                <td><ul>
-                        {% set arrayUtilisation = projet.utilisation.getValues %}
-                        {% for utilisation in arrayUtilisation %}
-                            <li>
-                                {{ utilisation.utilisationType }}
-                            </li>
-                        {% endfor %}
-                    </ul></td>
+                        <div>
+                            <div class="ib sub-txt-small grey">
+                                Supports :
+                            </div>
+                            {% set arraySupport = projet.support.getValues %}
+                            {% for support in arraySupport %}
+                                <div class="ib  sub-txt-small projet bord-droit">
+                                    {{ support.supportType }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <div class="ib sub-txt-small grey">
+                                Diffusion :
+                            </div>
+                            {% set arrayDiffusion = projet.diffusion.getValues %}
+                            {% for diffusion in arrayDiffusion %}
+                                <div class="ib  sub-txt-small projet bord-droit">
+                                    {{ diffusion.diffusionType }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <div class="ib sub-txt-small grey">
+                                Utilisation :
+                            </div>
+                            {% set arrayUtilisation = projet.utilisation.getValues %}
+                            {% for utilisation in arrayUtilisation %}
+                                <div class="ib  sub-txt-small projet bord-droit">
+                                    {{ utilisation.utilisationType }}
+                                </div>
+                            {% endfor %}
+                        </div>
 
-                <td>{{ projet.tempsDiffusion }} an(s)</td>
-                <td>{% if projet.tarif %}{{ projet.tarif }}{% else %}-{% endif %} €</td>
-                <td>{% if projet.dateDiffusion %}{{ projet.dateDiffusion|date('d/m/Y') }}{% endif %}</td>
+                        <div class="ib">
+                            <div class="ib sub-txt-small grey">
+                                Diffusion prévue à partir du
+                            </div>
+                            <div class="ib  sub-txt-small projet">
+                                {{ projet.dateDiffusion.date|date('d/m/Y') }}
+                            </div>
+                        </div>
+                        <div class="ib">
+                            <div class="ib sub-txt-small grey">
+                                pour
+                            </div>
+                            <div class="ib  sub-txt-small projet">
+                                {{ projet.tempsDiffusion }} an(s).
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                </td>
                 <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : projet.script.id }) }}">
                         <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h4 style="color: #ff5419">Modifier le projet</h4></a></td>
 
@@ -99,9 +128,15 @@
                         <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h4 style="color: #34495e">Supprimer le projet</h4></a></td>
 
             </tr>
-        {% endfor %}
-        </tbody>
     </table>
+    <div class="title-tab"></div>
+        {% endfor %}
+
+
+
+<br>
+<br>
+
 
 {% endblock %}
 

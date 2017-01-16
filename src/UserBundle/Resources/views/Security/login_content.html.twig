@@ -11,17 +11,17 @@
         {% endif %}
 
         <div>
-            <div class="login_label">
-                <label for="username">{{ 'security.login.username'|trans }}</label>
-            </div>
-            <input class="login_input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+            {#<div class="login_label">#}
+            {#<label for="username">{{ 'security.login.username'|trans }}</label>#}
+            {#</div>#}
+            <input placeholder="Num d'utilisateur" class="login_input" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
         </div>
 
         <div>
-            <div class="login_label">
-                <label for="password">{{ 'security.login.password'|trans }}</label>
-            </div>
-            <input class="login_input" type="password" id="password" name="_password" required="required" />
+            {#<div class="login_label">#}
+            {#<label for="password">{{ 'security.login.password'|trans }}</label>#}
+            {#</div>#}
+            <input placeholder="Mot de passe" class="login_input" type="password" id="password" name="_password" required="required" />
         </div>
 
         <div class="login_remember">
@@ -30,11 +30,8 @@
         </div>
 
         <div class="login_submit">
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+            <button id="login_submit" type="submit" name="_submit" value="{{ 'security.login.submit'|trans }}">Connexion</button>
             {#<a href="{{ path('fos_user_registration_register') }}">S'inscrire</a>#}
         </div>
     </form>
 </div>
-
-
-
