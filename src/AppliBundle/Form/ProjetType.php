@@ -43,7 +43,7 @@ class ProjetType extends AbstractType
                 'attr' => array('min' => '01-01-2017')))
             ->add('tempsDiffusion','integer',
                 array('label'=>'Temps de diffusion (en années) :',
-                'attr' => array('style' => 'width : 80px;', 'min' => '0')))
+                'attr' => array('placeholder' => '00', 'min' => '0')))
 
 
 

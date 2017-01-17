@@ -14,10 +14,6 @@
 <body>
 
 
-
-
-
-
 {% for type, messages in app.session.flashBag.all %}
     {% for message in messages %}
         <div class="{{ type }}">
@@ -28,56 +24,27 @@
 
 
 {% if is_granted("ROLE_USER") %}
-    <aside>
-
-        <div class="asideleft">
-            <a href="{{ path('index') }}">
-                <img class="menulogo" src="{{ asset('images/bumplogo-white.png')}}" alt="Logo Bump"></a>
-        </div>
-
-        <div class="asideleft">
-            <div class="txt-center fine">Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.prenom }}</a> ! </div>
-            <div class="txt-center fine"><a class="deconnexion" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
+    <header class="log">
 
 
-
-        </div>
-
-
-
-
-        {% block aside %}
-        {% endblock %}
-
-
-
-
-            {% if is_granted("ROLE_ADMIN") %}
-                <br>
-                <div class="txt-center"><a href="{{ path('admin_index') }}">Administration</a></div>
-            {% endif %}
-        </div>
-
-
-
-        <div class="asideleft mentions">
-            <div class="txt-center fine petite">Copyright © 2017 Diaphonics</div>
-            <div class="txt-center fine petite">●</div>
-            <div class="txt-center fine petite">Studio Bump</div>
-            <div class="txt-center fine petite">●</div>
-            <div class="txt-center fine petite">Contact</div>
-            <div class="txt-center fine petite">●</div>
-            <div class="txt-center fine petite">Mentions Légales</div>
-
-        </div>
-    </aside>
-        {% else %}
-            <header>
+            <div class="menuleft">
                 <div class="headerlogo">
-                    <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump">
+                   <img src="{{ asset('images/bumplogo-white.png')}}" alt="Logo Bump"></a>
                 </div>
-            </header>
-        {% endif %}
+                <div class="ib txt-center fine grey">Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.prenom }}</a> ! </div>
+                <div class=" ib txt-center fine petite"><a class="deconnexion" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                   <div class="ib txt-center fine"><a href="{{ path('admin_index') }}"> - Administration</a></div>
+                {% endif %}
+            </div>
+
+
+
+            {% block ariane %}
+
+
+            {% endblock %}
 
 
 
@@ -86,49 +53,43 @@
 
 
 
-
+    </header>
 
 <main>
 
 
-    {#<div class="connection">#}
-        {#<div class="conn-top"></div>#}
-        {#<div class="conn-middle">#}
-            {% block connection %}
-            {% endblock %}
-        {#</div>#}
-        {#<div class="conn-bottom"></div>#}
-
-
-    {#</div>#}
-
-
-
-    <div class="large">
-        {% block body %}
+        {% block left %}
         {% endblock %}
-    </div>
-    {#<div class="midsize">#}
-        {#{% block contentlarge %}#}
-        {#{% endblock %}#}
-    {#</div>#}
 
-    {#<aside class="asideright">#}
-        {#{% block asideright %}#}
-        {#{% endblock %}#}
 
-    {#</aside>#}
+
+        {% block right %}
+        {% endblock %}
+
+
 
 
 
 </main>
 
-{% if is_granted("ROLE_USER") %}
+
 
 {% else %}
+    <header>
+        <div class="headerlogo">
+            <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump">
+        </div>
+    </header>
+
+
+    <main class="nolog">
+        {% block connection %}
+        {% endblock %}
+    </main>
+{% endif %}
 <footer>Copyright © 2017 Diaphonics <span>●</span> Studio Bump <span>●</span> Contact <span>●</span> Mentions Légales
 </footer>
-{% endif %}
+
 </body>
 
 

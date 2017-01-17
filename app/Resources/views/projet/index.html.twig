@@ -1,35 +1,65 @@
 {% extends 'layout.html.twig' %}
 
 
+     {% block ariane %}
+
+         <div class="ariane grey">
+             <div class="ib fine">PROJETS</div>
+             <div class="ib fine petite">Paramètres</div>
+             <div class="ib padding-ten fine">></div>
+             <div class="ib fine">SCRIPT</div>
+             <div class="ib fine petite">Guide</div>
+             <div class="ib fine petite">Voix-Off</div>
+             <div class="ib fine petite">Ecriture</div>
+             <div class="ib padding-ten fine">></div>
+             <div class="ib fine">STORYBOARD</div>
+             <div class="ib fine petite">Ecriture</div>
+
+         </div>
+
+     {% endblock %}
 
 
-{% block body %}
+{% block left %}
+<div class="ib largeur-half  leftprojet">
+
 
     <a href="{{ path('projet_new', {'id': app.user.id }) }}">
-    <table>
-        <td>
-            <img class="imgflat ib" src="{{ asset('images/file.png')}}" alt="Nouveau Projet" height="35">
-        </td>
-       <td>
-           <h3 class="grey ib">Créer un nouveau projet</h3>
-       </td>
+    <div class="txt-center">
+        <div class="ib imground">
+            <img src="{{ asset('images/light-bulb.png')}}" alt="Nouveau Projet">
+        </div>
+       <div>
+           <h3 class="ib hand">Créer un nouveau projet</h3>
+       </div>
 
-    </table>
+    </div>
     </a>
 
 
 
-    <table class="title-tab">
-        <td class="padding-ten projet"><h3>Vos projets</h3></td>
+
+</div>
+
+{% endblock %}
+
+{% block right %}
+
+<div class="ib largeur-half rightprojet">
+
+    <table class="title-tab hand">
+        <td class="padding-ten projet hand"><h3>Vos projets</h3></td>
     </table>
 
 
+    {% if projets %}
 
 {% for projet in projets %}
 
+    <div class="padding-ten" style="background-color: white">
     <table style="width:100%">
             <tr>
-               <td>
+               <td colspan="4">
                     <div>
 
                        <h4 class="ib sub-txt-big projet">{{ projet.nomProjet }}</h4>
@@ -109,34 +139,43 @@
 
 
                     </div>
-
+            </tr>
+        <tr>
 
                 </td>
                 <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : projet.script.id }) }}">
-                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="50"><h4 style="color: #ff5419">Modifier le projet</h4></a></td>
-
+                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="30">
+                        <div class="sub-txt-small projet">Modifier le projet</div></a></td>
                 <td style="text-align: center">
 
                     <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Ecrire le script</h4></a>
-
+                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="30">
+                        <div class="sub-txt-small script">Ecrire le script</div></a></td>
 
                 <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
-                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="50"><h4 style="color: #9db138">Ecrire le storyboard</h4>{% endif %}</td>
+                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="30">
+                        <div class="sub-txt-small" style="color: #9db138">Ecrire le storyboard</div>{% endif %}</td>
 
                 <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id, 'script': projet.script.id}) }}">
-                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="50"><h4 style="color: #34495e">Supprimer le projet</h4></a></td>
+                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="30">
+                        <div class="sub-txt-small script">Supprimer le projet</div></a></td>
+
 
             </tr>
     </table>
+    </div>
     <div class="title-tab"></div>
         {% endfor %}
 
+    {% else %}
 
+    <div class="ib sub-txt-small grey">
 
-<br>
-<br>
+        Pas de projet enregistré
 
+    </div>
+{% endif %}
 
+</div>
 {% endblock %}
 

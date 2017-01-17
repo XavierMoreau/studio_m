@@ -1,9 +1,50 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
+{% block ariane %}
+
+    <div class="ariane grey">
+        <div class="ib fine">PROJETS</div>
+        <div class="ib fine petite">Paramètres</div>
+        <div class="ib padding-ten fine">></div>
+        <div class="ib fine">SCRIPT</div>
+        <div class="ib fine petite">Guide</div>
+        <div class="ib fine petite">Voix-Off</div>
+        <div class="ib fine petite">Ecriture</div>
+        <div class="ib padding-ten fine">></div>
+        <div class="ib fine">STORYBOARD</div>
+        <div class="ib fine petite">Ecriture</div>
+
+    </div>
+
+{% endblock %}
+
+{% block left %}
+
+    <div class="ib largeur-un-quart  leftprojet-new-edit">
+
+
+
+            <div class="txt-center">
+                <div class="ib imground">
+                    <img src="{{ asset('images/light-bulb.png')}}" alt="Nouveau Projet">
+                </div>
+
+
+            </div>
+
+
+
+
+
+    </div>
+
+{% endblock %}
+
+{% block right %}
+<div class="ib largeur-trois-quarts rightprojet-new-edit">
 
     <table class="title-tab">
-        <td class="padding-ten projet"><h3>Votre projet</h3></td>
+        <td class="padding-ten projet hand"><h3>Nouveau projet</h3></td>
     </table>
 
 
@@ -56,5 +97,5 @@
 
 
 
-
+<div>
 {% endblock %}

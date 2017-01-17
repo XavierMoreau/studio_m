@@ -68,7 +68,22 @@ div{
 
 .largeur-half{
     width: 49%;
+    margin: 2%;
+    position: absolute;
 }
+
+.largeur-un-quart{
+    width: 21%;
+    margin: 2%;
+    position: absolute;
+}
+
+.largeur-trois-quarts{
+    width: 70%;
+    margin: 2%;
+    position : absolute;
+}
+
 
 .fix{
     position: fixed;
@@ -104,51 +119,60 @@ div{
 }
 
 .petite{
-    font-size: 0.6em;
+    font-size: 0.8em;
 }
 /*-------------------------------HEADER---------------------------------------*/
 
-.headerlogo{
-    text-align: center;
-    padding-top: 1.5%;
-    width: 100%;
-    height: 100%;
+header{
+    height: 30%;
 }
 
-.headerlogo img{
-    height: 70%;
+header a{
+    color : #e4e8e9;
+    text-decoration: none;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-.header{
+header a:hover{
+    text-decoration: none;
+    color : darkgrey;
+}
+
+
+.log{
+    height: 15%;
+    width:100%;
     background-color: #3d3e40;
     opacity:0.8;
-    width: 100%;
+}
+
+.headerlogo{
+    padding-top: 1.5%;
+    height: 71%;
+    width:100%;
+
+}
+
+.headerlogo img {
     height: 100%;
 }
 
 .menuleft{
     width: 33%;
+    height: 100%;
     text-align: left;
     display: inline-block;
     margin-left: 1%;
 }
 
-.menucenter{
-    width: 32%;
-    text-align: center;
-    display: inline-block;
-}
 
-.menuright{
-    width: 29%;
+.ariane{
+    width: 64%;
     text-align: right;
     display: inline-block;
+    margin-right: 1%;
 }
 
-.menuright div{
-    margin-right:40px;
-    display: inline-block;
-}
 
 .deconnexion {
     font-size: 0.8em;
@@ -157,16 +181,17 @@ div{
 
 
 
+
 /*-------------------------------MAIN---------------------------------------*/
 
 
 main{
 
-    height: 100%;
-    width : 81%;
-    margin-left: 19%;
-
-  }
+    min-height: 79%;
+    width : 100%;
+    background-color: white;
+    opacity: 0.94;
+    }
 
 
 main a:hover{
@@ -175,51 +200,84 @@ main a:hover{
 }
 
 
-
-
-.midsize{
-    width : 60%;
-
-    margin-left:19%;
-    display: inline-block;
-    padding-left: 10px;
-    background-color: white;
-    height: 100%;
-    opacity: 0.8;
-
+.nolog{
+    width:100%;
+    min-height: 64%;
+    background-color: transparent;
 }
+
+.leftprojet{
+    color: #e4e8e9;
+    background-color: #fe5c24;
+    opacity: 0.95;
+    margin: 2%;
+    padding: 3%;
+    width: 35%;
+    position: absolute;
+    }
+
+.leftprojet-new-edit{
+    background-color: transparent;
+    color: #fe5c24;
+    margin: 2%;
+    padding: 3%;
+    position: absolute;
+}
+
+.rightprojet{
+    color: #3d3e40;
+    background-color: #e4e8e9;
+    opacity:0.95;
+    margin: 2%;
+    padding: 3%;
+    width: 44%;
+    margin-left: 47%;
+}
+
+.rightprojet-new-edit{
+    color: #3d3e40;
+    background-color: #e4e8e9;
+    opacity:0.95;
+    margin: 2%;
+    padding: 3%;
+    width: 62%;
+    margin-left: 30%;
+}
+
 
 
 .large{
     background-color: white;
     height: 100%;
-    opacity: 0.9;
+    width:70%;
+    opacity: 0.95;
     display: inline-block;
 }
 
 
 aside{
-    position: absolute;
     background-color: #3d3e40;
     color : #e4e8e9;
+    opacity:0.95;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 1.1em;
-    width :18%;
+    width :25%;
     height :100%;
+    display: inline-block;
+    padding-left: 20px;
+
 }
 
 
-aside a{
+main a{
     color : #e4e8e9;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1em;
     font-family: 'Yanone Kaffeesatz', sans-serif;
-
-
 }
 
 
-aside a:hover{
+main a:hover{
     text-decoration: none;
     color : darkgrey;
 }
@@ -232,17 +290,9 @@ aside a:hover{
 
 
 .menulogo{
-    width: 100%;
+    width: 15%;
 }
 
-
-
-.asideright {
-    display: inline-block;
-    padding-left: 20px;
-    background-color: white;
-    color: #34495e;
-}
 
 
 .asideleft {
@@ -252,6 +302,17 @@ margin-top: 15%;
 
     }
 
+
+.imground{
+    background-color: #e4e8e9;
+    border-radius: 50%;
+    padding: 5%;
+    width: 25%;
+}
+
+.imground img{
+    width: 100%;
+}
 
 
 /*-------------------------------LOGIN FORM---------------------------------------*/
@@ -279,7 +340,7 @@ margin-top: 15%;
 
 .login_form {
     max-width: 400px;
-    margin-top: 25%;
+    margin-top: 10%;
 }
 
 .login_label {
@@ -312,10 +373,6 @@ margin-top: 15%;
 }
 
 
-/*.login_submit {*/
-    /*text-align: center;*/
-    /*font-family: 'Yanone Kaffeesatz', sans-serif;*/
-/*}*/
 
 #login_submit {
     text-align: center;
@@ -450,9 +507,25 @@ label .checkbox{
 .scriptcolor{
     color: #34495e;
 }
+input {
+    height: 1em;
+    margin: 5px;
+    padding: 2%;
+    border-radius: 5px;
+    border: 1px solid darkgrey;
+    background-color: white;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 1.1em;
+}
 
+#applibundle_projet_nomProjet{
 
+    width:15em;
+}
 
+#applibundle_projet_tempsDiffusion{
+    width:3em;
+}
 
 /*-------------------------------PROJETS---------------------------------------*/
 
@@ -470,6 +543,79 @@ label .checkbox{
 
 
 /*-------------------------------SCRIPT ECRITURE---------------------------------------*/
+
+.script-orientation-box1, .script-orientation-box2, .script-orientation-box3{
+    color: #e4e8e9;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    width: 24%;
+}
+
+.script-orientation-box1{
+    background-color: #CC4B42;
+   }
+
+.script-orientation-box2{
+    background-color: #A6B23A;
+}
+
+.script-orientation-box3{
+    background-color: #34495e;
+}
+
+
+
+.script-orientation-box1 img, .script-orientation-box2 img, .script-orientation-box3 img{
+    height :100%;
+    width: 100%;
+}
+
+.txtround1, .txtround2, .txtround3{
+    background-color: #e4e8e9;
+    border-radius: 50%;
+    width: 1.9em;
+    height: 1.9em;
+    }
+
+.txtround1 h4{
+    color: #CC4B42;
+}
+.script-questions{
+    color: #CC4B42;
+}
+
+.txtround2 h4{
+    color: #A6B23A;
+}
+
+.txtround3 h4{
+    color: #34495e;
+}
+
+
+.script-questionnaire-voixoff-box {
+    background-color: #A6B23A;
+    padding: 5%;
+    padding-bottom: 12%;
+    padding-top: 12%;
+    text-align: center;
+}
+
+
+.script-questionnaire-image-box {
+    background-color: transparent;
+    padding: 5%;
+    padding-bottom: 12%;
+    padding-top: 12%;
+    text-align: center;
+    position: absolute;
+    top:0;
+    height: 12%;
+}
+
+.script-questionnaire-image-box img{
+    height: 100%;
+}
 
 .title-tab{
     width: 100%;
@@ -558,4 +704,46 @@ label .checkbox{
 
 .orientation{
     margin-bottom: -50px;
+}
+
+.questionnaire{
+    width:100%;
+    padding:1%;
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    background-color: #f5f5f5;
+    font-size: 0.8em;
+    color: #666;
+}
+
+.largeur-un-quart-voixoff{
+    width: 27%;
+    margin: 2%;
+    position: absolute;
+    margin-left:72%
+}
+
+.largeur-trois-quarts-voixoff{
+    width: 64%;
+    margin: 2%;
+    position : absolute;
+}
+
+.script-box1{
+    width:48%;
+    height:100%;
+    text-align: left;
+    position: relative;
+
+}
+
+.script-box1 img, .script-box3 img {
+    width: 48%;
+}
+
+.script-box3{
+    width:48%;
+    height:100%;
+    text-align: right;
+
 }

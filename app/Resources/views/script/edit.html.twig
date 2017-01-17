@@ -1,9 +1,44 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
 
-    <table class="title-tab">
-        <td class="padding-ten script"><h3>Afin d'écrire votre script, répondez aux questions suivantes</h3></td>
+ {% block ariane %}
+
+     <div class="ariane grey">
+         <a href="{{ path('projet_index', {'id':app.user.id}) }}">
+             <div class="ib fine">PROJETS</div>
+         </a>
+         <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
+             <div class="ib fine petite">Paramètres</div>
+         </a>
+         <div class="ib padding-ten fine">></div>
+         <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+             <div class="ib fine">SCRIPT</div>
+         </a>
+         <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+             <div class="ib fine petite">Guide</div>
+         </a>
+         <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+             <div class="ib fine petite">Voix-Off</div>
+         </a>
+         <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+             <div class="ib fine petite">Ecriture</div>
+         </a>
+         <div class="ib padding-ten fine">></div>
+         <div class="ib fine">STORYBOARD</div>
+         <div class="ib fine petite">Ecriture</div>
+
+     </div>
+
+ {% endblock %}
+
+{% block left %}
+
+
+<div class="ib largeur-trois-quarts">
+
+
+<table class="title-tab">
+        <td class="padding-ten script-questions"><h3>Afin d'écrire votre script, répondez aux questions suivantes</h3></td>
     </table>
 
 
@@ -15,10 +50,10 @@
         {% for reponse in reponses %}
 
         <div class="padding-ten">
-            <div class="largeur-totale title-txt-petit script">{{ reponse.question.question }}</div>
+            <div class="largeur-totale title-txt-petit script-questions">{{ reponse.question.question }}</div>
 
                 <label for="{{ reponse.id }}"></label><br>
-                <textarea placeholder="Entrez votre réponse..." rows="4" class="form-control" name="{{ reponse.id }}">{{ reponse.reponse }}</textarea>
+                <textarea placeholder="Entrez votre réponse..." rows="6" class="questionnaire" name="{{ reponse.id }}">{{ reponse.reponse }}</textarea>
 
 
             </div>
@@ -29,104 +64,53 @@
 
         <div class="largeur-totale txt-center ib">
                  <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script.id})}}">
-                             <div class="ib enregistrer script">Enregistrer</div>
+                             <div class="enregistrer script-questions">Enregistrer</div>
                 <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Enregistrer" height="19">
             </button>
-        </div>
-
-<hr>
-
-
-
-
-        <div class="largeur-totale txt-center ib">
-
-            <div class="ib largeur-half">
-                <a href="{{ path('script_voixoff', { 'id': app.user.id, 'projet': projet.id,'script': script.id })  }}">
-                    <div class="ib enregistrer script">Ecrire la voix-off</div></a>
-                <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Retour" height="35">
-            </div>
-
-            <div class="ib largeur-half">
-                <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': script.id}) }}">
-                    <div class="ib enregistrer script">Ecrire le script</div></a>
-                <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Retour" height="35">
-            </div>
-
         </div>
 
 
     </form>
 
-
+</div>
 
 {% endblock %}
 
 
 
-{% block aside %}
+{% block right %}
+
+
+    <div class="ib largeur-un-quart txt-center">
+        {#<div class="script-questionnaire-image-box">#}
 
 
 
-    <div class="largeur-totale txt-center">
-        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Script" height="50"><h4 style="color: #ff5419">Projet</h4>
-    </div>
+            {#<img src="{{ asset('images/chatting-silhouettes.png')}}" alt="Script">#}
+
+        {#<div>#}
+            {#<h3 class="ib hand script-questions">Les questions</h3>#}
+        {#</div>#}
+
+    {#</div>#}
 
 
 
+    <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
-            <img class="imgflat" src="{{ asset('images/parameters.png')}}" alt="Voix-off" height="30">
-            <div class="ib title-txt-petit projet">Paramètres du projet</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale txt-center padding-ten">
-
-        <div class="title-tab">
+        <div class="ib script-questionnaire-voixoff-box">
+            <div class="ib imground">
+                <img src="{{ asset('images/megaphone.png')}}" alt="Script" >
+            </div>
+            <div>
+                <h3 class="ib hand">Ecrire la voix-off -></h3>
+            </div>
+            <div class="ib txtround2 fine">
+                <h4>2</h4>
+            </div>
         </div>
-    </div>
+    </a>
 
 
-
-
-    <div class="largeur-totale txt-center">
-        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Script</h4>
-    </div>
-
-    <div class="largeur-totale left-menu actuel">
-        <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Questionnaire" height="30">
-            <div class="ib title-txt-petit script">Questionnaire</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Voix-off" height="30">
-            <div class="ib title-txt-petit script">Voix-off</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Script" height="30">
-            <div class="ib title-txt-petit script">Script</div>
-        </a>
-    </div>
-
-
-
-
-
-    <div class="largeur-totale txt-center padding-ten">
-
-        <br>
-        <div class="title-tab">
-        </div>
-    </div>
-
-
-
+</div>
 {% endblock %}
