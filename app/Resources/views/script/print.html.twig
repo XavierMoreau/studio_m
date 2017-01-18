@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="{{ asset('images/favicon.png')}}">
 </head>
-<body>
+<body class="print">
 
+<div class="print-fond">
 
-<h4 class="ib title-tab">Votre projet : {{ projet.nomProjet }}</h4>
+<h4 class="ib title-tab projet">Votre projet : {{ projet.nomProjet }}</h4>
 
 
 <div class="ib">
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         Projet créé par
     </div>
     <div class="ib enregistrer">
@@ -26,7 +27,7 @@
 </div>
 
 <div class="ib">
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         le
     </div>
     <div class="ib enregistrer">
@@ -35,7 +36,7 @@
 </div>
 
 <div>
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         Supports :
     </div>
         {% set arraySupport = projet.support.getValues %}
@@ -46,7 +47,7 @@
         {% endfor %}
 </div>
 <div>
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         Diffusion :
     </div>
         {% set arrayDiffusion = projet.diffusion.getValues %}
@@ -57,7 +58,7 @@
         {% endfor %}
 </div>
 <div>
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         Utilisation :
     </div>
     {% set arrayUtilisation = projet.utilisation.getValues %}
@@ -69,7 +70,7 @@
 </div>
 
 <div class="ib">
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         Diffusion prévue à partir du
     </div>
     <div class="ib enregistrer">
@@ -77,7 +78,7 @@
     </div>
 </div>
 <div class="ib">
-    <div class="ib sub-txt-small">
+    <div class="ib sub-txt-small grey">
         pour
     </div>
     <div class="ib enregistrer">
@@ -89,12 +90,12 @@
 
 <div class="title-tab"></div>
 
-<h4 class="ib title-tab">Vos réponses :</h4>
+<h4 class="ib title-tab script-questions">Vos réponses :</h4>
 {% for key,reponse in reponses %}
 
 
 
-<div class="id sub-txt-small reponses">
+<div class="id sub-txt-small reponses grey">
     {{ reponse.question.question }}
 </div>
 
@@ -110,7 +111,7 @@
 
 
 
-<h4 class="ib title-tab">Votre voix-off :</h4>
+<h4 class="ib title-tab script-voixoff">Votre voix-off :</h4>
 
 
 
@@ -125,16 +126,16 @@
 {%  set minvo = minround|round(0, 'floor') %}
 {%  set secvo = timing%60 %}
 
+<div class="grey">
+    <div class="ib padding-ten sub-txt-big">{{ script.count }}</div>
+    <div class="ib sub-txt-small bord-droit">mots</div>
 
-<div class="ib padding-ten sub-txt-big">{{ script.count }}</div>
-<div class="ib sub-txt-small bord-droit">mots</div>
-
-<div class="ib sub-txt-small">Durée estimée de la voix-off :</div>
-<div class="ib sub-txt-big">{{ minvo }}</div>
-<div class="ib sub-txt-small">min</div>
-<div class="ib sub-txt-big">{{ secvo }}</div>
-<div class="ib sub-txt-small">sec</div>
-
+    <div class="ib sub-txt-small grey">Durée estimée de la voix-off :</div>
+    <div class="ib sub-txt-big grey">{{ minvo }}</div>
+    <div class="ib sub-txt-small grey">min</div>
+    <div class="ib sub-txt-big grey">{{ secvo }}</div>
+    <div class="ib sub-txt-small grey">sec</div>
+</div>
 
 <div class="title-tab"></div>
 
@@ -145,26 +146,26 @@
 
     {#Pour chaque réponse au questionnaire du script#}
 
-<h4 class="ib title-tab">Votre script :</h4>
+<h4 class="ib title-tab script">Votre script :</h4>
 
         {% for key,ecriture in ecritures %}
 
             {#<div style="width: 100%;">#}
 
 
-            <table class="title-txt-petit">
+            <table class="title-txt-petit script">
                 <td><h5>Ligne de script n° {{ key + 1 }}</h5></td>
             </table>
             <div class="largeur-totale padding-ten">
-                <div class="sub-txt-small">Description</div>
+                <div class="sub-txt-small grey">Description</div>
                 <div>{{ ecriture.description }}</div>
             </div>
             <div class="largeur-totale padding-ten">
-                <div class="sub-txt-small">Voix-off</div>
+                <div class="sub-txt-small grey">Voix-off</div>
                 <div>{{ ecriture.voixoff }} </div>
             </div>
 
-            <div>
+            <div class="grey">
                 {% set timing = ecriture.count/2.5 %}
                 {%  set minround = timing/60 %}
                 {%  set min = minround|round(0, 'floor') %}
@@ -227,6 +228,7 @@
 
         {% endfor %}
 
+</div>
 </body>
 
 

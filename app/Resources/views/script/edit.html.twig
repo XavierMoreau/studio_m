@@ -4,9 +4,12 @@
  {% block ariane %}
 
      <div class="ariane grey">
+         <div class="ib sub-txt-small fine grey">Projet en cours : </div><div class="ib fine lightgrey bord-droit"> {{ projet.nomProjet }}</div>
+
          <a href="{{ path('projet_index', {'id':app.user.id}) }}">
              <div class="ib fine">PROJETS</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
              <div class="ib fine petite">Paramètres</div>
          </a>
@@ -14,17 +17,21 @@
          <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine">SCRIPT</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Guide</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Voix-Off</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Ecriture</div>
          </a>
          <div class="ib padding-ten fine">></div>
          <div class="ib fine">STORYBOARD</div>
+         <div class="ib fine">></div>
          <div class="ib fine petite">Ecriture</div>
 
      </div>
@@ -63,7 +70,7 @@
 
 
         <div class="largeur-totale txt-center ib">
-            <button class="btn-iconflat" type="submit" value="Enregistrer">
+            <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script.id})}}">
                 <table class="tab-buttons shadow back-questions">
                     <td>
                         <div class="lightgrey">Enregistrer</div>

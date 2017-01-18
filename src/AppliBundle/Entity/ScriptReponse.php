@@ -31,7 +31,7 @@ class ScriptReponse
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script", cascade={"persist","remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $script;
 

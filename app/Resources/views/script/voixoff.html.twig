@@ -6,9 +6,12 @@
  {% block ariane %}
 
      <div class="ariane grey">
+         <div class="ib sub-txt-small fine grey">Projet en cours : </div><div class="ib fine lightgrey bord-droit"> {{ projet.nomProjet }}</div>
+
          <a href="{{ path('projet_index', {'id':app.user.id}) }}">
              <div class="ib fine">PROJETS</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
              <div class="ib fine petite">Paramètres</div>
          </a>
@@ -16,17 +19,21 @@
          <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine">SCRIPT</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Guide</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Voix-Off</div>
          </a>
+         <div class="ib fine">></div>
          <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
              <div class="ib fine petite">Ecriture</div>
          </a>
          <div class="ib padding-ten fine">></div>
          <div class="ib fine">STORYBOARD</div>
+         <div class="ib fine">></div>
          <div class="ib fine petite">Ecriture</div>
 
      </div>
@@ -37,147 +44,147 @@
 {% block left %}
 
 
+<table>
+
+    <td style="width:65%; vertical-align: top; background-color: #e4e8e9;">
+        <div class="padding-ten">
+
+            <form>
+
+                <table class="title-tab">
+                    <td class="padding-ten"><h3 class="script-voixoff">Rédigez le texte de la voix-off</h3></td>
+                </table>
 
 
-<div class="ib largeur-trois-quarts-voixoff">
+                <div class="largeur-totale">
+                    <label for="voixoffglobal"></label>
+                    <textarea style="width: 98%;" placeholder="Rédigez votre voix-off..." rows="24" class="questionnaire" name="voixoff">{{ script.voixoffGlobal }}</textarea>
+                </div>
 
 
-<form>
 
-    <table class="title-tab">
-        <td class="padding-ten"><h3 class="script-voixoff">Rédigez le texte de la voix-off</h3></td>
-    </table>
+                <div class="grey">
+
+                    {% set timing = script.count/2.5 %}
+                    {%  set minround = timing/60 %}
+                    {%  set min = minround|round(0, 'floor') %}
+                    {%  set sec = timing%60 %}
+
+                    <div class="ib">
+                        <div class="ib sub-txt-big">{%  if script.count %}{{ script.count }}{% else %}0{% endif %}</div>
+                        <div class="ib sub-txt-small bord-droit">mots</div>
+                    </div>
+                    <div class="ib">
+                        <div class="ib sub-txt-small">Durée estimée :</div>
+                        <div class="ib sub-txt-big">{{ min }}</div>
+                        <div class="ib sub-txt-small">min</div>
+                        <div class="ib sub-txt-big">{{ sec }}</div>
+                        <div class="ib sub-txt-small bord-droit">sec</div>
+                    </div>
+
+                    <div class="ib">
+                        <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_voixoff_edit',{'id':app.user.id, 'projet': projet.id,'script': script.id})}}">
+                            <div class="ib">
+                            <table class="ib tab-buttons-petit shadow back-voixoff">
+                                <td>
+                                    <div class="lightgrey">Mettre à jour</div>
+                                </td>
+                                <td>
+                                    <img src="{{ asset('images/refresh-button.png')}}" alt="Enregistrer" height="19">
+                                </td>
+                            </table>
+                            </div>
+                            <div class="ib">
+                            <table class="ib tab-buttons-petit shadow back-voixoff">
+                                <td>
+                                    <div class="lightgrey">Enregistrer</div>
+                                </td>
+                                <td>
+                                    <img src="{{ asset('images/save-file-option.png')}}" alt="Enregistrer" height="19">
+                                </td>
+                            </table>
+                    </div>
+                        </button>
 
 
-        <div class="largeur-totale">
-            <label for="voixoffglobal"></label>
-            <textarea placeholder="Rédigez votre voix-off..." rows="24" class="questionnaire" name="voixoff">{{ script.voixoffGlobal }}</textarea>
+
+                    </div>
+
+                </div>
+
+
+
+
+            </form>
+
+
+
+
+
+            <table class="largeur-totale padding-ten">
+
+                <td style="width:33%" class="txt-center">
+                    <div class="script-voixoff-box1 shadow">
+                    <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                        <div class="ib">
+
+                            <img src="{{ asset('images/list.png')}}" alt="Script" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand petite"><- Répondre aux questions</h3>
+                        </div>
+                   </a>
+                    </div>
+                </td>
+                <td style="width:30%"></td>
+
+                <td style="width:33%" class="txt-center">
+                    <div class="script-voixoff-box3 shadow">
+                        <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+
+                        <div class="ib">
+                            <img src="{{ asset('images/pencil.png')}}" alt="Retour" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand petite">Ecrire le script -></h3>
+                        </div>
+                    </a>
+                    </div>
+                </td>
+
+            </table>
+
+
         </div>
 
 
 
-<div class="grey">
 
-    {% set timing = script.count/2.5 %}
-    {%  set minround = timing/60 %}
-    {%  set min = minround|round(0, 'floor') %}
-    {%  set sec = timing%60 %}
-
-    <div class="ib">
-        <div class="ib sub-txt-big">{{ script.count }}</div>
-        <div class="ib sub-txt-small bord-droit">mots</div>
-    </div>
-    <div class="ib">
-        <div class="ib sub-txt-small">Durée estimée :</div>
-        <div class="ib sub-txt-big">{{ min }}</div>
-        <div class="ib sub-txt-small">min</div>
-        <div class="ib sub-txt-big">{{ sec }}</div>
-        <div class="ib sub-txt-small bord-droit">sec</div>
-    </div>
-
-    <div class="ib">
-        <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_voixoff_edit',{'id':app.user.id, 'projet': projet.id,'script': script.id})}}">
-            <table class="ib tab-buttons-petit shadow back-voixoff">
-                <td>
-                    <div class="lightgrey">Mettre à jour</div>
-                </td>
-                <td>
-                    <img src="{{ asset('images/refresh-button.png')}}" alt="Enregistrer" height="19">
-                </td>
-            </table>
-            <table class="ib tab-buttons-petit shadow back-voixoff">
-                <td>
-                    <div class="lightgrey">Enregistrer</div>
-                </td>
-                <td>
-                    <img src="{{ asset('images/save-file-option.png')}}" alt="Enregistrer" height="19">
-                </td>
-            </table>
-        </button>
+    </td>
+    <td style="vertical-align: top; padding-right: 3%">
 
 
+        <div class="largeur-totale padding-ten">
 
-    </div>
+            <h3 class="ib bord-droit script-voixoff">Vos réponses :</h3>
 
-</div>
-
-
-
-
-    </form>
-
-
-
-
-
-    <table class="largeur-totale padding-ten">
-
-        <td style="width:25%" class="txt-center">
-            <div class="script-voixoff-box1 shadow">
-            <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-                <div class="ib">
-
-                    <img src="{{ asset('images/list.png')}}" alt="Script" height="30">
+            {% for key,reponse in reponses %}
+                <div class="id sub-txt-small grey">
+                      {{ reponse.question.question }}
                 </div>
-                <div>
-                    <h3 class="ib hand petite"><- Répondre aux questions</h3>
+
+                <div class="id sub-txt-small script-voixoff">
+                    {% if reponse.reponse %}{{ reponse.reponse }}
+                    {% else %} Vous n'avez pas répondu
+                    {% endif %}
                 </div>
-           </a>
-            </div>
-        </td>
-        <td style="width:47%"></td>
 
-        <td style="width:25%" class="txt-center">
-            <div class="script-voixoff-box3 shadow">
-                <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+            {% endfor %}
+        </div>
 
-                <div class="ib">
-                    <img src="{{ asset('images/pencil.png')}}" alt="Retour" height="30">
-                </div>
-                <div>
-                    <h3 class="ib hand petite">Ecrire le script -></h3>
-                </div>
-            </a>
-            </div>
-        </td>
+    </td>
 
-    </table>
-
-
-</div>
-
-
-
-
-
-
-{% endblock %}
-
-
-{% block right %}
-<div class="ib largeur-un-quart-voixoff">
-
-    <h3 class="ib bord-droit script-voixoff">Vos réponses :</h3>
-{% for key,reponse in reponses %}
-
-
-
-    <div class="id sub-txt-small grey">
-              {{ reponse.question.question }}
-
-    </div>
-
-
-
-    <div class="id sub-txt-small script-voixoff">
-        {% if reponse.reponse %}{{ reponse.reponse }}
-        {% else %} Vous n'avez pas répondu
-        {% endif %}
-    </div>
-
-
-{% endfor %}
-    </div>
+</table>
 {% endblock %}
 
 

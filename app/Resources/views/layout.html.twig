@@ -31,12 +31,14 @@
                 <div class="headerlogo">
                    <img src="{{ asset('images/bumplogo-white.png')}}" alt="Logo Bump"></a>
                 </div>
-                <div class="ib txt-center fine grey">Bonjour <a href="{{ path('fos_user_profile_show') }}">{{ app.user.prenom }}</a> ! </div>
-                <div class=" ib txt-center fine petite"><a class="deconnexion" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
-
+                <div class="ib sub-txt-small fine grey">Bonjour</div><div class="ib fine lightgrey bord-droit"> <a href="{{ path('fos_user_profile_show') }}">{{ app.user.prenom }}</a> ! </div>
                 {% if is_granted("ROLE_ADMIN") %}
-                   <div class="ib txt-center fine"><a href="{{ path('admin_index') }}"> - Administration</a></div>
+                    <div class="ib fine bord-droit"><a href="{{ path('admin_index') }}">Administration</a></div>
                 {% endif %}
+                <div class=" ib fine petite"><a class="deconnexion" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></div>
+
+
+
             </div>
 
 

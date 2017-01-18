@@ -491,7 +491,7 @@ footer span{
     background-color: #A6B23A;
 }
 
-.backscript{
+.back-script{
     background-color: #34495e;
 }
 
@@ -697,7 +697,6 @@ input {
 .title-tab{
     width: 100%;
     font-weight: bold;
-    color: #34495e;
     border-bottom: solid 1px #dddddd;
     margin-bottom: 10px;
     font-family: 'News Cycle', sans-serif;
@@ -845,3 +844,12 @@ input {
     color: grey;
     padding-right: 2%;
 }
+
+.print {
+    background: white;
+    padding:2%;
+}
+
+.print-fond{
+    background: url(/studio_m/web/images/bumplogo-white.png);
+   }

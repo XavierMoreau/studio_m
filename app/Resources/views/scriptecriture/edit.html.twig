@@ -4,6 +4,8 @@
  {% block ariane %}
 
      <div class="ariane grey">
+         <div class="ib sub-txt-small fine grey">Projet en cours : </div><div class="ib fine lightgrey bord-droit"> {{ projet.nomProjet }}</div>
+
          <a href="{{ path('projet_index', {'id':app.user.id}) }}">
              <div class="ib fine">PROJETS</div>
          </a>
@@ -40,8 +42,11 @@
 {% block left %}
 
 
+
     {% set mintotal = 0 %}
     {% set sectotal = 0 %}
+
+
 
 <table>
 
@@ -149,13 +154,25 @@
 
                     <div class="ib">
                         <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}">
-                            <h3 class="ib script">Mettre à jour</h3>
-                            <img src="{{ asset('images/update-arrows.png')}}" alt="Mettre à jour" height="19">
+                            <table class="ib tab-buttons-petit shadow back-script">
+                                <td>
+                                    <div class="lightgrey">Mettre à jour</div>
+                                </td>
+                                <td>
+                                    <img src="{{ asset('images/refresh-button.png')}}" alt="Enregistrer" height="19">
+                                </td>
+                            </table>
                         </button>
-                        <a href="{{ path('scriptecriture_delete', {'id':app.user.id, 'projet': projet.id, 'script': script.id, 'scriptEcriture': ecriture.id}) }}">
-                            <h6 class="ib script">Supprimer</h6>
-                            <img src="{{ asset('images/delete.png')}}" alt="Supprimer la ligne de script" height="19"></a>
 
+                        <a href="{{ path('scriptecriture_delete', {'id':app.user.id, 'projet': projet.id, 'script': script.id, 'scriptEcriture': ecriture.id}) }}">
+
+
+                                    <div class="script ib" style="font-size: 0.8em">Supprimer</div>
+
+                                    <img src="{{ asset('images/delete.png')}}" alt="Enregistrer" height="13">
+
+
+                        </a>
                     </div>
                 </div>
 
