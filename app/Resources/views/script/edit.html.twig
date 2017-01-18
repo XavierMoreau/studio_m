@@ -63,9 +63,15 @@
 
 
         <div class="largeur-totale txt-center ib">
-                 <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_reponses_edit',{'id':app.user.id, 'projet': projet.id,'script': projet.script.id})}}">
-                             <div class="enregistrer script-questions">Enregistrer</div>
-                <img class="imgflat" src="{{ asset('images/big-diskette.png')}}" alt="Enregistrer" height="19">
+            <button class="btn-iconflat" type="submit" value="Enregistrer">
+                <table class="tab-buttons shadow back-questions">
+                    <td>
+                        <div class="lightgrey">Enregistrer</div>
+                    </td>
+                    <td>
+                        <img src="{{ asset('images/save-file-option.png')}}" alt="Enregistrer" height="19">
+                    </td>
+                </table>
             </button>
         </div>
 
@@ -98,15 +104,15 @@
 
     <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-        <div class="ib script-questionnaire-voixoff-box">
-            <div class="ib imground">
-                <img src="{{ asset('images/megaphone.png')}}" alt="Script" >
+        <div class="ib script-questionnaire-voixoff-box shadow">
+            <div class="ib">
+                <img src="{{ asset('images/microphone.png')}}" alt="Script" height="30">
             </div>
             <div>
-                <h3 class="ib hand">Ecrire la voix-off -></h3>
+                <h3 class="ib hand petite">Ecrire la voix-off -></h3>
             </div>
             <div class="ib txtround2 fine">
-                <h4>2</h4>
+                <h4 class="script-voixoff">2</h4>
             </div>
         </div>
     </a>

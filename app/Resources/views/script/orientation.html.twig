@@ -46,16 +46,16 @@
 
    <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-        <div class="ib largeur-un-quart script-orientation-box1">
+        <div class="ib largeur-un-quart script-orientation-box1 shadow">
             <div class="ib imground">
 
-                    <img src="{{ asset('images/chatting-silhouettes.png')}}" alt="Script">
+                    <img src="{{ asset('images/list.png')}}" alt="Script">
             </div>
                      <div>
                 <h3 class="ib hand">Répondre aux questions</h3>
             </div>
             <div class="ib txtround1 fine">
-          <h4>1</h4>
+          <h4 class="script-questions">1</h4>
         </div>
         </div>
     </a>
@@ -63,30 +63,30 @@
 
  <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-     <div class="ib largeur-un-quart script-orientation-box2">
+     <div class="ib largeur-un-quart script-orientation-box2 shadow">
         <div class="ib imground">
-            <img src="{{ asset('images/megaphone.png')}}" alt="Script" >
+            <img src="{{ asset('images/microphone.png')}}" alt="Script" >
         </div>
          <div>
             <h3 class="ib hand">Ecrire la voix-off</h3>
         </div>
         <div class="ib txtround2 fine">
-          <h4>2</h4>
+          <h4 class="script-voixoff">2</h4>
         </div>
        </div>
             </a>
 
 
 <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-    <div class="ib largeur-un-quart script-orientation-box3">
+    <div class="ib largeur-un-quart script-orientation-box3 shadow">
            <div class="ib imground">
-                 <img src="{{ asset('images/school-pencil.png')}}" alt="Retour">
+                 <img src="{{ asset('images/pencil.png')}}" alt="Retour">
             </div>
             <div>
                  <h3 class="ib hand">Ecrire le script</h3>
             </div>
             <div class="ib txtround3 fine">
-          <h4>3</h4>
+          <h4 class="script">3</h4>
         </div>
     </div>
 </a>
@@ -96,72 +96,3 @@
 
 
 
-
-{% block right %}
-
-<div style="display: none">
-
-
-
-
-    <div class="largeur-totale txt-center">
-        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Script" height="50"><h4 style="color: #ff5419">Projet</h4>
-    </div>
-
-
-
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
-            <img class="imgflat" src="{{ asset('images/parameters.png')}}" alt="Voix-off" height="30">
-            <div class="ib title-txt-petit projet">Paramètres</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale txt-center padding-ten">
-
-        <div class="title-tab">
-        </div>
-    </div>
-
-
-
-
-    <div class="largeur-totale txt-center">
-        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="50"><h4 style="color: #34495e">Script</h4>
-    </div>
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/guide.png')}}" alt="Questionnaire" height="30">
-            <div class="ib title-txt-petit script">Questionnaire</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id, 'script' : script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/voixoff1.png')}}" alt="Voix-off" height="30">
-            <div class="ib title-txt-petit script">Voix-off</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale left-menu">
-        <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': script.id}) }}">
-            <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Script" height="30">
-            <div class="ib title-txt-petit script">Script</div>
-        </a>
-    </div>
-
-
-
-
-
-    <div class="largeur-totale txt-center padding-ten">
-
-        <br>
-        <div class="title-tab">
-        </div>
-    </div>
-</div>
-
-{% endblock %}

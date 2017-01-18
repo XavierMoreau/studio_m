@@ -52,14 +52,16 @@
     {{ form_start(form) }}
         {{ form_widget(form) }}
 
-    <div class="padding-ten">
-        <div class="ib">
-            <button class="btn-iconflat" type="submit" value="Enregistrer">
-                <div class="ib enregistrer projet">Enregistrer</div>
-                <img class="imgflat" src="{{ asset('images/big-diskette-projet.png')}}" alt="Enregistrer" height="19">
-            </button>
-        </div>
-    </div>
+    <button class="btn-iconflat" type="submit" value="Enregistrer">
+        <table class="tab-buttons shadow back-projet">
+            <td>
+                <div class="lightgrey">Enregistrer</div>
+            </td>
+            <td>
+                <img src="{{ asset('images/save-file-option.png')}}" alt="Enregistrer" height="19">
+            </td>
+        </table>
+    </button>
 
 
 
