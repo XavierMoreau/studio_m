@@ -8,8 +8,8 @@ parameters:
     database_name: cvaw_bump
     database_user: cvaw_marc
     database_password: Marc35400
-    mailer_transport: gmail
-    mailer_host: 127.0.0.1
+    mailer_transport:
+    mailer_host:
     mailer_user:
     mailer_password:
     secret: 3807c75c2fcb1d4cbd54d7e7024244a81dfe77db

@@ -41,11 +41,11 @@
 {% block left %}
 
 
-<div class="ib largeur-trois-quarts">
+<div class="ib largeur-questions">
 
 
 <table class="title-tab">
-        <td class="padding-ten script-questions"><h3>Afin d'écrire votre script, répondez aux questions suivantes</h3></td>
+        <td class="padding-ten hand script-questions"><h3>Afin d'écrire votre script, répondez aux questions suivantes</h3></td>
     </table>
 
 
@@ -60,7 +60,7 @@
             <div class="largeur-totale title-txt-petit script-questions">{{ reponse.question.question }}</div>
 
                 <label for="{{ reponse.id }}"></label><br>
-                <textarea placeholder="Entrez votre réponse..." rows="6" class="questionnaire" name="{{ reponse.id }}">{{ reponse.reponse }}</textarea>
+                <textarea style="width:97%" placeholder="Entrez votre réponse..." rows="6" class="questionnaire" name="{{ reponse.id }}">{{ reponse.reponse }}</textarea>
 
 
             </div>
@@ -94,24 +94,13 @@
 {% block right %}
 
 
-    <div class="ib largeur-un-quart txt-center">
-        {#<div class="script-questionnaire-image-box">#}
-
-
-
-            {#<img src="{{ asset('images/chatting-silhouettes.png')}}" alt="Script">#}
-
-        {#<div>#}
-            {#<h3 class="ib hand script-questions">Les questions</h3>#}
-        {#</div>#}
-
-    {#</div>#}
+    <div class="ib largeur-totale txt-center">
 
 
 
     <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-        <div class="ib script-questionnaire-voixoff-box shadow">
+        <div class="ib script-questionnaire-voixoff-box">
             <div class="ib">
                 <img src="{{ asset('images/microphone.png')}}" alt="Script" height="30">
             </div>

@@ -25,8 +25,6 @@
 
 {% if is_granted("ROLE_USER") %}
     <header class="log">
-
-
             <div class="menuleft">
                 <div class="headerlogo">
                    <img src="{{ asset('images/bumplogo-white.png')}}" alt="Logo Bump"></a>
@@ -78,8 +76,8 @@
 
 {% else %}
     <header>
-        <div class="headerlogo">
-            <img src="{{ asset('images/bumplogo.png')}}" alt="Logo Bump">
+        <div class="headerlogo-nolog">
+            <img src="{{ asset('images/bumplogo-rouge.png')}}" alt="Logo Bump">
         </div>
     </header>
 

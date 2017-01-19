@@ -3,39 +3,43 @@
 
      {% block ariane %}
 
-         <div class="ariane grey">
-             <div class="ib fine">PROJETS</div>
-             <div class="ib fine petite">Paramètres</div>
-             <div class="ib padding-ten fine">></div>
-             <div class="ib fine">SCRIPT</div>
-             <div class="ib fine petite">Guide</div>
-             <div class="ib fine petite">Voix-Off</div>
-             <div class="ib fine petite">Ecriture</div>
-             <div class="ib padding-ten fine">></div>
-             <div class="ib fine">STORYBOARD</div>
-             <div class="ib fine petite">Ecriture</div>
 
-         </div>
 
      {% endblock %}
 
 
 {% block left %}
-<div class="ib largeur-half  leftprojet">
+<div class="ib leftprojet">
 
+<div class="leftprojet-top">
 
-    <a href="{{ path('projet_new', {'id': app.user.id }) }}">
-    <div class="txt-center">
-        <div class="ib imground">
-            <img src="{{ asset('images/idea.png')}}" alt="Nouveau Projet">
+        <div class="txt-center">
+            <div class="ib imground">
+                <img src="{{ asset('images/idea.png')}}" alt="Nouveau Projet">
+            </div>
+            <div>
+                <h3 class="ib hand">Vos projets</h3>
+            </div>
+
         </div>
-       <div>
-           <h3 class="ib hand">Créer un nouveau projet</h3>
-       </div>
 
+</div>
+    <div class="leftprojet-photo">
+        <img src="{{ asset('images/pic1.jpg')}}" alt="Nouveau Projet">
     </div>
-    </a>
+    <div class="leftprojet-bottom">
+        <div class="fine petite">
+            <p>Créez votre projet, renseignez les types de supports, les types diffusions, les types d'utilisations.
+                Vous pouvez aussi indiquer pour quand votre projet est prévu ainsi que sa surée dans le temps.
+            </p>
+            <p>Toutes ces données nous permettront de calculer les droits et le montant approximatif de votre projet.
+            </p>
+            <p>Ensuite vous pourrez écrire votre script, puis votre stroy-board</p>
 
+
+
+            </div>
+        </div>
 
 
 
@@ -45,136 +49,147 @@
 
 {% block right %}
 
-<div class="ib largeur-half rightprojet">
+<div class="ib rightprojet">
+    <div class="rightprojet-photo">
 
-    <table class="title-tab hand">
-        <td class="padding-ten projet hand"><h3>Vos projets</h3></td>
-    </table>
+        <a href="{{ path('projet_new', {'id': app.user.id }) }}">
+            <div class="leftprojet-photo">
+                <img src="{{ asset('images/pic2.jpg')}}" alt="Nouveau Projet">
+                <div class="rightprojet-photo-txt hand">Créez votre nouveau projet ici...</div>
+            </div>
+        </a>
 
+    </div>
+
+
+
+<div class="rightprojet-list">
 
     {% if projets %}
 
-{% for projet in projets %}
+        {% for projet in projets %}
 
-    <div class="padding-ten" style="background-color: white">
-    <table style="width:100%">
-            <tr>
-               <td colspan="4">
-                    <div>
+            <div class="padding-ten" style="background-color: white">
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="4">
+                            <div>
 
-                       <h4 class="ib sub-txt-big projet">{{ projet.nomProjet }}</h4>
+                                <h4 class="ib sub-txt-big projet">{{ projet.nomProjet }}</h4>
 
 
-                        <div class="ib">
-                            <div class="ib sub-txt-small grey">
-                                Créé le :
-                            </div>
-                            <div class="ib sub-txt-small projet">
-                                {{ projet.dateCreation.date|date('d/m/Y') }}
-                            </div>
+                                <div class="ib">
+                                    <div class="ib sub-txt-small grey">
+                                        Créé le :
+                                    </div>
+                                    <div class="ib sub-txt-small projet">
+                                        {{ projet.dateCreation.date|date('d/m/Y') }}
+                                    </div>
 
-                            {% if is_granted("ROLE_ADMIN") %}
-                                <div class="ib sub-txt-small grey">
-                                    par
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <div class="ib sub-txt-small grey">
+                                            par
+                                        </div>
+                                        <div class="ib sub-txt-small projet">
+                                            {{ projet.utilisateur.prenom }} {{ projet.utilisateur.nom}} ({{ projet.utilisateur.username }})
+                                        </div>
+                                    {% endif %}
                                 </div>
-                                <div class="ib sub-txt-small projet">
-                                    {{ projet.utilisateur.prenom }} {{ projet.utilisateur.nom}} ({{ projet.utilisateur.username }})
+
+                                <div>
+                                    <div class="ib sub-txt-small grey">
+                                        Supports :
+                                    </div>
+                                    {% set arraySupport = projet.support.getValues %}
+                                    {% for support in arraySupport %}
+                                        <div class="ib  sub-txt-small projet bord-droit">
+                                            {{ support.supportType }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                        </div>
-
-                        <div>
-                            <div class="ib sub-txt-small grey">
-                                Supports :
-                            </div>
-                            {% set arraySupport = projet.support.getValues %}
-                            {% for support in arraySupport %}
-                                <div class="ib  sub-txt-small projet bord-droit">
-                                    {{ support.supportType }}
+                                <div>
+                                    <div class="ib sub-txt-small grey">
+                                        Diffusion :
+                                    </div>
+                                    {% set arrayDiffusion = projet.diffusion.getValues %}
+                                    {% for diffusion in arrayDiffusion %}
+                                        <div class="ib  sub-txt-small projet bord-droit">
+                                            {{ diffusion.diffusionType }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <div>
-                            <div class="ib sub-txt-small grey">
-                                Diffusion :
-                            </div>
-                            {% set arrayDiffusion = projet.diffusion.getValues %}
-                            {% for diffusion in arrayDiffusion %}
-                                <div class="ib  sub-txt-small projet bord-droit">
-                                    {{ diffusion.diffusionType }}
+                                <div>
+                                    <div class="ib sub-txt-small grey">
+                                        Utilisation :
+                                    </div>
+                                    {% set arrayUtilisation = projet.utilisation.getValues %}
+                                    {% for utilisation in arrayUtilisation %}
+                                        <div class="ib  sub-txt-small projet bord-droit">
+                                            {{ utilisation.utilisationType }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <div>
-                            <div class="ib sub-txt-small grey">
-                                Utilisation :
-                            </div>
-                            {% set arrayUtilisation = projet.utilisation.getValues %}
-                            {% for utilisation in arrayUtilisation %}
-                                <div class="ib  sub-txt-small projet bord-droit">
-                                    {{ utilisation.utilisationType }}
+
+                                <div class="ib">
+                                    <div class="ib sub-txt-small grey">
+                                        Diffusion prévue à partir du
+                                    </div>
+                                    <div class="ib  sub-txt-small projet">
+                                        {{ projet.dateDiffusion.date|date('d/m/Y') }}
+                                    </div>
                                 </div>
-                            {% endfor %}
-                        </div>
+                                <div class="ib">
+                                    <div class="ib sub-txt-small grey">
+                                        pour
+                                    </div>
+                                    <div class="ib  sub-txt-small projet">
+                                        {{ projet.tempsDiffusion }} an(s).
+                                    </div>
+                                </div>
 
-                        <div class="ib">
-                            <div class="ib sub-txt-small grey">
-                                Diffusion prévue à partir du
+
+
+
+
                             </div>
-                            <div class="ib  sub-txt-small projet">
-                                {{ projet.dateDiffusion.date|date('d/m/Y') }}
-                            </div>
-                        </div>
-                        <div class="ib">
-                            <div class="ib sub-txt-small grey">
-                                pour
-                            </div>
-                            <div class="ib  sub-txt-small projet">
-                                {{ projet.tempsDiffusion }} an(s).
-                            </div>
-                        </div>
+                    </tr>
+                    <tr>
+
+                        </td>
+                        <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : projet.script.id }) }}">
+                                <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="30">
+                                <div class="sub-txt-small projet">Modifier le projet</div></a></td>
+                        <td style="text-align: center">
+
+                            <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                                <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="30">
+                                <div class="sub-txt-small script">Ecrire le script</div></a></td>
+
+                        <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
+                                <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="30">
+                                <div class="sub-txt-small" style="color: #9db138">Ecrire le storyboard</div>{% endif %}</td>
+
+                        <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id, 'script': projet.script.id}) }}">
+                                <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="30">
+                                <div class="sub-txt-small script">Supprimer le projet</div></a></td>
 
 
-
-
-
-                    </div>
-            </tr>
-        <tr>
-
-                </td>
-                <td style="text-align: center"><a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : projet.script.id }) }}">
-                        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Modifier projet" height="30">
-                        <div class="sub-txt-small projet">Modifier le projet</div></a></td>
-                <td style="text-align: center">
-
-                    <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-                        <img class="imgflat" src="{{ asset('images/pen.png')}}" alt="Script" height="30">
-                        <div class="sub-txt-small script">Ecrire le script</div></a></td>
-
-                <td style="text-align: center">{% if projet.storyboard %}Accéder au storyboard{% else %}
-                        <img class="imgflat" src="{{ asset('images/play-video.png')}}" alt="Storyboard" height="30">
-                        <div class="sub-txt-small" style="color: #9db138">Ecrire le storyboard</div>{% endif %}</td>
-
-                <td style="text-align: center"><a href="{{ path('projet_delete', {'id':app.user.id, 'projet': projet.id, 'script': projet.script.id}) }}">
-                        <img class="imgflat" src="{{ asset('images/garbage.png')}}" alt="Modifier projet" height="30">
-                        <div class="sub-txt-small script">Supprimer le projet</div></a></td>
-
-
-            </tr>
-    </table>
-    </div>
-    <div class="title-tab"></div>
+                    </tr>
+                </table>
+            </div>
+            <div class="title-tab"></div>
         {% endfor %}
 
     {% else %}
 
-    <div class="ib sub-txt-small grey">
+        <div class="ib sub-txt-small grey">
 
-        Pas de projet enregistré
+            Pas de projet enregistré
 
-    </div>
-{% endif %}
+        </div>
+    {% endif %}
+
+</div>
 
 </div>
 {% endblock %}

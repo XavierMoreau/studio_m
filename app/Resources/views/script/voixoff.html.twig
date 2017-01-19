@@ -46,19 +46,19 @@
 
 <table>
 
-    <td style="width:65%; vertical-align: top; background-color: #e4e8e9;">
-        <div class="padding-ten">
+    <td style="width:70%; vertical-align: top;">
+        <div class="largeur-voixoff">
 
             <form>
 
                 <table class="title-tab">
-                    <td class="padding-ten"><h3 class="script-voixoff">Rédigez le texte de la voix-off</h3></td>
+                    <td class="padding-ten"><h3 class="script-voixoff hand">Rédigez le texte de la voix-off</h3></td>
                 </table>
 
 
                 <div class="largeur-totale">
                     <label for="voixoffglobal"></label>
-                    <textarea style="width: 98%;" placeholder="Rédigez votre voix-off..." rows="24" class="questionnaire" name="voixoff">{{ script.voixoffGlobal }}</textarea>
+                    <textarea style="width: 98%;" placeholder="Rédigez votre voix-off..." rows="30" class="questionnaire" name="voixoff">{{ script.voixoffGlobal }}</textarea>
                 </div>
 
 
@@ -81,6 +81,10 @@
                         <div class="ib sub-txt-big">{{ sec }}</div>
                         <div class="ib sub-txt-small bord-droit">sec</div>
                     </div>
+
+
+
+
 
                     <div class="ib">
                         <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('script_voixoff_edit',{'id':app.user.id, 'projet': projet.id,'script': script.id})}}">
@@ -117,14 +121,14 @@
 
             </form>
 
+        </div>
 
 
 
-
-            <table class="largeur-totale padding-ten">
+            <table class="largeur-totale voixoff-boxes">
 
                 <td style="width:33%" class="txt-center">
-                    <div class="script-voixoff-box1 shadow">
+                    <div class="script-voixoff-box1 back-questions">
                     <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
                         <div class="ib">
 
@@ -133,13 +137,16 @@
                         <div>
                             <h3 class="ib hand petite"><- Répondre aux questions</h3>
                         </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">1</h4>
+                        </div>
                    </a>
                     </div>
                 </td>
-                <td style="width:30%"></td>
+                <td style="width:20%"></td>
 
                 <td style="width:33%" class="txt-center">
-                    <div class="script-voixoff-box3 shadow">
+                    <div class="script-voixoff-box3 back-script">
                         <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
                         <div class="ib">
@@ -148,6 +155,9 @@
                         <div>
                             <h3 class="ib hand petite">Ecrire le script -></h3>
                         </div>
+                            <div class="ib txtround2 fine">
+                                <h4 class="script">3</h4>
+                            </div>
                     </a>
                     </div>
                 </td>
@@ -161,19 +171,19 @@
 
 
     </td>
-    <td style="vertical-align: top; padding-right: 3%">
+    <td style="vertical-align: top; padding-right: 3%; padding-top: 1.5%;">
 
 
-        <div class="largeur-totale padding-ten">
+        <div class="largeur-voixoff-right back-voixoff padding-ten">
 
-            <h3 class="ib bord-droit script-voixoff">Vos réponses :</h3>
+            <h3 class="ib bord-droit lightgrey">Vos réponses :</h3>
 
             {% for key,reponse in reponses %}
                 <div class="id sub-txt-small grey">
                       {{ reponse.question.question }}
                 </div>
 
-                <div class="id sub-txt-small script-voixoff">
+                <div class="id sub-txt-small lightgrey">
                     {% if reponse.reponse %}{{ reponse.reponse }}
                     {% else %} Vous n'avez pas répondu
                     {% endif %}

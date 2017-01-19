@@ -2,37 +2,39 @@
 
 {% block ariane %}
 
-    <div class="ariane grey">
-        <div class="ib fine">PROJETS</div>
-        <div class="ib fine petite">Paramètres</div>
-        <div class="ib padding-ten fine">></div>
-        <div class="ib fine">SCRIPT</div>
-        <div class="ib fine petite">Guide</div>
-        <div class="ib fine petite">Voix-Off</div>
-        <div class="ib fine petite">Ecriture</div>
-        <div class="ib padding-ten fine">></div>
-        <div class="ib fine">STORYBOARD</div>
-        <div class="ib fine petite">Ecriture</div>
 
-    </div>
 
 {% endblock %}
 
 {% block left %}
 
-    <div class="ib largeur-un-quart  leftprojet-new-edit">
+    <div class="ib leftprojet">
 
+        <div class="leftprojet-top">
 
+                <div class="txt-center">
+                    <div class="ib imground">
+                        <img src="{{ asset('images/idea.png')}}" alt="Nouveau Projet">
+                    </div>
+                    <div>
+                        <h3 class="ib hand">Votre nouveau projet</h3>
+                    </div>
 
-            <div class="txt-center">
-                <div class="ib imground">
-                    <img src="{{ asset('images/light-bulb.png')}}" alt="Nouveau Projet">
                 </div>
+
+        </div>
+        <div class="leftprojet-photo">
+            <img src="{{ asset('images/pic5.jpg')}}" alt="Nouveau Projet">
+        </div>
+        <div class="leftprojet-bottom">
+            <div class="fine petite"> Créez votre projet, renseignez les types de supports, les types diffusions, les types d'utilisations.
+                Vous pouvez aussi indiquer pour quand votre projet est prévu ainsi que sa surée dans le temps.
+                Toutes ces données nous permettront de calculer les droits et le montant approximatif de votre projet.
+
 
 
             </div>
-
-
+        </div>
 
 
 
@@ -41,11 +43,9 @@
 {% endblock %}
 
 {% block right %}
-<div class="ib largeur-trois-quarts rightprojet-new-edit">
+<div class="ib rightprojet-new-edit">
 
-    <table class="title-tab">
-        <td class="padding-ten projet hand"><h3>Nouveau projet</h3></td>
-    </table>
+
 
 
 
@@ -67,37 +67,9 @@
 
     {{ form_end(form) }}
 
-
+</div>
 
 {% endblock %}
 
 
 
-
-{% block aside %}
-
-    <div class="largeur-totale txt-center">
-        <img class="imgflat" src="{{ asset('images/file.png')}}" alt="Script" height="50"><h4 style="color: #ff5419">Projet</h4>
-    </div>
-
-
-
-
-    <div class="largeur-totale left-menu actuel">
-
-            <img class="imgflat" src="{{ asset('images/parameters.png')}}" alt="Voix-off" height="30">
-            <div class="ib title-txt-petit projet">Paramètres</div>
-        </a>
-    </div>
-
-    <div class="largeur-totale txt-center padding-ten">
-
-        <div class="title-tab">
-        </div>
-    </div>
-
-
-
-
-<div>
-{% endblock %}

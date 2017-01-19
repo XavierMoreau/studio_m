@@ -2,38 +2,46 @@
 
  {% block ariane %}
 
-     <div class="ariane grey">
-         <div class="ib sub-txt-small fine grey">Projet en cours : </div><div class="ib fine lightgrey bord-droit"> {{ projet.nomProjet }}</div>
-
-         <a href="{{ path('projet_index', {'id':app.user.id}) }}">
+     <div class="ib ariane grey">
+         <div>
+            <div class="ib sub-txt-small fine grey">Projet en cours : </div>
+             <div class="ib fine lightgrey"> {{ projet.nomProjet }}</div>
+         </div>
+         <div class="ib">
+             <a href="{{ path('projet_index', {'id':app.user.id}) }}">
              <div class="ib fine">PROJETS</div>
-         </a>
-         <div class="ib fine">></div>
-         <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
-             <div class="ib fine petite">Paramètres</div>
-         </a>
-         <div class="ib padding-ten fine">></div>
-         <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-             <div class="ib fine">SCRIPT</div>
-         </a>
-         <div class="ib fine">></div>
-         <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-             <div class="ib fine petite">Guide</div>
-         </a>
-         <div class="ib fine">></div>
-         <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-             <div class="ib fine petite">Voix-Off</div>
-         </a>
-         <div class="ib fine">></div>
-         <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+            </a>
+             <div class="ib fine">></div>
+             <a href="{{ path('projet_edit', {'id':app.user.id, 'projet': projet.id, 'script' : script.id }) }}">
+                 <div class="ib fine petite">Paramètres</div>
+             </a>
+         </div>
+             <div class="ib">
+             <div class="ib chevron fine">></div>
+             <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                 <div class="ib fine">SCRIPT</div>
+             </a>
+             <div class="ib fine">></div>
+             <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                 <div class="ib fine petite">Guide</div>
+             </a>
+             <div class="ib fine">></div>
+             <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                 <div class="ib fine petite">Voix-Off</div>
+             </a>
+             <div class="ib fine">></div>
+             <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                 <div class="ib fine petite">Ecriture</div>
+             </a>
+         </div>
+         <div class="ib">
+             <div class="ib chevron fine">></div>
+             <div class="ib fine">STORYBOARD</div>
+             <div class="ib fine">></div>
              <div class="ib fine petite">Ecriture</div>
-         </a>
-         <div class="ib padding-ten fine">></div>
-         <div class="ib fine">STORYBOARD</div>
-         <div class="ib fine">></div>
-         <div class="ib fine petite">Ecriture</div>
-
+         </div>
      </div>
+
 
  {% endblock %}
 
@@ -48,56 +56,96 @@
 
 
     <table class="title-tab">
-        <td class="padding-ten"><h3>Pour écrire votre script, vous souhaitez :</h3></td>
+        <td class="padding-ten hand lightgrey"><h3>Pour écrire votre script, vous souhaitez :</h3></td>
     </table>
 
-   <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+    <table class="script-orientation-box">
+    <tr>
+            <td class="largeur-tiers back-questions">
 
-        <div class="ib largeur-un-quart script-orientation-box1 shadow">
-            <div class="ib imground">
+                <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+
+                <div class="ib txtround1 fine">
+                    <h4 class="script-questions">1</h4>
+                </div>
+
+                <div>
+                    <h3 class="ib hand">Répondre aux questions</h3>
+                </div>
+                <div class="ib imground">
 
                     <img src="{{ asset('images/list.png')}}" alt="Script">
-            </div>
-                     <div>
-                <h3 class="ib hand">Répondre aux questions</h3>
-            </div>
-            <div class="ib txtround1 fine">
-          <h4 class="script-questions">1</h4>
+                </div>
+                </a>
+        <div class="img-orientation">
+            <img src="{{ asset('images/pic6.jpg')}}" alt="Retour">
         </div>
+            </td>
+            <td class="largeur-tiers back-voixoff">
+
+                <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+
+                <div class="ib txtround2 fine">
+                    <h4 class="script-voixoff">2</h4>
+                </div>
+
+                <div>
+                    <h3 class="ib hand">Ecrire la voix-off</h3>
+                </div>
+                <div class="ib imground">
+                    <img src="{{ asset('images/microphone.png')}}" alt="Script" >
+                </div>
+                </a>
+        <div class="img-orientation">
+            <img src="{{ asset('images/pic9.jpg')}}" alt="Retour">
         </div>
-    </a>
+
+        </td>
+
+            <td class="largeur-tiers back-script">
+
+                <a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+
+                <div class="ib txtround3 fine">
+                    <h4 class="script">3</h4>
+                </div>
+                <div>
+                    <h3 class="ib hand">Ecrire le script</h3>
+                </div>
+                <div class="ib imground">
+                    <img src="{{ asset('images/pencil.png')}}" alt="Retour">
+                </div>
+                </a>
+                <div class="img-orientation">
+                    <img src="{{ asset('images/pic4.jpg')}}" alt="Retour">
+                </div>
+
+            </td>
+        </tr>
 
 
- <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+        <tr>
 
-     <div class="ib largeur-un-quart script-orientation-box2 shadow">
-        <div class="ib imground">
-            <img src="{{ asset('images/microphone.png')}}" alt="Script" >
-        </div>
-         <div>
-            <h3 class="ib hand">Ecrire la voix-off</h3>
-        </div>
-        <div class="ib txtround2 fine">
-          <h4 class="script-voixoff">2</h4>
-        </div>
-       </div>
-            </a>
+            <td class="largeur-tiers orientation-text back-questions fine petite"> Vous ne maitisez pas l'écriture de script ? Répondez à ces quelques questions qui vous guideront pour la rédaction du script correspondant à votre projet.
+            </td>
+
+            <td class="largeur-tiers orientation-text back-voixoff fine petite"> Ecrivez votre voix-off d'un seul bloc et contrôlez la durée estimée en fonction du nombre de mots.
+            </td>
+
+            <td class="largeur-tiers orientation-text back-script fine petite"> Ecrivez votre script et votre voix-off en parallèle. Maitrisez le durées des séquences à votre guise.
+            </td>
+        </tr>
 
 
-<a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-    <div class="ib largeur-un-quart script-orientation-box3 shadow">
-           <div class="ib imground">
-                 <img src="{{ asset('images/pencil.png')}}" alt="Retour">
-            </div>
-            <div>
-                 <h3 class="ib hand">Ecrire le script</h3>
-            </div>
-            <div class="ib txtround3 fine">
-          <h4 class="script">3</h4>
-        </div>
-    </div>
-</a>
+    </table>
+
+
+
 </div>
+
+
+
+
 
 {% endblock %}
 
