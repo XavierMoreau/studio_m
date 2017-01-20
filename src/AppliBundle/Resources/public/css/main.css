@@ -12,11 +12,15 @@ body {
     font-family: 'News Cycle', sans-serif;
     height:100%;
     margin: 0;
-    background: url(/studio_m/web/images/fond2.jpg) no-repeat center center fixed;
+    background: url(/bump/web/images/fond2.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.print-fond{
+    background: url(/bump/web/images/bumplogo-white.png);
 }
 
 p, span , h1 , h2 , h3 , h4 , h5 , h6 {
@@ -118,6 +122,7 @@ a:hover{
 .fine{
     font-family: 'Yanone Kaffeesatz', sans-serif;
     font-size: 1.1em;
+    font-weight: bold;
 }
 
 .normale{
@@ -255,7 +260,7 @@ main a:hover{
 }
 .leftprojet-photo img{
     width: 100%;
-}
+  }
 
 .leftprojet-bottom{
     color: #fe5c24;
@@ -264,8 +269,7 @@ main a:hover{
     width: 94%;
     margin-top: -2%;
     text-align: justify;
-    position: absolute;
-    top: 94%;
+
 }
 
 
@@ -287,16 +291,17 @@ main a:hover{
 
 .rightprojet-photo{
 width:94.4%;
+
 }
 
 .rightprojet-photo-txt{
-    margin-top: -53%;
-    margin-bottom: 16%;
+    /*margin-top: -53%;*/
+    /*margin-bottom: 50%;*/
     text-align: center;
     margin-right: 14%;
-    margin-left: 44%;
+    margin-left: 50%;
     color: #333333;
-    font-size: 2.3em;
+    font-size: 1.8em;
     transform:rotate(13deg);
     -ms-transform:rotate(13deg); /* Internet Explorer */
     -moz-transform:rotate(13deg); /* Firefox */
@@ -962,6 +967,3 @@ input {
     padding:2%;
 }
 
-.print-fond{
-    background: url(/studio_m/web/images/bumplogo-white.png);
-   }

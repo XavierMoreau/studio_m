@@ -81,7 +81,7 @@ class ScriptEcriture
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="AppliBundle\Entity\Script")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $script;
 

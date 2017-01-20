@@ -112,9 +112,11 @@ class Projet
     public function __construct()
     {
         $this->dateCreation = new \DateTime();
+        $this->dateDiffusion = new \DateTime();
         $this->support = new ArrayCollection();
         $this->utilisation = new ArrayCollection();
         $this->diffusion = new ArrayCollection();
+
     }
 
 

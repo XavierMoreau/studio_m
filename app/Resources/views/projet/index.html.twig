@@ -9,7 +9,13 @@
 
 
 {% block left %}
-<div class="ib leftprojet">
+
+
+
+
+<table>
+
+    <td style="width:40%; vertical-align: top; padding: 3%">
 
 <div class="leftprojet-top">
 
@@ -28,7 +34,7 @@
         <img src="{{ asset('images/pic1.jpg')}}" alt="Nouveau Projet">
     </div>
     <div class="leftprojet-bottom">
-        <div class="fine petite">
+        <div class="fine">
             <p>Créez votre projet, renseignez les types de supports, les types diffusions, les types d'utilisations.
                 Vous pouvez aussi indiquer pour quand votre projet est prévu ainsi que sa surée dans le temps.
             </p>
@@ -44,18 +50,16 @@
 
 
 </div>
+        </td>
 
-{% endblock %}
-
-{% block right %}
-
-<div class="ib rightprojet">
+    <td style="vertical-align: top; padding: 3%;">
+<div class="ib">
     <div class="rightprojet-photo">
 
         <a href="{{ path('projet_new', {'id': app.user.id }) }}">
-            <div class="leftprojet-photo">
-                <img src="{{ asset('images/pic2.jpg')}}" alt="Nouveau Projet">
-                <div class="rightprojet-photo-txt hand">Créez votre nouveau projet ici...</div>
+            <div>
+
+                <img style="width: 106%;" src="{{ asset('images/pic2b.jpg')}}" alt="Nouveau Projet">
             </div>
         </a>
 
@@ -192,5 +196,7 @@
 </div>
 
 </div>
+    </td>
+</table>
 {% endblock %}
 
