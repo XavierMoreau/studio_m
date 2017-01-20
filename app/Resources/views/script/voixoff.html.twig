@@ -1,5 +1,3 @@
-
-
 {% extends 'layout.html.twig' %}
 
 
@@ -91,7 +89,7 @@
                             <div class="ib">
                             <table class="ib tab-buttons-petit shadow back-voixoff">
                                 <td>
-                                    <div class="lightgrey">Mettre à jour</div>
+                                    <div class="lightgrey fine">Mettre à jour</div>
                                 </td>
                                 <td>
                                     <img src="{{ asset('images/refresh-button.png')}}" alt="Enregistrer" height="19">
@@ -101,7 +99,7 @@
                             <div class="ib">
                             <table class="ib tab-buttons-petit shadow back-voixoff">
                                 <td>
-                                    <div class="lightgrey">Enregistrer</div>
+                                    <div class="lightgrey fine">Enregistrer</div>
                                 </td>
                                 <td>
                                     <img src="{{ asset('images/save-file-option.png')}}" alt="Enregistrer" height="19">
@@ -175,9 +173,10 @@
 
 
         <div class="largeur-voixoff-right back-voixoff padding-ten">
+            <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
             <h3 class="ib bord-droit lightgrey">Vos réponses :</h3>
-
+            </a>
             {% for key,reponse in reponses %}
                 <div class="id sub-txt-small grey">
                       {{ reponse.question.question }}

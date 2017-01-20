@@ -93,26 +93,52 @@
 
 {% block right %}
 
+        <table class="largeur-totale voixoff-boxes">
 
-    <div class="ib largeur-totale txt-center">
+            <td style="width:33%" class="txt-center">
+                <div class="script-voixoff-box1 back-projet">
+                    <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                        <div class="ib">
+                            <img src="{{ asset('images/compass.png')}}" alt="Retour" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand petite"><- Retour</h3>
+                        </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">1</h4>
+                        </div>
+                        <div class="ib hand">| </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">2</h4>
+                        </div>
+                        <div class="ib hand">| </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">3</h4>
+                        </div>
+                    </a>
+                </div>
+            </td>
+            <td style="width:30%"></td>
+
+            <td style="width:33%" class="txt-center">
+                <div class="script-voixoff-box3 back-voixoff">
+                    <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+
+                    <div class="ib">
+                            <img src="{{ asset('images/microphone.png')}}" alt="Retour" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand petite">Ecrire la voix-off -></h3>
+                        </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-voixoff">3</h4>
+                        </div>
+                    </a>
+                </div>
+            </td>
+
+        </table>
 
 
 
-    <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
-
-        <div class="ib script-questionnaire-voixoff-box">
-            <div class="ib">
-                <img src="{{ asset('images/microphone.png')}}" alt="Script" height="30">
-            </div>
-            <div>
-                <h3 class="ib hand petite">Ecrire la voix-off -></h3>
-            </div>
-            <div class="ib txtround2 fine">
-                <h4 class="script-voixoff">2</h4>
-            </div>
-        </div>
-    </a>
-
-
-</div>
 {% endblock %}

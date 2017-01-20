@@ -50,9 +50,9 @@
 
 <table>
 
-    <td style="width:65%; vertical-align: top; background-color: #e4e8e9;">
+    <td style="width:70%; vertical-align: top;">
 
-        <div class="padding-ten">
+        <div class="largeur-voixoff">
 
     <div class="largeur-totale script-footer">
         <a target="_blank" class="ib icontop" href="{{ path('script_print', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
@@ -75,9 +75,9 @@
 
                 {#<div style="width: 100%;">#}
 
-                <div style="background-color: white";>
+                <div style="background-color: white; border-radius: 10px">
                 <table class="title-tab">
-                    <td class="padding-ten script"><h3>Ligne de script n° {{ key + 1 }}</h3></td>
+                    <td class="padding-ten hand script"><h3>Séquence n° {{ key + 1 }}</h3></td>
                 </table>
 
         {#On affiche le formulaire d'édition#}
@@ -87,7 +87,7 @@
 
                 <div class="largeur-totale">
                     <div class="largeur-half-form-script ib txt-center">
-                        <div class="largeur-totale title-txt-petit script">Voix-off</div>
+                        <div class="largeur-totale title-txt-petit script petite">Voix-off</div>
                         <div class="largeur-totale padding-ten" >
                             <label for="voixoff{{ ecriture.id }}"></label>
                             <textarea class="txtarea-form-script" placeholder="Saisissez la voixoff ici..." rows="10" name="vo{{ ecriture.id }}" >{% if ecriture.voixoff %}{{ ecriture.voixoff }}{% endif %}</textarea>
@@ -108,22 +108,22 @@
                     {%  set minround = timing/60 %}
                     {%  set min = minround|round(0, 'floor') %}
                     {%  set sec = timing%60 %}
-                    <div class="ib">
+                    <div class="ib petite fine">
                         <div class="ib padding-ten sub-txt-big">{{ ecriture.count }}</div>
                         <div class="ib sub-txt-small bord-droit">mots</div>
                     </div>
-                    <div class="ib">
+                    <div class="ib petite fine">
                         <div class="ib sub-txt-small">Durée estimée :</div>
                         <div class="ib sub-txt-big">{{ min }}</div>
                         <div class="ib sub-txt-small">min</div>
                         <div class="ib sub-txt-big">{{ sec }}</div>
                         <div class="ib sub-txt-small bord-droit">sec</div>
                     </div>
-                        <div class="ib">
+                        <div class="ib petite fine">
                         <div class="ib sub-txt-small">Forcer la durée :</div>
-                            <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="min{{ ecriture.id }}" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}">
+                            <input style="display: inline-block; width: 30px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="min{{ ecriture.id }}" value="{% if ecriture.tempsForceMin %}{{ ecriture.tempsForceMin }}{% endif %}">
                         <div class="ib sub-txt-small"> min</div>
-                            <input style="display: inline-block; width: 50px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="sec{{ ecriture.id }}" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}">
+                            <input style="display: inline-block; width: 30px; padding-right: 5px;" placeholder="00" type="number" min="0" max="59" step="1" class="form-control" name="sec{{ ecriture.id }}" value="{% if ecriture.tempsForceSec %}{{ ecriture.tempsForceSec }}{% endif %}">
                         <div class="ib sub-txt-small bord-droit"> sec</div>
                     </div>
 
@@ -144,7 +144,7 @@
                     {% endif %}
 
 
-                    <div class="ib">
+                    <div class="ib petite fine">
                         <div class="ib sub-txt-small">Durée depuis le début :</div>
                         <div class="ib sub-txt-big">{{ mintotal }}</div>
                         <div class="ib sub-txt-small">min</div>
@@ -156,7 +156,7 @@
                         <button class="btn-iconflat" type="submit" value="Enregistrer" formmethod="post" formaction="{{ path('scriptecriture_edit',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}">
                             <table class="ib tab-buttons-petit shadow back-script">
                                 <td>
-                                    <div class="lightgrey">Mettre à jour</div>
+                                    <div class="lightgrey fine">Mettre à jour</div>
                                 </td>
                                 <td>
                                     <img src="{{ asset('images/refresh-button.png')}}" alt="Enregistrer" height="19">
@@ -167,16 +167,15 @@
                         <a href="{{ path('scriptecriture_delete', {'id':app.user.id, 'projet': projet.id, 'script': script.id, 'scriptEcriture': ecriture.id}) }}">
 
 
-                                    <div class="script ib" style="font-size: 0.8em">Supprimer</div>
+                                    <div class="script ib" style="font-size: 0.8em">Supprimer la séquence</div>
 
-                                    <img src="{{ asset('images/delete.png')}}" alt="Enregistrer" height="13">
 
 
                         </a>
                     </div>
                 </div>
 
-            <div class="title-tab"></div>
+
 
 
 
@@ -189,7 +188,7 @@
             <div class="ib">
                 <button class="btn-iconflat" type="submit" formmethod="post" formaction="{{ path('scriptecriture_new',{'id':app.user.id, 'projet': projet.id, 'script': script.id})}}" value="Enregistrer">
                     <img class="imgflat" src="{{ asset('images/add-plus-button.png')}}" alt="Ajouter une ligne de script" height="14">
-                    <h2 class="ib script">Ajouter une ligne de script</h2>
+                    <h2 class="ib script hand">Ajouter une séquence</h2>
                     <img class="imgflat" src="{{ asset('images/pen-plume.png')}}" alt="Ajouter une ligne de script" height="35">
                 </button>
             </div>
@@ -209,7 +208,7 @@
                 <img src="{{ asset('images/print.png')}}" alt="Enregistrer" height="30">
 
     </a>
-    <a class="ib icontop" href="{{ path('script_valid', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">
+    {#<a class="ib icontop" href="{{ path('script_valid', {'id':app.user.id, 'projet': projet.id, 'script': script.id}) }}">#}
         <img src="{{ asset('images/envelope.png')}}" alt="Enregistrer" height="30">
 
     </a>
@@ -217,24 +216,73 @@
         </div>
 
 
+        <table class="largeur-totale voixoff-boxes">
+
+            <td style="width:33%" class="txt-center">
+                <div class="script-voixoff-box1 back-projet">
+                    <a href="{{ path('script_orientation', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
+                        <div class="ib">
+                            <img src="{{ asset('images/compass.png')}}" alt="Retour" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand petite"><- Retour</h3>
+                        </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">1</h4>
+                        </div>
+                        <div class="ib hand">| </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">2</h4>
+                        </div>
+                        <div class="ib hand">| </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="script-questions">3</h4>
+                        </div>
+                    </a>
+                </div>
+            </td>
+            <td style="width:20%"></td>git
+
+            <td style="width:33%" class="txt-center">
+                <div class="script-voixoff-box3 back-storyboard">
+                    {#<a href="{{ path('scriptecriture_index', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">#}
+
+                        <div class="ib">
+                            <img src="{{ asset('images/storyboard.png')}}" alt="Retour" height="30">
+                        </div>
+                        <div>
+                            <h3 class="ib hand lightgrey petite">Ecrire le storyboard -></h3>
+                        </div>
+                        <div class="ib txtround2 fine">
+                            <h4 class="storyboard">4</h4>
+                        </div>
+                    {#</a>#}
+                </div>
+            </td>
+
+        </table>
+
+
     </td>
-<td style="vertical-align: top; padding-right: 3%">
+<td style="vertical-align: top; padding-right: 3%; padding-top: 1.5%;">
 
 
-<div class="largeur-totale padding-ten">
+    <div class="largeur-voixoff-right back-script padding-ten">
+        <a href="{{ path('script_questions', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-    <h3 class="ib bord-droit script">Vos réponses :</h3>
+        <h3 class="ib bord-droit hand lightgrey">Vos réponses :</h3>
+        </a>
     {% for key,reponse in reponses %}
 
 
 
-        <div class="id sub-txt-small grey">
+        <div class="id sub-txt-small fine grey">
             {{ reponse.question.question }}
         </div>
 
 
 
-        <div class="id sub-txt-small script">
+        <div class="id sub-txt-small normale lightgrey">
             {{ reponse.reponse }}
         </div>
 
@@ -245,27 +293,28 @@
     <div class="title-tab"></div>
 
 
+        <a href="{{ path('script_voixoff', {'id':app.user.id, 'projet': projet.id,'script': projet.script.id}) }}">
 
-    <h3 class="ib bord-droit script">Votre voix-off :</h3>
+        <h3 class="ib hand lightgrey">Votre voix-off :</h3>
 
-
+        </a>
     {% set timing = script.count/2.5 %}
     {%  set minround = timing/60 %}
     {%  set minvo = minround|round(0, 'floor') %}
     {%  set secvo = timing%60 %}
 
-    <div class="ib sub-txt-big grey">{{ script.count }}</div>
-    <div class="ib sub-txt-small grey bord-droit">mots</div>
+    <div class="ib sub-txt-big fine petite grey">{{ script.count }}</div>
+    <div class="ib sub-txt-small fine petite grey bord-droit">mots</div>
 
-    <div class="ib sub-txt-big grey">{{ minvo }}</div>
-    <div class="ib sub-txt-small grey">min</div>
-    <div class="ib sub-txt-big grey">{{ secvo }}</div>
-    <div class="ib sub-txt-small grey">sec</div>
+    <div class="ib sub-txt-big fine petite grey">{{ minvo }}</div>
+    <div class="ib sub-txt-small fine petite grey">min</div>
+    <div class="ib sub-txt-big fine petite grey">{{ secvo }}</div>
+    <div class="ib sub-txt-small fine petite grey">sec</div>
 
 
     {% set text = script.voixoffGlobal|split('\n') %}
     {% for paragraph in text %}
-    <p class="sub-txt-small script">{{ paragraph }}</p>
+    <p class="sub-txt-small normale lightgrey">{{ paragraph }}</p>
     {% endfor %}
 
 </div>

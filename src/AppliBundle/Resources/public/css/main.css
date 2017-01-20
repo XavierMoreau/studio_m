@@ -38,9 +38,6 @@ a:hover{
     color : darkgrey;
 }
 
-div{
-    font-family: 'News Cycle', sans-serif;
-}
 
 .ib{
     display: inline-block;
@@ -549,6 +546,9 @@ footer span{
     color: #34495e;
 }
 
+.storyboard{
+    color: #feb74a;
+}
 
 .projet{
     color: #ff5419;
@@ -576,6 +576,14 @@ footer span{
 
 .back-script{
     background-color: #34495e;
+}
+
+
+.storyboard{
+    color: #feb74a;
+}
+.back-storyboard{
+    background-color: #feb74a;
 }
 
 
@@ -714,8 +722,8 @@ input {
 .txtround1, .txtround2, .txtround3{
     background-color: #e4e8e9;
     border-radius: 50%;
-    width: 1.9em;
-    height: 1.9em;
+    width: 1.4em;
+    height: 1.4em;
     margin-top: 8%;
 
 
@@ -806,7 +814,7 @@ input {
     margin-bottom: 10px;
 }
 .padding-ten{
-    padding: 15px;
+    padding: 10px;
 }
 
 
